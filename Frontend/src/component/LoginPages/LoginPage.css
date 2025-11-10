@@ -1,0 +1,58 @@
+
+.login-container {
+  background-size: cover;
+  background-position: center;
+  background-image: url('../../assert/login-bg.jpg'); 
+  display: flex;
+  justify-content: flex-end; /* Align content to the right */
+  align-items: center;
+
+  height: 100vh; /* Set the container to full viewport height */
+}
+
+    .center-container {
+     
+   
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    
+    .center-content {
+      
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+    
+    .custom-button {
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    
+    .custom-button:hover {
+      background-color: #64797f;
+      color: white;
+    }
+    
+
+ 
+    .rows {
+      margin-top: 15%;
+      background-color: white;
+      min-width: 140vh;
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 1); /* Set initial box-shadow */
+      border: 3px solid rgba(255, 255, 255, 0.8);
+      overflow: hidden;
+    }
+    
+    
+    
+    
+

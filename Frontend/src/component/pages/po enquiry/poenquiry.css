@@ -1,0 +1,24 @@
+#datePicker {
+  margin-top: 20px;
+}
+
+#addToList {
+  float: right;
+}
+#enddate {
+  position: relative;
+  right: 280px;
+  top: 20px;
+}
+
+.page_header {
+  font-family: "Roboto", sans-serif;
+}
+
+#spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100vh;
+}

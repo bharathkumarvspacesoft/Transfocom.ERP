@@ -1,0 +1,28 @@
+#datePicker{
+
+    margin-top: 20px;
+}
+
+#addToList {
+    float: right;
+}
+
+#challan{
+    position: relative;
+    top: 17px;
+}
+#employeebtn{
+    position: relative;
+    left: 520px;
+    top: 25px;
+}
+
+
+.error {
+    border: 2px solid red;
+    border-radius: 5px;
+    }
+
+    .page_header{
+        font-family: 'Roboto', sans-serif;
+    }

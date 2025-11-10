@@ -1,0 +1,21 @@
+footer.mainFooter {
+    text-align: center;
+    color: black;
+    font-size: 14px;
+    font-weight: 50px;
+    padding: 0 20px 20px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #3bc1d7;
+  }
+  
+  footer.mainFooter hr {
+    width: 100%;
+  }
+  
+  footer.mainFooter p {
+    margin-top: 20px;
+  }
+  

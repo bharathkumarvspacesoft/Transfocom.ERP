@@ -1,0 +1,66 @@
+#orderbtn {
+  position: relative;
+  left: 500px;
+  bottom: -10px;
+}
+
+.error {
+  border: 2px solid red;
+  border-radius: 5px;
+}
+.page_header {
+  font-family: "Roboto", sans-serif;
+}
+#spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100vh;
+}
+.break-after-5-words {
+  /* Force line breaks after every 5 words */
+  display: block;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+
+#quotationbtn {
+  position: relative;
+  left: 526px;
+  bottom: -18px;
+}
+#print {
+  border: 1px solid black;
+}
+.error {
+  border: 2px solid red;
+  border-radius: 5px;
+}
+.page_header {
+  font-family: "Roboto", sans-serif;
+}
+
+#spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100vh;
+}
+
+.MuiTableHead-root,
+.MuiTableCell-head,
+.MuiTableHead-root {
+  white-space: nowrap !important;
+ padding: 3px 10px 3px 4px; 
+}
+.MuiTableCell-sizeSmall {
+  padding: 3px 10px 3px 4px;
+}
+
+.MuiTableCell-root, MuiTableCell-head, MuiTableHead-root, MuiTableCell-sizeSmall{
+padding: 3px 10px 3px 4px; 
+}

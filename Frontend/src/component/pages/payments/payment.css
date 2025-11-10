@@ -1,0 +1,43 @@
+#datePicker {
+  margin-top: 20px;
+  position: relative;
+  /* left:300px */
+}
+.MuiStack-root {
+  width: 500px;
+}
+
+#addToList {
+  float: right;
+}
+#btn-1 {
+  position: relative;
+  top: 110px;
+  left: 510px;
+}
+#enddate {
+  position: relative;
+  right: 240px;
+  top: 19px;
+}
+
+.error {
+  border: 2px solid red;
+  border-radius: 5px;
+}
+
+.page_header {
+  font-family: "Roboto", sans-serif;
+  padding: 1px;
+}
+
+#spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100vh;
+}
+.MuiTableHead-root{
+  padding: 1px;
+}

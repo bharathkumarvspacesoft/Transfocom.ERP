@@ -1,0 +1,30 @@
+{
+  "costingName": "825KVA,22000/433V,OCTC,CU,HT,OD/ID,D1-A11",
+  "costingDate": "07-11-2025",
+  "oltcText": "",
+  "accessories": "",
+  "labourCharges": "",
+  "miscExpense": "",
+  "tapingSwitch": "OCTC",
+  "typeTapping": "℅ H. V. variation of +2.5℅ to -5℅ in equal steps of 2.5℅ Off circuit tap changer",
+  "items": [
+    {
+      "itemCode": "G1",
+      "mid": 391,
+      "description": "G1",
+      "unit": "Nos",
+      "quantity": "1",
+      "rate": "10",
+      "amount": "10"
+    },
+    {
+      "itemCode": "G2",
+      "mid": 392,
+      "description": "G2",
+      "unit": "Set",
+      "quantity": "2",
+      "rate": "20",
+      "amount": "40"
+    }
+  ]
+}

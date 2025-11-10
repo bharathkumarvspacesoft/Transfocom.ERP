@@ -1,0 +1,67 @@
+#datePicker {
+  margin-top: 20px;
+}
+
+#addToList {
+  float: right;
+}
+
+#challan {
+  position: relative;
+  top: 17px;
+}
+#invoicebtn {
+  position: relative;
+  left: 530px;
+  top: 15px;
+}
+
+.error {
+  border: 2px solid red;
+  border-radius: 5px;
+}
+
+.page_header {
+  font-family: "Roboto", sans-serif;
+}
+
+#spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100vh;
+}
+/* Ensures table doesn't overflow and wraps neatly */
+.tabel {
+  table-layout: auto;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Prevents cells from wrapping but keeps everything within limits */
+.tabel td, .tabel th {
+  white-space: nowrap;
+  padding: 8px;
+  text-align: center;
+}
+
+/* Makes header more visible and structured */
+.tableHeader th {
+  background-color: #e0f7fa;
+  font-weight: bold;
+}
+
+/* Removes bottom scrollbar caused by unnecessary width */
+.MuiTableContainer-root {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* Fix button overflow in last column */
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px;
+}

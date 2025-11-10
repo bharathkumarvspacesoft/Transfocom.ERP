@@ -1,0 +1,115 @@
+.nav {
+    padding: 0;
+    margin: 0;
+    display: block;
+    float: left;
+    width: calc(100% - 230px);
+    text-align: center;
+  }
+  .nav ul {
+    list-style: none;
+    /* display: inline-block; */
+    display: block;
+    margin: 0;
+    padding: 0;
+    margin-left: 2%;
+  }
+  
+  .nav li {
+    font-size: 14px;
+    position: relative;
+    float: left;
+    z-index: 100;
+  }
+  
+  .nav ul li a,
+  .nav ul li button {
+    color:black;
+    text-decoration: none;
+    display: block;
+    padding: 5px;
+    background-color: transparent;
+    border: 0;
+    width: 100%;
+    text-align: left;
+    transition: all 0.3s ease-in-out;
+  }
+  .nav > ul > li:hover ul{
+    max-height: 1000px;
+  }
+  .nav > ul > li > a {
+    text-transform: uppercase;
+    line-height: 84px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  
+  .nav ul li:hover a,
+.nav ul li:hover button {
+  border: 1px solid #666666;
+
+}
+
+  
+  .nav ul li.active:hover a,
+  .nav ul li.active:hover button {
+    transform: translate(0, 0);
+  }
+  
+  .nav > ul > li > a,
+  .nav > ul > li > button {
+    font-size: 1em;
+    cursor: pointer;
+  }
+  
+  .nav > ul > li > a > svg,
+  .nav > ul > li > button > svg {
+    vertical-align: middle;
+    margin: -3px 5px 0;
+    font-size: 16px;
+
+  }
+  
+  .nav li ul {
+    display: block;
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+    background-color: #fff;
+    text-align: left;
+    position: absolute;
+    /* left: 0;
+    top: 100%;
+    width: 200px;
+   */
+  }
+
+  .nav li ul li {
+    display: block;
+    float: none;
+  }
+
+  .nav li ul li.active a {
+    background-color: #1a6263;
+  }
+
+  .nav li ul li:hover a {
+    background-color: #17a2b8;
+  }
+  .nav li ul li a {
+    padding: 10px 15px;
+    display: block;
+  }
+
+  .nav > ul > li.active {
+    background-color: rgba(255,255,255,0.1);
+  }
+  
+  .nav > ul > li.active > a {
+    color: #fff;
+  }
+  
+  .nav > ul > li.active svg {
+    color: #fff;
+  }
+  

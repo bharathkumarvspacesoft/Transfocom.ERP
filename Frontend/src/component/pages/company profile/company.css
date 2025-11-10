@@ -1,0 +1,11 @@
+.error {
+  border: 2px solid red;
+  border-radius: 5px;
+}
+.page_header {
+  float: left;
+  font-family: 'Roboto', sans-serif;
+}
+.bank{
+  font-family: 'Roboto', sans-serif;
+}

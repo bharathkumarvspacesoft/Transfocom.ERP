@@ -1,0 +1,25 @@
+#datePicker{
+
+    margin-top: 20px;
+}
+
+#addToList {
+    float: right;
+}
+#Bombtn{
+    position: relative;
+    left: 510px;
+    top: 10px;
+}
+
+.page_header{
+    font-family: 'Roboto', sans-serif;
+}
+
+#spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 100vh;
+  }

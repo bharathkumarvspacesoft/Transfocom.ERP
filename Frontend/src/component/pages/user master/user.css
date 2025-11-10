@@ -1,0 +1,49 @@
+
+
+#userbtn {
+  position: relative;
+  bottom: 21px;
+  left: 530px;
+}
+#save-btn {
+  position: relative;
+
+  right: 220px;
+}
+
+#closebtn {
+  position: relative;
+
+  right: 190px;
+}
+
+.error {
+  border: 2px solid red;
+  border-radius: 5px;
+}
+.page_header {
+  float: left;
+  font-family: 'Roboto', sans-serif;
+}
+
+#spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100vh;
+}
+.swal2-container {
+  z-index: 9999; /* Use a higher value if needed */
+}
+
+.navbar {
+  z-index: 10000;
+  position: relative;
+}
+/* Add this to your CSS */
+.form-container {
+  max-height: calc(100vh - navbarHeight);
+  overflow-y: auto;
+  padding: 20px;
+}

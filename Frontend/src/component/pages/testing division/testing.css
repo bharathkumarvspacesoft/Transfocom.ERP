@@ -1,0 +1,40 @@
+#addtest {
+  position: relative;
+  bottom: 21px;
+  left: 500px;
+}
+#savebtnn {
+  position: relative;
+
+  right: 200px;
+}
+
+#closebtn {
+  position: relative;
+
+  right: 190px;
+}
+.error-msg {
+  /* border: 1px solid red;
+  border-radius: 5px; */
+  color: #ff0000;
+  position: absolute;
+  font-size: 12px;
+  left: 24px;
+  bottom: -16px;
+}
+.page_header {
+  float: left;
+  font-family: "Roboto", sans-serif;
+}
+
+#spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 150px;
+}
+.swal2-container {
+  z-index: 9999 !important;
+}

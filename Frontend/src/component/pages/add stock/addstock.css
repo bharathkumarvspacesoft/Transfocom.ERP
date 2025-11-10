@@ -1,0 +1,32 @@
+#savebtn2 {
+  /* margin-bottom: 20px; */
+  position: relative;
+  top: -150px;
+  right: 10px;
+}
+
+#canclebtn {
+  /* margin-bottom: 20px; */
+  position: relative;
+  bottom: 150px;
+  left: 30px;
+}
+#rowbtn {
+  /* margin-bottom: 20px; */
+  position: relative;
+  bottom: 250px;
+  left: 450px;
+}
+
+#addToList {
+  float: right;
+}
+
+.page_header {
+  float: left;
+  font-family: 'Roboto', sans-serif;
+}
+.error {
+  border: 2px solid red;
+  border-radius: 5px;
+}

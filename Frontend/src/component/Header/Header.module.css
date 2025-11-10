@@ -1,0 +1,109 @@
+.header {
+    width: 100%;
+    padding: 0;
+    background-color: #64797f;
+    color:whitesmoke;
+    clear: both;
+    height: 85px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    clear: both;
+  }
+  
+  .header:after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  .head {
+    padding: 0;
+  }
+  
+  .head:after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  .logo {
+    font-size: 1.8rem;
+    float: left;
+    color: #b7c0cd;
+    background-color: #005051;
+    padding: 7px 10px;
+    width: 230px;
+    position: relative;
+  }
+  
+  .logo a {
+    color: #b7c0cd;
+    text-decoration: none;
+  }
+  
+  .logo img {
+    max-height: 70px;
+  }
+  
+  .logo a:hover {
+    color: #fff;
+  }
+  
+  .quickMenu {
+    float: right;
+    display: flex;
+    align-items: center;
+    height: 80px;
+    gap: 20px;
+  }
+  
+  .notification {
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: flex-start;
+  }
+  
+  .notification:hover {
+    background-color: #efefef;
+  }
+  
+  .notification .date {
+    background-color: rgba(0, 0, 0, 0.8);
+    text-align: center;
+    min-width: 40px;
+    margin-right: 10px;
+    border-radius: 4px;
+    padding: 3px 0;
+    color: #fff;
+  }
+  
+  .notification .title {
+    font-weight: 600;
+  }
+  
+  .notification .description {
+    font-weight: 400;
+  }
+  
+  .avatar {
+    cursor: pointer;
+    background-color: orangered;
+  }
+  .logoutButton {
+    /* Styles for the logout button */
+    position: absolute; /* Position the button absolutely within the .logo container */
+    top: 50%; /* Position the button halfway down vertically */
+    right: 100%; /* Position the button to the right of the logo image */
+    transform: translate(-50%, -50%); /* Center the button vertically and horizontally */
+    padding: 4px; /* Adjust padding as needed */
+    background-color: transparent; /* Remove background color to make it invisible */
+    border: none; /* Remove button border */
+    cursor: pointer;
+  }
+  

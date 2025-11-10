@@ -1,0 +1,43 @@
+#newmat-btn {
+  margin-top: 25px;
+  left: 529px;
+  position: relative;
+  bottom: 38px;
+}
+#addToList {
+  float: right;
+}
+
+#rowbtn {
+  position: relative;
+  top: -170px;
+  left: 400px;
+}
+
+#addmaterialbtn {
+  position: relative;
+  top: -100px;
+  left: 200px;
+}
+
+#addbtn {
+  position: relative;
+  top: -100px;
+  right: 300px;
+}
+
+.error {
+  border: 2px solid red;
+  border-radius: 5px;
+}
+.page_header{
+  font-family: 'Roboto', sans-serif;
+}
+
+#spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100vh;
+}

@@ -1,0 +1,37 @@
+#costing2btn {
+  position: relative;
+  top: 20px;
+  left: 529px;
+}
+
+.page_header {
+  font-family: "Roboto", sans-serif;
+}
+
+#spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100vh;
+}
+.popup {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  max-width: 700px;
+  overflow-wrap: break-word; /* Break words that exceed the container */
+  white-space: normal;       /* Allow text to wrap */
+  display: none;
+}
+
+
+.table-cell:hover .popup {
+  display: block;
+}
+/* costing1.css */
+.multiline-header {
+  white-space: normal; /* Allow line breaks */
+  text-align: center; /* Center the text */
+}

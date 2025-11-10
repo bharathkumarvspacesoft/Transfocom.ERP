@@ -1,0 +1,40 @@
+.chart-containers {
+    width: 100%; /* Full width for the container */
+    padding: 20px;
+}
+
+.stockchart {
+    display: flex; /* Use flexbox to align items vertically */
+    flex-direction: column; /* Stack bars vertically */
+    gap: 10px; /* Space between bars */
+}
+
+.bar {
+    position: relative; /* Position for the tooltip */
+    height: 30px; /* Set a fixed height for the bars */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #007bff; /* Default background color */
+    transition: background-color 0.3s; /* Smooth transition for hover */
+}
+
+.bar:hover {
+    opacity: 0.8; /* Slightly fade on hover */
+}
+
+.tooltip {
+    position: absolute; /* Position tooltip absolutely */
+    left: 100%; /* Position to the right of the bar */
+    transform: translateX(10px); /* Offset tooltip slightly */
+    background-color: #333; /* Tooltip background color */
+    color: white; /* Tooltip text color */
+    padding: 5px; /* Padding around tooltip text */
+    border-radius: 3px; /* Rounded corners for tooltip */
+    visibility: hidden; /* Hidden by default */
+    opacity: 0; /* Hidden by default */
+    transition: visibility 0s, opacity 0.2s linear; /* Smooth show/hide */
+}
+
+.bar:hover .tooltip {
+    visibility: visible; /* Show tooltip on hover */
+    opacity: 1; /* Fully visible */
+}

@@ -1,0 +1,33 @@
+#datePicker {
+  margin-top: 20px;
+}
+
+#addToList {
+  float: right;
+}
+#purchasebtn {
+  position: relative;
+  top: 20px;
+  left: 499px;
+}
+#enddate {
+  position: relative;
+  right: 270px;
+  top: 19px;
+}
+.page_header {
+  font-family: "Roboto", sans-serif;
+}
+
+#spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100vh;
+}
+@media print {
+  .hide-on-print {
+    display: none;
+  }
+}

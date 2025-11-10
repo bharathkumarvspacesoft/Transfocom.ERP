@@ -1,0 +1,317 @@
+[
+  {
+    "itemCode": "CORE500/22",
+    "mid": 12,
+    "description": "Core Assembly-500/22",
+    "unit": "Kgs",
+    "quantity": "851",
+    "rate": "315",
+    "amount": "268065"
+  },
+  {
+    "itemCode": "LVC500/22",
+    "mid": 269,
+    "description": "Low Voltage Coils-500/22",
+    "unit": "Nos",
+    "quantity": "185",
+    "rate": "910",
+    "amount": "168350"
+  },
+  {
+    "itemCode": "HVC500/22",
+    "mid": 249,
+    "description": "High Voltage Coils-500/22",
+    "unit": "Nos",
+    "quantity": "312",
+    "rate": "910",
+    "amount": "283920"
+  },
+  {
+    "itemCode": "TAPC7",
+    "mid": 106,
+    "description": "7 Position",
+    "unit": "Nos",
+    "quantity": "1",
+    "rate": "2600",
+    "amount": "2600"
+  },
+  {
+    "itemCode": "coper Flat 630/11/22",
+    "mid": 350,
+    "description": "Size = 50X6",
+    "unit": "Kgs",
+    "quantity": "8",
+    "rate": "910",
+    "amount": "7280"
+  },
+  {
+    "itemCode": "Insulating material",
+    "mid": 279,
+    "description": "INSUL. ",
+    "unit": "Kgs",
+    "quantity": "58",
+    "rate": "170",
+    "amount": "9860"
+  },
+  {
+    "itemCode": "TRDM16 X 800",
+    "mid": 24,
+    "description": "Tie Rod (M16 X 800)",
+    "unit": "Nos",
+    "quantity": "8",
+    "rate": "105",
+    "amount": "840"
+  },
+  {
+    "itemCode": "CBMM16 X 280",
+    "mid": 29,
+    "description": "M16 X 280",
+    "unit": "Nos",
+    "quantity": "8",
+    "rate": "45",
+    "amount": "360"
+  },
+  {
+    "itemCode": "BRAZINGROD",
+    "mid": 192,
+    "description": "BRAZINGROD",
+    "unit": "Kgs",
+    "quantity": "0.4",
+    "rate": "5300",
+    "amount": "2120"
+  },
+  {
+    "itemCode": "T500/22",
+    "mid": 229,
+    "description": "TANK-500/22",
+    "unit": "Nos",
+    "quantity": "500",
+    "rate": "1041",
+    "amount": "520500"
+  },
+  {
+    "itemCode": "RAD800X6X300",
+    "mid": 147,
+    "description": "800 X 6 X 300 (500/22)",
+    "unit": "Nos",
+    "quantity": "4",
+    "rate": "3340",
+    "amount": "13360"
+  },
+  {
+    "itemCode": "GASES",
+    "mid": 287,
+    "description": " GASES LPG/ OXG.",
+    "unit": "Nos",
+    "quantity": "0.25",
+    "rate": "400",
+    "amount": "100"
+  },
+  {
+    "itemCode": "VALVE32MM",
+    "mid": 104,
+    "description": "32 MM",
+    "unit": "Nos",
+    "quantity": "2",
+    "rate": "830",
+    "amount": "1660"
+  },
+  {
+    "itemCode": "LVBR30MM",
+    "mid": 118,
+    "description": "30 MM",
+    "unit": "Nos",
+    "quantity": "4",
+    "rate": "80",
+    "amount": "320"
+  },
+  {
+    "itemCode": "LVBR20MM",
+    "mid": 117,
+    "description": "20 MM",
+    "unit": "Nos",
+    "quantity": "1",
+    "rate": "40",
+    "amount": "40"
+  },
+  {
+    "itemCode": "HVBU24kV",
+    "mid": 107,
+    "description": "24 kV / 250 AMP",
+    "unit": "Nos",
+    "quantity": "3",
+    "rate": "475",
+    "amount": "1425"
+  },
+  {
+    "itemCode": "LVBR30MM",
+    "mid": 118,
+    "description": "30 MM",
+    "unit": "Nos",
+    "quantity": "4",
+    "rate": "2450",
+    "amount": "9800"
+  },
+  {
+    "itemCode": "LVBR20MM",
+    "mid": 117,
+    "description": "20 MM",
+    "unit": "Nos",
+    "quantity": "1",
+    "rate": "910",
+    "amount": "910"
+  },
+  {
+    "itemCode": "LVBR12MM",
+    "mid": 116,
+    "description": "12 MM",
+    "unit": "Nos",
+    "quantity": "3",
+    "rate": "190",
+    "amount": "570"
+  },
+  {
+    "itemCode": "RWASHERLV20",
+    "mid": 179,
+    "description": "LV 20",
+    "unit": "Nos",
+    "quantity": "1",
+    "rate": "150",
+    "amount": "150"
+  },
+  {
+    "itemCode": "RWASHERLV30",
+    "mid": 180,
+    "description": "LV 30",
+    "unit": "Nos",
+    "quantity": "4",
+    "rate": "190",
+    "amount": "760"
+  },
+  {
+    "itemCode": "RWASHERLV12",
+    "mid": 178,
+    "description": "LV 12",
+    "unit": "Nos",
+    "quantity": "3",
+    "rate": "100",
+    "amount": "300"
+  },
+  {
+    "itemCode": "BRE1000GM",
+    "mid": 139,
+    "description": "1000 GM",
+    "unit": "Nos",
+    "quantity": "1",
+    "rate": "470",
+    "amount": "470"
+  },
+  {
+    "itemCode": "LOBUSH",
+    "mid": 103,
+    "description": "LOBUSH",
+    "unit": "Nos",
+    "quantity": "4",
+    "rate": "32",
+    "amount": "128"
+  },
+  {
+    "itemCode": "MSNUTM12",
+    "mid": 157,
+    "description": "M12",
+    "unit": "Kgs",
+    "quantity": "8",
+    "rate": "96",
+    "amount": "768"
+  },
+  {
+    "itemCode": "MSBOLTM12X40",
+    "mid": 151,
+    "description": "M12 X 40",
+    "unit": "Kgs",
+    "quantity": "8",
+    "rate": "96",
+    "amount": "768"
+  },
+  {
+    "itemCode": "VARNISH",
+    "mid": 177,
+    "description": "AIR DRYING",
+    "unit": "Kgs",
+    "quantity": "0.25",
+    "rate": "270",
+    "amount": "67.5"
+  },
+  {
+    "itemCode": "GASKETS",
+    "mid": 334,
+    "description": "TOP COVER GASKET 10MM",
+    "unit": "Nos",
+    "quantity": "0.8",
+    "rate": "963",
+    "amount": "770.4000000000001"
+  },
+  {
+    "itemCode": "TROIL",
+    "mid": 150,
+    "description": "IS : 335",
+    "unit": "Ltr",
+    "quantity": "730",
+    "rate": "68",
+    "amount": "49640"
+  },
+  {
+    "itemCode": "ARPLUG",
+    "mid": 102,
+    "description": "ARPLUG",
+    "unit": "Nos",
+    "quantity": "2",
+    "rate": "95",
+    "amount": "190"
+  },
+  {
+    "itemCode": "BREPIPE0.5INCH",
+    "mid": 95,
+    "description": ".5 INCH",
+    "unit": "Nos",
+    "quantity": "1",
+    "rate": "41",
+    "amount": "41"
+  },
+  {
+    "itemCode": "BUCLAMP",
+    "mid": 100,
+    "description": "BUCLAMP",
+    "unit": "Nos",
+    "quantity": "12",
+    "rate": "32",
+    "amount": "384"
+  },
+  {
+    "itemCode": "NAME PLATE",
+    "mid": 281,
+    "description": "NAME PLATE ",
+    "unit": "Nos",
+    "quantity": "1",
+    "rate": "200",
+    "amount": "200"
+  },
+  {
+    "itemCode": "LGREY",
+    "mid": 195,
+    "description": "LIGHT GREY",
+    "unit": "Ltr",
+    "quantity": "8",
+    "rate": "210",
+    "amount": "1680"
+  },
+  {
+    "itemCode": "OIL FILLING CAP",
+    "mid": 319,
+    "description": "O F CAP ",
+    "unit": "Nos",
+    "quantity": "1",
+    "rate": "65",
+    "amount": "65"
+  }
+]

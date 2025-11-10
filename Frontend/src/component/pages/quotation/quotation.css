@@ -1,0 +1,31 @@
+#quotationbtn {
+  position: relative;
+  left: 526px;
+  bottom: -18px;
+}
+#print {
+  border: 1px solid black;
+}
+.error {
+  border: 2px solid red;
+  border-radius: 5px;
+}
+.page_header {
+  font-family: "Roboto", sans-serif;
+}
+
+#spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100vh;
+}
+
+.MuiTableCell-root,
+.MuiTableCell-head,
+.MuiTableHead-root {
+  white-space: nowrap !important;
+}
+
+

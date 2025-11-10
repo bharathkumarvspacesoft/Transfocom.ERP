@@ -1,0 +1,126 @@
+#addenquirybtn {
+  float: right;
+  margin-top: 5px;
+}
+#addcostinbtn {
+  right: 15px;
+  position: absolute;
+  bottom: 15px;
+}
+
+#searchBox {
+  float: right;
+}
+
+.mb-4 {
+  box-shadow: 0px 7px 16px grey;
+}
+
+/* #r1 {
+
+    width: 50rem;
+} */
+
+#r2 {
+  width: 50rem;
+}
+
+#r3 {
+  width: 50rem;
+}
+
+#r4 {
+  width: 50rem;
+}
+
+#r5 {
+  width: 25rem;
+}
+
+#r6 {
+  width: 50rem;
+}
+
+#r7 {
+  width: 50rem;
+}
+
+#r8 {
+  width: 50rem;
+}
+
+#r9 {
+  width: 50rem;
+}
+
+#r10 {
+  width: 50rem;
+}
+
+#r11 {
+  width: 50rem;
+}
+
+#form6Example7 {
+  width: 30rem;
+}
+
+#form1 {
+  margin-top: 40px;
+  margin-left: 4.2rem;
+  font-family: "Roboto", sans-serif;
+}
+
+#savebtn {
+  height: 40px;
+  width: 120px;
+  margin-left: 15rem;
+  background-color: rgb(8, 202, 40);
+}
+
+#quotebtn {
+  /* margin-bottom: 30px; */
+  width: 120px;
+  height: 40px;
+  padding-left: 5px;
+  background-color: rgb(44, 8, 250);
+}
+
+#cancelbtn {
+  width: 120px;
+  height: 40px;
+
+  background-color: rgb(226, 43, 11);
+}
+
+#btnRow {
+  width: 100%;
+}
+
+.form-control {
+  border-radius: 15px;
+  border: 1px solid rgba(0, 176, 240, 0.59);
+  border-top-width: 1px;
+  border-right-width: 1px;
+  border-bottom-width: 5px;
+  border-left-width: 3px;
+  /* border-top-left-radius: 40px */
+}
+
+.error {
+  border: 2px solid red;
+  border-radius: 5px;
+}
+.page_header {
+  font-family: "Roboto", sans-serif;
+}
+
+#spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100vh;
+}
+
+

@@ -1,0 +1,44 @@
+#datePicker{
+
+    margin-top: 20px;
+}
+
+#addToList {
+    float: right;
+}
+
+#challan{
+    position: relative;
+    top: 17px;
+}
+#challanbtn{
+    position: relative;
+    left: 520px;
+    top: 10px;
+}
+#breadcrumb{
+    border: 1px solid white;
+   
+    min-height: 50px;
+    margin-left: 10px;
+    background: white;
+    border-radius: 15px;
+    
+}
+.error {
+    border: 2px solid red;
+    border-radius: 5px;
+    }
+
+    .page_header{
+        font-family: 'Roboto', sans-serif;
+    }
+
+    #spinner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        height: 100vh;
+      }
+

@@ -1,0 +1,28 @@
+#datePicker {
+  margin-top: 20px;
+}
+
+#addToList {
+  float: right;
+}
+#btn2 {
+  position: relative;
+  left: 522px;
+  bottom: -9px;
+}
+
+.error {
+  border: 2px solid red;
+  border-radius: 5px;
+}
+.page_header {
+  font-family: "Roboto", sans-serif;
+}
+
+#spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100vh;
+}

@@ -1,0 +1,20 @@
+[
+  {
+    "itemCode": "G1",
+    "mid": 391,
+    "description": "G1",
+    "unit": "Nos",
+    "quantity": "1",
+    "rate": "10",
+    "amount": "10"
+  },
+  {
+    "itemCode": "G2",
+    "mid": 392,
+    "description": "G2",
+    "unit": "Set",
+    "quantity": "2",
+    "rate": "20",
+    "amount": "40"
+  }
+]
