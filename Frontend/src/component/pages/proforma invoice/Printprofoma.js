@@ -268,8 +268,8 @@ const Printprofoma = () => {
                       </td>
                   </tr>
                   <tr style="height:14pt">
-                      <td style="width:238pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-                          <p class="s4" style="padding-top: 2pt;padding-left: 2pt;text-indent: 0pt;line-height: 10pt;text-align: left;">Customer:-</p>
+                      <td style="width:238pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
+                          <p class="s4" style="padding-top: 2pt;padding-left: 2pt;text-indent: 0pt;line-height: 10pt;text-align: left; font-size: 10pt;">Customer:-</p>
                       </td>
                       <td style="width:62pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" rowspan="4">
                           <p class="s4" style="padding-top: 2pt;padding-left: 4pt;padding-right: 15pt;text-indent: -2pt;line-height: 261%;text-align: left;">PRO.INV: PO.NO:</p>
@@ -289,7 +289,7 @@ const Printprofoma = () => {
                       </td>
                   </tr>
                   <tr style="height:50pt">
-                     <td style="width:238pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                     <td style="width:238pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                         <p class="s4" style="padding-top: 2pt;padding-left: 2pt;text-indent: 0pt;line-height: 12pt;text-align: left;font-size: 10pt;">${data.custname}</p>
                         <p class="s4" style="padding-left: 2pt; text-indent: 0pt; line-height: 12pt; text-align: left;font-size: 10pt;">
                             ${data?.address ? data.address.split(',').join(',<br>') : ""}
@@ -297,14 +297,14 @@ const Printprofoma = () => {
                     </td>
                   </tr>
                   <tr style="height:14pt">
-                      <td style="width:238pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                      <td style="width:238pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
                           <p class="s4" style="padding-top: 2pt;padding-left: 2pt;text-indent: 0pt;line-height: 10pt;text-align: left;">GST NO:-${data.gstno}</p>
                       </td>
                   </tr>
              
                   <tr style="height:70pt">
                      <td style="width:238pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">   
-                        <p class="s4" style="padding-top: 2pt;padding-left: 2pt;text-indent: 0pt;line-height: 12pt;text-align: left;font-size: 10pt;">Consumer: ${data.consumer}</p>
+                        <p class="s4" style="padding-top: 1pt;padding-left: 2pt;text-indent: 0pt;line-height: 12pt;text-align: left;font-size: 10pt;">Consumer: ${data.consumer}</p>
                         <p class="s4" style="padding-left: 2pt;text-indent: 0pt;line-height: 10pt;text-align: left;"></p>
                         <p class="s4" style="padding-left: 2pt; text-indent: 0pt; line-height: 12pt; text-align: left;font-size: 10pt;">
                             ${data?.consumer_address ? data.consumer_address.split(',').join(',<br>') : ""}
@@ -325,7 +325,7 @@ const Printprofoma = () => {
                           <p class="s4" style="padding-top: 2pt;padding-left: 28pt;text-indent: 0pt;line-height: 10pt;text-align: left;">AMOUNT</p>
                       </td>
                   </tr>
-                  <tr style="height:154pt">
+                  <tr style="height:250pt">
                       <td style="width:238pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
                           <p class="s3" style="padding-top: 7pt;padding-left: 2pt;padding-right: 47pt;text-indent: 0pt;line-height: 130%;text-align: left;">Distribution Transformer duly tested and filled with Transformer oil and supplied with silica gel breather.</p>
                           <p style="text-indent: 0pt;text-align: left;">
@@ -344,6 +344,7 @@ const Printprofoma = () => {
                           <p class="s3" style="padding-top: 2pt;padding-right: 1pt;text-indent: 0pt;text-align: right;">${Number(amount || 0).toLocaleString("en-IN")}</p>
                       </td>
                   </tr>
+                  
                   <tr style="height:14pt">
                      <td style="width:238pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" rowspan="2">
                         <p class="s4" style="padding-top: 3pt;padding-left: 2pt;padding-right: 5pt;text-indent: 0pt;line-height: 87%;text-align: left;font-size: 10pt;">${amountToWords(nettotal)}</p>
@@ -352,7 +353,7 @@ const Printprofoma = () => {
                         <p class="s4" style="padding-top: 2pt;padding-left: 55pt;padding-right: 55pt;text-indent: 0pt;line-height: 12pt;text-align: center;font-size: 12pt;">TOTAL</p>
                         </td>
                         <td style="width:100pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-                        <p class="s3" style="padding-top: 2pt;padding-right: 1pt;text-indent: 0pt;line-height: 12pt;text-align: right;font-size: 10pt;">${Number(amount || 0).toLocaleString("en-IN")}</p>
+                        <p class="s4" style="padding-top: 2pt;padding-right: 1pt;text-indent: 0pt;line-height: 12pt;text-align: right;font-size: 12pt;">${Number(amount || 0).toLocaleString("en-IN")}</p>
                     </td>
                   </tr>
                   <tr style="height:14pt">
@@ -372,7 +373,7 @@ const Printprofoma = () => {
                           <p class="s5" style="padding-top: 7pt;padding-left: 2pt;text-indent: 0pt;line-height: 10pt;text-align: left;font-weight: bold;">Bank Details:-</p>
                           <p class="s5" style="padding-top: 2pt;padding-left: 2pt;text-indent: 0pt;line-height: 9pt;text-align: left;font-weight: bold;">Name:&nbsp;&nbsp; Static Electricals Pune</p>
                           <p class="s5" style="padding-top: 2pt;padding-left: 2pt;padding-right: 47pt;text-indent: 0pt;line-height: 87%;text-align: left;font-weight: bold;">ICIC Bank – A/c No:&nbsp;&nbsp; 003905501942</p>
-                                              <p class="s5" style="padding-top: 1pt;padding-left: 2pt;text-indent: 0pt;line-height: 9pt;text-align: left;font-weight: bold;">Branch:&nbsp;&nbsp;Shivaji Nager Branch, Pune 411005</p>
+                                              <p class="s5" style="padding-top: 1pt;padding-left: 2pt;text-indent: 0pt;line-height: 9pt;text-align: left;font-weight: bold;">Branch:&nbsp;&nbsp;Shivaji Nager, Pune 411005</p>
                     <p class="s5" style="padding-top: 3pt;padding-left: 2pt;text-indent: 0pt;line-height: 9pt;text-align: left;font-weight: bold;">RTGS / NEFT / IFSC Code:&nbsp;&nbsp; ICIC0000039</p>
                     
                           

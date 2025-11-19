@@ -191,7 +191,7 @@ const PrintChallan = () => {
       
               <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
       
-              <title style="display:none;"></title>
+              <title style="display:none;">Chellan</title>
       
               <meta name="author" content="STATIC ELECTRIC"/>
       
@@ -367,410 +367,278 @@ const PrintChallan = () => {
       
           <body>
       
-          <p class="s1" style="padding-top: 3pt;  text-indent: 0pt; line-height: 19pt; text-align: center;">STATIC ELECTRICALS PUNE</p>
-
-      
-              <p style="text-indent: 0pt; line-height: 9pt; text-align: center;">S. No. 229/2/2, Behind Wipro Technologies,</p>
-
-      
-              <p  style="text-indent: 0pt; line-height: 9pt; text-align: center;">Hinjewadi, Pune 411 057.</p>
-      
-              <p  style="text-indent: 0pt; line-height: 9pt; text-align: center;"/>
-      
-              <p  style="text-indent: 0pt; line-height: 9pt; text-align: center;">Telefax: 020-22933059.</p>
-      
-              <p style="text-indent: 0pt; line-height: 9pt; text-align: center;">
-      
-                  <br/>
-      
+          <p class="s1" style="padding-top: 3pt;  text-indent: 0pt; line-height: 19pt; text-align: center;">STATIC ELECTRICALS PUNE</p>      
+              <p style="text-indent: 0pt; line-height: 9pt; text-align: center;">S. No. 229/2/2, Behind Wipro Technologies,</p>      
+              <p  style="text-indent: 0pt; line-height: 9pt; text-align: center;">Hinjewadi, Pune 411 057.</p>     
+              <p  style="text-indent: 0pt; line-height: 9pt; text-align: center;"/>      
+              <p  style="text-indent: 0pt; line-height: 9pt; text-align: center;">Telefax: 020-22933059.</p>      
+              <p style="text-indent: 0pt; line-height: 9pt; text-align: center;">      
+                  <br/>      
+              </p>      
+              <p style="text-indent: 0pt;text-align: left;">      
+                  <br/>      
               </p>
       
-              <p style="text-indent: 0pt;text-align: left;">
-      
-                  <br/>
-      
-              </p>
-      
-              <table style="border-collapse:collapse;margin-left:6.765pt" cellspacing="0">
-      
-                  <tr style="height:10pt">
-      
-                      <td style="width:443pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:2pt" colspan="5">
-      
-                          <p class="s2" style="padding-left: 135pt;padding-right: 132pt;text-indent: 0pt;line-height: 8pt;text-align: center;">An ISO 9001:2015 Certified Company</p>
-      
-                      </td>
-      
+              <table style="border-collapse:collapse;margin-left:8.765pt" cellspacing="0">      
+                  <tr style="height:10pt">      
+                      <td style="width:443pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="5">      
+                          <p class="s2" style="padding-left: 135pt;padding-right: 132pt;text-indent: 0pt;line-height: 8pt;text-align: center;">An ISO 9001:2015 Certified Company</p>      
+                      </td>      
                   </tr>
       
-                  <tr style="height:58pt">
-      
-                      <td style="width:443pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt" colspan="5">
-      
-                          <p style="text-indent: 0pt;text-align: left;">
-      
-                              <br/>
-      
-                          </p>
-      
-                          <p class="s3" style="padding-left: 135pt;padding-right: 132pt;text-indent: 0pt;text-align: center;">D E L I V E R Y C H A L L A N </p>
-      
-                      </td>
-      
+                  <tr style="height:58pt">      
+                      <td style="width:443pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="5">      
+                        <p style="text-indent: 0pt;text-align: left;">      
+                            <br/>      
+                        </p>                            
+                        <p class="s7" style="padding-left: 135pt; padding-right: 132pt; padding-top: 20px; text-indent: 0pt; text-align: center; font-weight: 900; text-decoration: underline; margin-bottom: 10px; -webkit-text-stroke: 0.5px black;">
+                          D E L I V E R Y  C H A L L A N
+                        </p>    
+                     </td>      
+                  </tr>      
+                  <tr style="height:9pt">      
+                      <td style="width:281pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="2" bgcolor="#BFBFBF">      
+                          <p class="s2" style="padding-left: 15pt;text-indent: 0pt;line-height: 8pt;text-align: left;padding-top:1pt;font-size:14px;padding-bottom:3px;margin-top: 6px;">TO: Buyer</p>      
+                      </td>      
+                      <td style="width:83pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="2" bgcolor="#BFBFBF">      
+                          <p style="text-indent: 0pt;text-align: left;">      
+                              <br/>      
+                          </p>      
+                      </td>      
+                      <td style="width:79pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" bgcolor="#BFBFBF">      
+                          <p style="text-indent: 0pt;text-align: left;">      
+                              <br/>      
+                          </p>      
+                      </td>      
                   </tr>
       
-                  <tr style="height:9pt">
-      
-                      <td style="width:281pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt" colspan="2" bgcolor="#BFBFBF">
-      
-                          <p class="s2" style="padding-left: 15pt;text-indent: 0pt;line-height: 8pt;text-align: left;padding-top:2pt;  margin-top: 6px;">TO: Buyer</p>
-      
+                  <tr style="height:57pt">      
+                      <td style="width:32pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" rowspan="3">      
+                          <p style="text-indent: 0pt;text-align: left;">      
+                              <br/>      
+                          </p>      
+                      </td>      
+                      <td style="width:249pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
+                          <p class="s4" style="padding-left: 1pt;text-indent: 0pt;line-height: 113%;text-align: left;font-size:14px;padding-top:2px;">${custname}</p>
+                               <p class="s4" style="padding-left: 1pt; text-indent: 0pt; line-height: 113%;font-size:14px;   text-align: left;">
+                              ${data[0]?.buyer_address ? data[0].buyer_address.split('\n').join(',<br>') : ""}
+                            </p>
                       </td>
       
-                      <td style="width:83pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt" colspan="2" bgcolor="#BFBFBF">
-      
-                          <p style="text-indent: 0pt;text-align: left;">
-      
-                              <br/>
-      
-                          </p>
-      
+                  
+                      <td style="width:105pt;border-top-style:solid; border-top-width:1pt; border-left-style:solid; border-left-width:1pt;" colspan="2">
+                          <span class="s2" style="display: flex; flex-direction: column; font-size:12px;">
+                              <span>&nbsp;D.C.NO:</span>
+                              <span>&nbsp;${data[0]?.challan_no}</span>
+                          </span>
+                          <br/>
+                          <p class="s2">&nbsp;P.O.NO: ${po_no}</p>
                       </td>
-      
-                      <td style="width:79pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt" bgcolor="#BFBFBF">
-      
-                          <p style="text-indent: 0pt;text-align: left;">
-      
-                              <br/>
-      
-                          </p>
-      
-                      </td>
-      
-                  </tr>
-      
-                  <tr style="height:57pt">
-      
-                      <td style="width:32pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt" rowspan="3">
-      
-                          <p style="text-indent: 0pt;text-align: left;">
-      
-                              <br/>
-      
-                          </p>
-      
-                      </td>
-      
-                      <td style="width:249pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-right-style:solid;border-right-width:2pt">
-      
-                          <p class="s4" style="padding-left: 1pt;text-indent: 0pt;line-height: 113%;text-align: left;">${custname}</p>
-                               <p class="s4" style="padding-left: 1pt; text-indent: 0pt; line-height: 113%; text-align: left;">
-  ${data[0]?.buyer_address ? data[0].buyer_address.split('\n').join(',<br>') : ""}
-</p>
-                      </td>
-      
-                      <td style="width:105pt; border-top-style:solid; border-top-width:2pt; border-left-style:solid; border-left-width:2pt" colspan="2">
-    <span class="s2" style="display: flex; flex-direction: row; align-items: center;">
-        <span>&nbsp;D.C.NO: </span>
-        <span>${data[0]?.challan_no}</span>
-    </span>
-    <br/>
-    <p class="s2">&nbsp;P.O.NO: ${po_no}</p>
-</td>
-
       
                      
       
-                      <td style="width:79pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-right-style:solid;border-right-width:2pt">
-         <p style="text-indent: 0pt;text-align: left;">
-            <p class="s2">&nbsp;Date: ${data[0]?.chdate}</p>
-                <br/>
-            </p>   
-                ${formatDates(po_date) ? `<p class="s2">&nbsp;Date: ${formatDates(po_date)}</p>` : ''}
-               <p style="text-indent: 0pt;text-align: left;">
-                <br/>
-              </p>
-      
+                      <td style="width:79pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
+                          <p style="text-indent: 0pt;text-align: left; font-size:12px;">
+                              <p class="s2" style="font-size:12px;">&nbsp;Date: ${data[0]?.chdate}</p>
+                                  <br/>
+                          </p>  
+                            <br/>
+                               ${formatDates(po_date) ? `<p class="s2" style="font-size:12px;">&nbsp;Date: ${formatDates(po_date)}</p>` : ''}
+                            <p style="text-indent: 0pt;text-align: left;">
+                              <br/>
+                            </p>
                       </td>
-      
                   </tr>
       
                   <tr style="height:16pt">
-      
-                      <td style="width:249pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt">
-      
-      
+                      <td style="width:249pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
                       </td>
-      
-                      <td style="width:43pt;border-left-style:solid;border-left-width:2pt ;border-bottom-style:solid;border-bottom-width:2pt;>
-      
+                      <td style="width:43pt;border-left-style:solid;border-left-width:1pt ;border-bottom-style:solid;border-bottom-width:1pt;>
                           <p style="text-indent: 0pt;text-align: left;">
-      
                               <br/>
-      
                           </p>
-      
+                      </td>
+                      <td style="width:40pt;border-right-style:solid;border-right-width:1pt;border-bottom-style:solid;border-bottom-width:1pt; ">
+                          <p style="text-indent: 0pt;text-align: left;">      
+                              <br/>      
+                          </p>      
                       </td>
       
-                      <td style="width:40pt;border-right-style:solid;border-right-width:2pt;border-bottom-style:solid;border-bottom-width:2pt; ">
-      
+                      <td style="width:79pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt;border-bottom-style:solid;border-bottom-width:1pt">      
                           <p style="text-indent: 0pt;text-align: left;">
+                            <br/>      
+                          </p>      
+                      </td>      
+                  </tr>
       
-                              <br/>
-      
+                  <tr style="height:64pt">      
+                      <td style="width:249pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                         <p class="s2" style="padding-left: 1pt;text-indent: 0pt;line-height: 8pt;text-align: left;text-decoration: underline;margin-bottom: 6px; padding-top:3px;  font-size:14px;">Delivery At:-</p>
+                          <p class="s4" style="padding-left: 1pt;text-indent: 0pt;line-height: 11pt;text-align: left; margin-top:"10px;font-size:16px;">${data[0]?.delivary_at_name}</p>        
+                          <p class="s4" style="padding-top: 1pt; padding-left: 1pt; text-indent: 0pt; line-height: 113%; text-align: left;font-size:14px;">
+                            ${data[0]?.delivery_address ? data[0].delivery_address.split('\n').join(',<br>') : ""}
                           </p>
-      
                       </td>
       
-                      <td style="width:79pt;border-left-style:solid;border-left-width:2pt;border-right-style:solid;border-right-width:2pt;border-bottom-style:solid;border-bottom-width:2pt">
-      
-                          <p style="text-indent: 0pt;text-align: left;">
-      
-                              <br/>
-      
-                          </p>
-      
-                      </td>
+                      <td style="width:43pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="4">
+                          <p class="s2" style="padding-left: 1pt;text-indent: 0pt;line-height: 8pt;text-align: left;text-decoration: underline; font-size:14px; padding-top:2px;">Order Acceptance Comment:-</p>
+                          <p class="s4" style="padding-left: 1pt;text-indent: 0pt;line-height: 11pt;text-align: left; padding-top:8px;">
+                            ${(data[0]?.OAcomment ?? "").split("\n").join("<br style='margin-top:4px'/>")}
+                          </p>              
+                          <p style="text-indent: 0pt;text-align: left;">      
+                            <br/>      
+                          </p>      
+                        </td>
       
                   </tr>
       
-                  <tr style="height:64pt">
-      
-                      <td style="width:249pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt">
-        <p class="s2" style="padding-left: 2pt;text-indent: 0pt;line-height: 8pt;text-align: left;text-decoration: underline;margin-bottom: 6px;">Delivery At:-</p>
-                          <p class="s4" style="padding-left: 1pt;text-indent: 0pt;line-height: 11pt;text-align: left; margin-top:"10px">${data[0]?.delivary_at_name}</p>
-  
-      
-                      <p class="s4" style="padding-top: 1pt; padding-left: 1pt; text-indent: 0pt; line-height: 113%; text-align: left;">
-            ${data[0]?.delivery_address ? data[0].delivery_address.split('\n').join(',<br>') : ""}
-          </p>
-
-
+                  <tr style="height:9pt">      
+                      <td style="width:32pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" bgcolor="#BFBFBF">      
+                          <p class="s2" style="text-indent: 0pt;line-height: 8pt;text-align: right;  margin-top: 6px; padding-bottom:2px; padding-right:2px">SR.NO</p>      
                       </td>
       
-                      <td style="width:43pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt" colspan="4">
-                    <p class="s2" style="padding-left: 1pt;text-indent: 0pt;line-height: 8pt;text-align: left;text-decoration: underline;">Order Acceptance Comment:-</p>
-                    <p class="s4" style="padding-left: 1pt;text-indent: 0pt;line-height: 11pt;text-align: left;">${(data[0]?.OAcomment ?? "").split("\n").join(",<br>")}
-</p>
-                
-                          <p style="text-indent: 0pt;text-align: left;">
-      
-                              <br/>
-      
-                          </p>
-      
+                      <td style="width:332pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="3" bgcolor="#BFBFBF">    
+                          <p class="s2" style="padding-left: 124pt;padding-right: 121pt;text-indent: 0pt;line-height: 8pt;text-align: center;  margin-top: 6px; padding-bottom:2px;">ITEM DESCRIPTION</p>      
                       </td>
       
+                      <td style="width:79pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" bgcolor="#BFBFBF">      
+                          <p class="s2" style="padding-left: 5pt;padding-right: 1pt;text-indent: 0pt;line-height: 8pt;text-align: center;  margin-top: 6px; padding-bottom:2px;">QUANTITY</p>      
+                      </td>      
                   </tr>
       
-                  <tr style="height:9pt">
-      
-                      <td style="width:32pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt" bgcolor="#BFBFBF">
-      
-                          <p class="s2" style="text-indent: 0pt;line-height: 8pt;text-align: right;  margin-top: 6px;">SR.NO</p>
-      
+                  <tr style="height:53pt">      
+                      <td style="width:32pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">      
+                          <p style="text-indent: 0pt;text-align: left;">      
+                              <br/>      
+                          </p>      
+                          <p class="s2" style="text-indent: 0pt;line-height: 9pt;text-align: right;"></p>   
+                           <br/>
+                          <br/>    
+                           <br/>
+                          <br/> 
+                    
+                         <p class="s2" style="text-indent: 0pt;line-height: 9pt;text-align: center;">1</p>
                       </td>
       
-                      <td style="width:332pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt" colspan="3" bgcolor="#BFBFBF">
+                      <td style="width:332pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="3" rowspan="3">
       
-                          <p class="s2" style="padding-left: 124pt;padding-right: 121pt;text-indent: 0pt;line-height: 8pt;text-align: center;  margin-top: 6px;">ITEM DESCRIPTION</p>
-      
-                      </td>
-      
-                      <td style="width:79pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt" bgcolor="#BFBFBF">
-      
-                          <p class="s2" style="padding-left: 5pt;padding-right: 2pt;text-indent: 0pt;line-height: 8pt;text-align: center;  margin-top: 6px;">QUANTITY</p>
-      
-                      </td>
-      
-                  </tr>
-      
-                  <tr style="height:53pt">
-      
-                      <td style="width:32pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-right-style:solid;border-right-width:2pt">
-      
-                          <p style="text-indent: 0pt;text-align: left;">
-      
-                              <br/>
-      
-                          </p>
-      
-                          <p class="s2" style="text-indent: 0pt;line-height: 9pt;text-align: right;"></p>
-      
-                      </td>
-      
-                      <td style="width:332pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-right-style:solid;border-right-width:2pt" colspan="3" rowspan="3">
-      
-                          <p class="s2" style="padding-left: 1pt;text-indent: 0pt;line-height: 9pt;text-align: left;">Distribution Transformer duly tested and</p>
-      
-                          <p class="s2" style="padding-left: 1pt;text-indent: 0pt;text-align: left;">filled with transformer oil and supplied with silica gel breather</p>
-      
-                          <p style="text-indent: 0pt;text-align: left;">
-      
-                              <br/>
-      
-                          </p>
-      
-                          <p class="s2" style="padding-left: 1pt;padding-right: 167pt;text-indent: 0pt;line-height: 219%;text-align: left;">Capacity    :   ${capacity}   KVA </p>
-                                <br/>
-                          <p class="s2" style="padding-left: 1pt;padding-right: 167pt;text-indent: 0pt;line-height: 219%;text-align: left;">Voltage Ratio  :   ${voltageratio}V</p>
-                                <br/>
-                          <p class="s2" style="padding-left: 1pt;padding-right: 167pt;text-indent: 0pt;line-height: 219%;text-align: left;">Type       :  ${typeLabel}</p>
+                          <p class="s2" style="padding-left: 1pt;text-indent: 0pt;line-height: 9pt;text-align: left;padding-bottom:6px; padding-top:6px;padding-left:3px; font-size:14px">Distribution Transformer duly tested and</p>   
+                   
+                          <p class="s2" style="padding-left: 1pt;text-indent: 0pt;text-align: left;padding-left:3px;font-size:14px">filled with transformer oil and supplied with silica gel breather</p>      
+                          <p style="text-indent: 0pt;text-align: left;">      
+                             
+                          </p>     
                           <br/>
-                                                    <br/>
-                                                                              <br/>
-                                                                                                        <br/>
-                          <p class="s2" style="padding-left: 20pt;padding-right: 167pt;text-indent: 0pt;line-height: 219%;text-align: left;">Vehicle No.:  ${vehicle || " "}</p>
-      
-                          <p style="text-indent: 0pt;text-align: left;">
-      
-                              <br/>
-      
+                          <br/> 
+                          <p class="s2" style="padding-left: 1pt;padding-right: 167pt;text-indent: 0pt;line-height: 119%;text-align: left; padding-left:3px;font-size:14px">Capacity${"&nbsp;".repeat(9)}-   ${capacity}   KVA </p>                               
+                          <p class="s2" style="padding-left: 1pt;padding-right: 167pt;padding-top:8px;text-indent: 0pt;line-height: 119%;text-align: left;padding-left:3px;font-size:14px">Voltage Ratio  -   ${voltageratio}V</p>                            
+                          <p class="s2" style="padding-left: 1pt;padding-right: 167pt;padding-top:8px;text-indent: 0pt;line-height: 119%;text-align: left;padding-left:3px;font-size:14px">Type ${"&nbsp;".repeat(14)}    -  ${typeLabel}</p>
+                          <br/>
+                          <br/>
+                          <br/>
+                          <br/>
+                          <br/>
+                          <br/>                                
+                          <br/>
+                          <br/>
+                          <br/>
+                          <br/>
+                          <br/>
+                          <br/>
+                          <br/>
+                          <br/>
+                          <p class="s2" style="padding-left: 20pt;padding-right: 167pt;text-indent: 0pt;line-height: 219%;text-align: left;font-size:14px">Vehicle No.:  ${vehicle || " "}</p>      
+                          <p style="text-indent: 0pt;text-align: left;">      
+                            <br/>      
                           </p>
       
-                          <p class="s2" style="padding-left: 20pt;text-indent: 0pt;text-align: left;"></p>
-      
+                          <p class="s2" style="padding-left: 20pt;text-indent: 0pt;text-align: left;"></p>      
                       </td>
       
-                      <td style="width:79pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-right-style:solid;border-right-width:2pt">
-      
-                          <p style="text-indent: 0pt;text-align: left;">
-      
-                              <br/>
-      
-                          </p>
-      
-                      </td>
-      
+                     <td style="width:79pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt;vertical-align:bottom">
+                    <p class="s2" style="padding-left: 5pt;padding-right: 1pt;text-indent: 0pt;line-height: 9pt;text-align: center;font-size:14px">
+                      ${qty} No.
+                    </p>
+                  </td> 
                   </tr>
       
-                  <tr style="height:11pt">
-      
-                      <td style="width:32pt;border-left-style:solid;border-left-width:2pt;border-right-style:solid;border-right-width:2pt">
-      
-                          <p style="text-indent: 0pt;text-align: left;">
-      
-                              <br/>
-      
-                          </p>
-      
+                  <tr style="height:11pt">      
+                      <td style="width:32pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">      
+                          <p style="text-indent: 0pt;text-align: left;">      
+                              <br/>      
+                          </p>      
                       </td>
       
-                    <td style="width:79pt;border-left-style:solid;border-left-width:2pt;border-right-style:solid;border-right-width:2pt">
-  <p class="s2" style="padding-left: 5pt;padding-right: 2pt;text-indent: 0pt;line-height: 9pt;text-align: center;">
-    ${qty} No.
-  </p>
-</td>
+                    <td style="width:79pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
+                      <p class="s2" style="padding-left: 5pt;padding-right: 1pt;text-indent: 0pt;line-height: 9pt;text-align: center;font-size:14px">
+                        (${convertNumberToWords(qty)} No.${qty !== 1 ? '' : ''})
+                      </p>
+                    </td>
 
-<tr style="height:139pt">
-  <td style="width:32pt;border-left-style:solid;border-left-width:2pt;border-right-style:solid;border-right-width:2pt">
-    <p style="text-indent: 0pt;text-align: left;">
-      <br/>
-    </p>
-  </td>
+                      <tr style="height:139pt">
+                        <td style="width:32pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
+                          <p style="text-indent: 0pt;text-align: left;">
+                            <br/>
+                          </p>
+                        </td>
 
-<td style="width:79pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt">
-  <p class="s2" style="padding-left: 5pt;padding-right: 3pt;text-indent: 0pt;text-align: center;white-space: nowrap;">
-    (${convertNumberToWords(qty)} No.${qty !== 1 ? '' : ''})
-  </p>
-</td>
-      
+                        <td style="width:79pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                          <p class="s2" style="padding-left: 5pt;padding-right: 3pt;text-indent: 0pt;text-align: center;white-space: nowrap;font-size:14px">
+                           
+                          </p>
+                        </td>      
                   </tr>
       
-                  <tr style="height:9pt">
-      
-                      <td style="width:32pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt">
-      
-                          <p style="text-indent: 0pt;text-align: left;">
-      
-                              <br/>
-      
-                          </p>
-      
+                  <tr style="height:20pt">      
+                      <td style="width:32pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">      
+                          <p style="text-indent: 0pt;text-align: left;">      
+                              <br/>      
+                          </p>      
+                      </td>      
+                      <td style="width:292pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="2">      
+                          <p style="text-indent: 0pt;text-align: left;">      
+                              <br/>      
+                          </p>      
+                      </td>      
+                      <td style="width:50pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">      
+                          <p class="s2" style="padding-right: 7pt;text-indent: 0pt;line-height: 8pt;text-align: right; font-size:14px ;padding-top:8px">TOTAL</p>      
                       </td>
       
-                      <td style="width:292pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt" colspan="2">
-      
-                          <p style="text-indent: 0pt;text-align: left;">
-      
-                              <br/>
-      
-                          </p>
-      
-                      </td>
-      
-                      <td style="width:40pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt">
-      
-                          <p class="s2" style="padding-right: 7pt;text-indent: 0pt;line-height: 8pt;text-align: right;">TOTAL</p>
-      
-                      </td>
-      
-                      <td style="width:79pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt">
-      
-                          <p class="s2" style="padding-left: 5pt;padding-right: 3pt;text-indent: 0pt;line-height: 8pt;text-align: center;">${qty} No. (${convertNumberToWords(qty)} No.)</p>
-      
-                      </td>
-      
+                      <td style="width:100pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">      
+                          <p class="s2" style="padding-left: 5pt;padding-right: 3pt;text-indent: 0pt;line-height: 8pt;text-align: center; font-size:14px;padding-top:8px">${qty} No. (${convertNumberToWords(qty)} No.)</p>      
+                      </td>      
                   </tr>
       
-                  <tr style="height:117pt">
-      
-                      <td style="width:281pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt" colspan="2">
-      
-                          <p class="s5" style="padding-left: 1pt;padding-right: 16pt;text-indent: 0pt;line-height: 157%;text-align: left;">1) The item which is despatched to you directly or through a third party, the company reserves the right to take back the</p>
-      
-                          <p class="s5" style="padding-top: 1pt;padding-left: 3pt;text-indent: 0pt;text-align: left;">item against any delay/non payment.</p>
-      
-                          <p style="text-indent: 0pt;text-align: left;">
-      
-                              <br/>
-      
-                          </p>
-      
-                          <p class="s2" style="padding-top: 6pt;padding-left: 1pt;text-indent: 0pt;text-align: left;">Subject to Pune Jurisdiction Only</p>
-      
-                          <p class="s5" style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: left;">Received the above items in good condition.</p>
-      
-                          <p style="text-indent: 0pt;text-align: left;">
-      
-                              <br/>
-      
-                          </p>
-      
-                          <p class="s2" style="padding-left: 1pt;text-indent: 0pt;text-align: left;">Receivers Signature</p>
-      
-                          <p class="s2" style="padding-left: 1pt;text-indent: 0pt;text-align: left;">
-      
-                              and          Stamp:<span class="s6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-      
-                          </p>
-      
+                  <tr style="height:117pt">      
+                      <td style="width:281pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="2"> 
+                          <p class="s5" style="padding-left: 1pt;padding-right: 16pt;text-indent: 0pt;line-height: 157%;text-align: left;font-size:12px;">1) The item which is despatched to you directly or through a third party, the company reserves the right to take back the item against any delay/non payment.</p>
+                          <p class="s5" style="padding-top: 1pt;padding-left: 3pt;text-indent: 0pt;text-align: left;font-size:14px;"></p>      
+                          <p style="text-indent: 0pt;text-align: left;">      
+                              <br/>      
+                          </p> 
+                           <p class="s2" style="padding-top: 6pt;padding-left: 1pt;text-indent: 0pt;text-align: left; font-size:12px;">Subject to Pune Jurisdiction Only</p>      
+                          <p class="s5" style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: left; font-size:12px;">Received the above items in good condition.</p>      
+                          <p style="text-indent: 0pt;text-align: left;">      
+                              <br/>      
+                          </p>      
+                          <p class="s2" style="padding-left: 1pt;text-indent: 0pt;text-align: left; font-size:12px;">Receivers Signature</p>      
+                          <p class="s2" style="padding-left: 1pt;text-indent: 0pt;text-align: left; font-size:12px;">      
+                              and          Stamp:<span class="s6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>      
+                          </p>      
                       </td>
       
-                      <td style="width:162pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt" colspan="3">
-      
-                          <p class="s7" style="padding-top: 9pt;padding-left: 1pt;text-indent: 0pt;text-align: left;">
-      
-                              For <span class="s8">Static Electricals Pune</span>
-      
-                          </p>
-      
-                          <p style="text-indent: 0pt;text-align: left;">
-      
-                              <br/>
-      
-                          </p>
-      
-                          <p class="s2" style="padding-left: 37pt;text-indent: 0pt;text-align: left;margin-top:80px;">Authorised Signatory</p>
-      
-                      </td>
-      
-                  </tr>
-      
-              </table>
-      
-          </body>
-      
+                      <td style="width:162pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="3">      
+                          <p class="s7" style="padding-top: 9pt;padding-left: 1pt;text-indent: 0pt;text-align: left; font-size:12px;">      
+                              For <span class="s8">Static Electricals Pune</span>      
+                          </p>      
+                          <p style="text-indent: 0pt;text-align: left;">      
+                              <br/>      
+                          </p>      
+                          <p class="s2" style="padding-left: 37pt;text-indent: 0pt;text-align: left;margin-top:80px;font-size:12px;">Authorised Signatory</p>      
+                      </td>      
+                  </tr>      
+              </table>      
+          </body>      
       </html>
       
   

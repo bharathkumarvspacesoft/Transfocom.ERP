@@ -16320,44 +16320,44 @@ router.get("/getchallanlist", (req, res) => {
 });
 
 
-router.get("/getchallan", (req, res) => {
-  const q = `
-    SELECT
-        c.id,
-        c.challan_no,
-        c.chdate,
-        c.custname,
-        c.buyer_address,
-        c.deliver_at,
-        c.delivery_address,
-        c.po_no,
-        c.po_date,
-        c.vehicle,
-        c.costing_id,
-        d.qty,
-        oa.consumer
-    FROM
-        challans c
-    LEFT JOIN
-        challan_details d ON c.id = d.challan_id
-    LEFT JOIN
-        order_acceptance oa ON c.costing_id = oa.qid
-    WHERE
-        NOT EXISTS (
-            SELECT 1 FROM invoices i WHERE i.challan_id = c.id
-        )
-    ORDER BY
-        c.id DESC;
-  `;
+// router.get("/getchallan", (req, res) => {
+//   const q = `
+//     SELECT
+//         c.id,
+//         c.challan_no,
+//         c.chdate,
+//         c.custname,
+//         c.buyer_address,
+//         c.deliver_at,
+//         c.delivery_address,
+//         c.po_no,
+//         c.po_date,
+//         c.vehicle,
+//         c.costing_id,
+//         d.qty,
+//         oa.consumer
+//     FROM
+//         challans c
+//     LEFT JOIN
+//         challan_details d ON c.id = d.challan_id
+//     LEFT JOIN
+//         order_acceptance oa ON c.costing_id = oa.qid
+//     WHERE
+//         NOT EXISTS (
+//             SELECT 1 FROM invoices i WHERE i.challan_id = c.id
+//         )
+//     ORDER BY
+//         c.id DESC;
+//   `;
 
-  pool.query(q, (err, data) => {
-    if (err) {
-      console.error("Database query error: ", err);
-      return res.json(err);
-    }
-    return res.json(data);
-  });
-});
+//   pool.query(q, (err, data) => {
+//     if (err) {
+//       console.error("Database query error: ", err);
+//       return res.json(err);
+//     }
+//     return res.json(data);
+//   });
+// });
 
 //<-------------------------------------------------------------->
 //<------------------------------------delete challan--------------------------->
@@ -16438,6 +16438,46 @@ router.get("/getchallan", (req, res) => {
 //     });
 //   });
 // });
+
+router.get("/getchallan", (req, res) => {
+  const q = `
+    SELECT
+        c.id,
+        c.challan_no,
+        c.chdate,
+        c.custname,
+        c.buyer_address,
+        c.deliver_at,
+        c.delivery_address,
+        c.po_no,
+        c.po_date,
+        c.vehicle,
+        c.costing_id,
+        d.qty,
+        oa.consumer
+    FROM
+        challans c
+    LEFT JOIN
+        challan_details d ON c.id = d.challan_id
+    LEFT JOIN
+        order_acceptance oa ON c.orderacceptance_id = oa.id
+    WHERE
+        NOT EXISTS (
+            SELECT 1 FROM invoices i WHERE i.challan_id = c.id
+        )
+    ORDER BY
+        c.id DESC;
+  `;
+
+  pool.query(q, (err, data) => {
+    if (err) {
+      console.error("Database query error: ", err);
+      return res.json(err);
+    }
+    return res.json(data);
+  });
+});
+
 router.delete("/deleteChallan/:id", (req, res) => {
   const id = req.params.id;
 
@@ -17073,6 +17113,8 @@ router.post("/challan", (req, res) => {
 
         const data = req.body;
         data.challan_no = challanno;
+
+
 
         pool.query("SELECT MAX(id) AS max_id FROM challans", (err, rows) => {
           if (err) {
@@ -17915,7 +17957,986 @@ function convertTime(time) {
 //   return orderNo;
 // };
 
+// router.post("/addNewInvoice", (req, res) => {
+//   console.log("HIII");
+
+//   const {
+//     detailList,
+//     inv_date,
+//     challan_id,
+//     buyername,
+//     buyer_id,
+//     challan_no,
+//     custname,
+//     customeraddress,
+//     modeoftransport,
+//     po_no,
+//     po_date,
+//     vehicle_no,
+//     grand_total,
+//     advance,
+//     net_total,
+//     date_issue,
+//     time_issue,
+//     date_removal,
+//     time_removal,
+//     uid,
+//     by_road,
+//     buyer_addr,
+//     consign_addr,
+//     roundoff,
+//     consigneename,
+//     orderacceptance_id,
+//     cgst,
+//     basic_total,
+//     sgst,
+//     igst,
+//     oa_id,
+//     gstno,
+//     costing_id,
+//     enquiry_id,
+//   } = req.body;
+
+//   const chqty = req.body.qty;
+//   const detailArray = Array.isArray(detailList) ? detailList : [detailList];
+
+//   // Safe numeric conversions
+//   const numericAdvance = 0;
+//   const numericNetTotal = parseFloat(net_total) || 0;
+//   const numericGrandTotal = parseFloat(grand_total) || 0;
+//   const numericBasicTotal = parseFloat(basic_total) || 0;
+//   const numericCGST = parseFloat(cgst) || 0;
+//   const numericSGST = parseFloat(sgst) || 0;
+//   const numericIGST = parseFloat(igst) || 0;
+//   const numericRoundoff = parseFloat(roundoff) || 0;
+
+//   // Format dates safely
+//   // Format dates safely - handles both DD-MM-YYYY and ISO formats
+//   // const formatDateForDB = (dateString) => {
+//   //   if (!dateString) return null;
+
+//   //   let date;
+
+//   //   // Check if date is in DD-MM-YYYY format
+//   //   if (dateString.includes('-') && dateString.split('-')[0].length <= 2) {
+//   //     const [day, month, year] = dateString.split('-');
+//   //     // Create date in YYYY-MM-DD format for proper parsing
+//   //     date = new Date(`${year}-${month}-${day}`);
+//   //   } else {
+//   //     // Handle ISO format or other standard formats
+//   //     date = new Date(dateString);
+//   //   }
+
+//   //   if (isNaN(date.getTime())) return null;
+
+//   //   const day = String(date.getDate()).padStart(2, "0");
+//   //   const month = String(date.getMonth() + 1).padStart(2, "0");
+//   //   const year = date.getFullYear();
+//   //   return `${year}-${month}-${day}`;
+//   // };
+
+//   // const formattedPODate = formatDateForDB(po_date);
+//   // const formattedInvDate = formatDateForDB(inv_date);
+//   // console.log("inv_date", inv_date);
+
+//   const formatDateForDB = (dateString) => {
+//     if (!dateString) return null;
+
+//     let date;
+
+//     // Check if date is in DD-MM-YYYY or DD/MM/YYYY format
+//     const separator = dateString.includes('-') ? '-' : dateString.includes('/') ? '/' : null;
+
+//     if (separator) {
+//       const parts = dateString.split(separator);
+//       if (parts[0].length <= 2) {
+//         // Input is in DD-MM-YYYY or DD/MM/YYYY format
+//         const [day, month, year] = parts;
+//         // Create date in YYYY-MM-DD format for proper parsing
+//         date = new Date(`${year}-${month}-${day}`);
+//       } else {
+//         // Already in YYYY-MM-DD or YYYY/MM/DD format
+//         date = new Date(dateString);
+//       }
+//     } else {
+//       // Handle ISO format or other standard formats
+//       date = new Date(dateString);
+//     }
+
+//     if (isNaN(date.getTime())) return null;
+
+//     const day = String(date.getDate()).padStart(2, "0");
+//     const month = String(date.getMonth() + 1).padStart(2, "0");
+//     const year = date.getFullYear();
+
+//     // Return with slashes instead of hyphens
+//     return `${year}-${month}-${day}`;
+//   };
+
+//   const formattedPODate = formatDateForDB(po_date);
+//   const formattedInvDate = formatDateForDB(inv_date);
+//   console.log("inv_date", inv_date);
+
+//   console.log(formattedInvDate, "formattedInvDate");
+
+
+//   // Update remaining advance in order_acceptance
+//   let remainingAdvance = numericNetTotal <= 0 ? Math.abs(numericNetTotal) : 0;
+//   pool.query(
+//     "UPDATE order_acceptance SET remainingadvance = ? WHERE id = ?",
+//     [remainingAdvance, oa_id],
+//     (err) => {
+//       if (err) {
+//         console.log("Error updating remainingadvance:", err);
+//         return res.status(500).send("Error updating remaining advance");
+//       }
+//     }
+//   );
+
+//   // Fetch challan_id from challan_no if needed
+//   pool.query(
+//     `SELECT id FROM challans WHERE challan_no = ?`,
+//     [challan_no],
+//     (err, chid) => {
+//       if (err) {
+//         console.log("Error fetching challan ID:", err);
+//         return res.status(500).send("Error fetching challan ID");
+//       }
+
+//       const challanId = chid[0]?.id || null;
+
+//       // Fetch user info for invoice number generation
+//       pool.query(
+//         `SELECT id, fname, lname, quot_serial FROM usermaster WHERE id = ?`,
+//         [uid],
+//         (err, user) => {
+//           if (err) {
+//             console.log("Error fetching user info:", err);
+//             return res.status(500).send("Error fetching user info");
+//           }
+
+//           // Fetch last invoice number to generate new invoice_no
+//           pool.query(
+//             "SELECT invoice_no FROM invoices ORDER BY id DESC LIMIT 1",
+//             (err, result) => {
+//               if (err) {
+//                 console.log("Error fetching last invoice:", err);
+//                 return res.status(500).send("Error fetching last invoice");
+//               }
+
+//               let lastNumber = 0;
+//               if (result[0] && result[0].invoice_no) {
+//                 const match = result[0].invoice_no.match(/(\d+)$/);
+//                 lastNumber = match ? parseInt(match[0]) : 0;
+//               }
+
+//               const newInvoiceNumber = lastNumber + 1;
+//               const invno = getInvNumber(newInvoiceNumber, user);
+
+//               // Insert into invoices table
+//               pool.query(
+//                 `INSERT INTO invoices (
+//                   invoice_no, inv_date, challan_id, buyer_id, buyername, customeraddress, transport_mode,
+//                   po_no, po_date, vehicle_no, basic_total, cgst, sgst, igst, grand_total, advance,
+//                   net_total, date_issue, date_removal, uid, by_road, buyer_addr, consign_addr,
+//                   roundoff, consigneename, orderacceptance_id, gstno
+//                 ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+//                 [
+//                   invno,
+//                   formattedInvDate,
+//                   challanId,
+//                   buyer_id,
+//                   buyername,
+//                   customeraddress,
+//                   modeoftransport,
+//                   po_no,
+//                   formattedPODate,
+//                   vehicle_no,
+//                   numericBasicTotal,
+//                   numericCGST,
+//                   numericSGST,
+//                   numericIGST,
+//                   numericGrandTotal,
+//                   numericAdvance,
+//                   numericNetTotal,
+//                   formatDateForDB(date_issue),
+//                   formatDateForDB(date_removal),
+//                   uid,
+//                   by_road,
+//                   buyer_addr,
+//                   consign_addr,
+//                   numericRoundoff,
+//                   consigneename,
+//                   orderacceptance_id,
+//                   gstno,
+//                 ],
+//                 (err, result) => {
+//                   if (err) {
+//                     console.log("Error inserting invoice:", err);
+//                     return res.status(500).send("Error inserting invoice");
+//                   }
+
+//                   const insertedInvoiceId = result.insertId;
+
+//                   // Fetch last invoice_balance for this order
+//                   pool.query(
+//                     `SELECT invoice_balance FROM invoice_transactions WHERE oid = ? ORDER BY invoice_id DESC LIMIT 1`,
+//                     [orderacceptance_id],
+//                     (err, balanceResult) => {
+//                       if (err) {
+//                         console.log("Error fetching last invoice balance:", err);
+//                         return res.status(500).send("Error fetching last invoice balance");
+//                       }
+
+//                       const lastBalance = parseFloat(balanceResult[0]?.invoice_balance || 0);
+//                       const newInvoiceBalance = numericAdvance - numericNetTotal;
+
+//                       // Insert invoice details and transactions
+//                       let pendingDetails = detailArray.length;
+//                       let pendingTransactions = detailArray.length;
+
+//                       if (pendingDetails === 0) return res.send("POSTED");
+
+//                       detailArray.forEach(({ plan_id, desc, qty, hsn, rate, amt }) => {
+//                         // Insert into invoice_details table
+//                         pool.query(
+//                           "INSERT INTO invoice_details (invoice_id, plan_id, `desc`, qty, hsn, rate, amt) VALUES (?, ?, ?, ?, ?, ?, ?)",
+//                           [insertedInvoiceId, plan_id, desc, qty, hsn, rate, amt],
+//                           (err) => {
+//                             if (err) {
+//                               console.log("Error inserting invoice details:", err);
+//                               return res.status(500).send("Error inserting invoice details");
+//                             }
+
+//                             pendingDetails--;
+//                             if (pendingDetails === 0) {
+//                               console.log("All invoice details inserted successfully");
+
+//                               // ✅ Update challan_details after all invoice details are inserted
+//                               if (challanId) {
+//                                 pool.query(
+//                                   `UPDATE challan_details 
+//                                    SET remainingqty = GREATEST(remainingqty - ?, 0)
+//                                    WHERE challan_id = ?`,
+//                                   [parseInt(chqty), challanId],
+//                                   (err) => {
+//                                     if (err) {
+//                                       console.log("Error updating remainingqty in challan_details:", err);
+//                                       return res.status(500).send("Error updating challan_details");
+//                                     }
+//                                     console.log("Challan details updated successfully");
+//                                   }
+//                                 );
+//                               }
+//                             }
+//                           }
+//                         );
+
+//                         // Insert into invoice_transactions table
+//                         pool.query(
+//                           `INSERT INTO invoice_transactions (
+//                             invoice_id, invoice_no, oid, costing_id, enquiry_id, plan_id,
+//                             item_desc, qty, hsn, rate, item_amount, basic_total, cgst, sgst, igst,
+//                             roundoff, grand_total, advance, net_total, invoice_balance,
+//                             buyer_id, buyer_name, invoice_date, uid, created_at
+//                           ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())`,
+//                           [
+//                             insertedInvoiceId,
+//                             invno,
+//                             orderacceptance_id,
+//                             costing_id,
+//                             enquiry_id,
+//                             plan_id,
+//                             desc,
+//                             qty,
+//                             hsn,
+//                             rate,
+//                             amt,
+//                             numericBasicTotal,
+//                             numericCGST,
+//                             numericSGST,
+//                             numericIGST,
+//                             numericRoundoff,
+//                             numericGrandTotal,
+//                             numericAdvance,
+//                             numericNetTotal,
+//                             newInvoiceBalance,
+//                             buyer_id,
+//                             custname,
+//                             formattedInvDate,
+//                             uid
+//                           ],
+//                           (err) => {
+//                             if (err) {
+//                               console.log("Error inserting invoice transaction:", err);
+//                               return res.status(500).send("Error inserting invoice transaction");
+//                             }
+
+//                             pendingTransactions--;
+//                             if (pendingTransactions === 0) {
+//                               console.log("All invoice transactions inserted successfully");
+//                               return res.send("POSTED");
+//                             }
+//                           }
+//                         );
+//                       });
+//                     }
+//                   );
+//                 }
+//               );
+//             }
+//           );
+//         }
+//       );
+//     }
+//   );
+// });
+
+// router.post("/addNewInvoice", (req, res) => {
+//   console.log("HIII");
+
+//   const {
+//     detailList,
+//     inv_date,
+//     challan_id,
+//     buyername,
+//     buyer_id,
+//     challan_no,
+//     custname,
+//     customeraddress,
+//     modeoftransport,
+//     po_no,
+//     po_date,
+//     vehicle_no,
+//     grand_total,
+//     advance,
+//     net_total,
+//     date_issue,
+//     time_issue,
+//     date_removal,
+//     time_removal,
+//     uid,
+//     by_road,
+//     buyer_addr,
+//     consign_addr,
+//     roundoff,
+//     consigneename,
+//     orderacceptance_id,
+//     cgst,
+//     basic_total,
+//     sgst,
+//     igst,
+//     oa_id,
+//     gstno,
+//     costing_id,
+//     enquiry_id,
+//     invoice_no, // ✅ Get invoice_no directly from frontend
+//   } = req.body;
+
+//   const chqty = req.body.qty;
+//   const detailArray = Array.isArray(detailList) ? detailList : [detailList];
+
+//   // ✅ Use invoice_no directly from frontend with trim
+//   const invno = String(invoice_no || "").trim();
+
+//   // Safe numeric conversions
+//   const numericAdvance = 0;
+//   const numericNetTotal = parseFloat(net_total) || 0;
+//   const numericGrandTotal = parseFloat(grand_total) || 0;
+//   const numericBasicTotal = parseFloat(basic_total) || 0;
+//   const numericCGST = parseFloat(cgst) || 0;
+//   const numericSGST = parseFloat(sgst) || 0;
+//   const numericIGST = parseFloat(igst) || 0;
+//   const numericRoundoff = parseFloat(roundoff) || 0;
+
+//   const formatDateForDB = (dateString) => {
+//     if (!dateString) return null;
+
+//     let date;
+
+//     // Check if date is in DD-MM-YYYY or DD/MM/YYYY format
+//     const separator = dateString.includes('-') ? '-' : dateString.includes('/') ? '/' : null;
+
+//     if (separator) {
+//       const parts = dateString.split(separator);
+//       if (parts[0].length <= 2) {
+//         // Input is in DD-MM-YYYY or DD/MM/YYYY format
+//         const [day, month, year] = parts;
+//         // Create date in YYYY-MM-DD format for proper parsing
+//         date = new Date(`${year}-${month}-${day}`);
+//       } else {
+//         // Already in YYYY-MM-DD or YYYY/MM/DD format
+//         date = new Date(dateString);
+//       }
+//     } else {
+//       // Handle ISO format or other standard formats
+//       date = new Date(dateString);
+//     }
+
+//     if (isNaN(date.getTime())) return null;
+
+//     const day = String(date.getDate()).padStart(2, "0");
+//     const month = String(date.getMonth() + 1).padStart(2, "0");
+//     const year = date.getFullYear();
+
+//     return `${year}-${month}-${day}`;
+//   };
+
+//   const formattedPODate = formatDateForDB(po_date);
+//   const formattedInvDate = formatDateForDB(inv_date);
+//   console.log("inv_date", inv_date);
+//   console.log("invoice_no from frontend:", invno);
+
+//   // Update remaining advance in order_acceptance
+//   let remainingAdvance = numericNetTotal <= 0 ? Math.abs(numericNetTotal) : 0;
+//   pool.query(
+//     "UPDATE order_acceptance SET remainingadvance = ? WHERE id = ?",
+//     [remainingAdvance, oa_id],
+//     (err) => {
+//       if (err) {
+//         console.log("Error updating remainingadvance:", err);
+//         return res.status(500).send("Error updating remaining advance");
+//       }
+//     }
+//   );
+
+//   // Fetch challan_id from challan_no if needed
+//   pool.query(
+//     `SELECT id FROM challans WHERE challan_no = ?`,
+//     [challan_no],
+//     (err, chid) => {
+//       if (err) {
+//         console.log("Error fetching challan ID:", err);
+//         return res.status(500).send("Error fetching challan ID");
+//       }
+
+//       const challanId = chid[0]?.id || null;
+
+//       // Insert into invoices table directly
+//       pool.query(
+//         `INSERT INTO invoices (
+//           invoice_no, inv_date, challan_id, buyer_id, buyername, customeraddress, transport_mode,
+//           po_no, po_date, vehicle_no, basic_total, cgst, sgst, igst, grand_total, advance,
+//           net_total, date_issue, date_removal, uid, by_road, buyer_addr, consign_addr,
+//           roundoff, consigneename, orderacceptance_id, gstno
+//         ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+//         [
+//           invno, // ✅ Using invoice_no directly from frontend
+//           formattedInvDate,
+//           challanId,
+//           buyer_id,
+//           buyername,
+//           customeraddress,
+//           modeoftransport,
+//           po_no,
+//           formattedPODate,
+//           vehicle_no,
+//           numericBasicTotal,
+//           numericCGST,
+//           numericSGST,
+//           numericIGST,
+//           numericGrandTotal,
+//           numericAdvance,
+//           numericNetTotal,
+//           formatDateForDB(date_issue),
+//           formatDateForDB(date_removal),
+//           uid,
+//           by_road,
+//           buyer_addr,
+//           consign_addr,
+//           numericRoundoff,
+//           consigneename,
+//           orderacceptance_id,
+//           gstno,
+//         ],
+//         (err, result) => {
+//           if (err) {
+//             console.log("Error inserting invoice:", err);
+//             return res.status(500).send("Error inserting invoice");
+//           }
+
+//           const insertedInvoiceId = result.insertId;
+
+//           // Fetch last invoice_balance for this order
+//           pool.query(
+//             `SELECT invoice_balance FROM invoice_transactions WHERE oid = ? ORDER BY invoice_id DESC LIMIT 1`,
+//             [orderacceptance_id],
+//             (err, balanceResult) => {
+//               if (err) {
+//                 console.log("Error fetching last invoice balance:", err);
+//                 return res.status(500).send("Error fetching last invoice balance");
+//               }
+
+//               const lastBalance = parseFloat(balanceResult[0]?.invoice_balance || 0);
+//               const newInvoiceBalance = numericAdvance - numericNetTotal;
+
+//               // Insert invoice details and transactions
+//               let pendingDetails = detailArray.length;
+//               let pendingTransactions = detailArray.length;
+
+//               if (pendingDetails === 0) return res.send("POSTED");
+
+//               detailArray.forEach(({ plan_id, desc, qty, hsn, rate, amt }) => {
+//                 // Insert into invoice_details table
+//                 pool.query(
+//                   "INSERT INTO invoice_details (invoice_id, plan_id, `desc`, qty, hsn, rate, amt) VALUES (?, ?, ?, ?, ?, ?, ?)",
+//                   [insertedInvoiceId, plan_id, desc, qty, hsn, rate, amt],
+//                   (err) => {
+//                     if (err) {
+//                       console.log("Error inserting invoice details:", err);
+//                       return res.status(500).send("Error inserting invoice details");
+//                     }
+
+//                     pendingDetails--;
+//                     if (pendingDetails === 0) {
+//                       console.log("All invoice details inserted successfully");
+
+//                       // ✅ Update challan_details after all invoice details are inserted
+//                       if (challanId) {
+//                         pool.query(
+//                           `UPDATE challan_details 
+//                            SET remainingqty = GREATEST(remainingqty - ?, 0)
+//                            WHERE challan_id = ?`,
+//                           [parseInt(chqty), challanId],
+//                           (err) => {
+//                             if (err) {
+//                               console.log("Error updating remainingqty in challan_details:", err);
+//                               return res.status(500).send("Error updating challan_details");
+//                             }
+//                             console.log("Challan details updated successfully");
+//                           }
+//                         );
+//                       }
+//                     }
+//                   }
+//                 );
+
+//                 // Insert into invoice_transactions table
+//                 pool.query(
+//                   `INSERT INTO invoice_transactions (
+//                     invoice_id, invoice_no, oid, costing_id, enquiry_id, plan_id,
+//                     item_desc, qty, hsn, rate, item_amount, basic_total, cgst, sgst, igst,
+//                     roundoff, grand_total, advance, net_total, invoice_balance,
+//                     buyer_id, buyer_name, invoice_date, uid, created_at
+//                   ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())`,
+//                   [
+//                     insertedInvoiceId,
+//                     invno, // ✅ Using invoice_no directly from frontend
+//                     orderacceptance_id,
+//                     costing_id,
+//                     enquiry_id,
+//                     plan_id,
+//                     desc,
+//                     qty,
+//                     hsn,
+//                     rate,
+//                     amt,
+//                     numericBasicTotal,
+//                     numericCGST,
+//                     numericSGST,
+//                     numericIGST,
+//                     numericRoundoff,
+//                     numericGrandTotal,
+//                     numericAdvance,
+//                     numericNetTotal,
+//                     newInvoiceBalance,
+//                     buyer_id,
+//                     custname,
+//                     formattedInvDate,
+//                     uid
+//                   ],
+//                   (err) => {
+//                     if (err) {
+//                       console.log("Error inserting invoice transaction:", err);
+//                       return res.status(500).send("Error inserting invoice transaction");
+//                     }
+
+//                     pendingTransactions--;
+//                     if (pendingTransactions === 0) {
+//                       console.log("All invoice transactions inserted successfully");
+//                       return res.send("POSTED");
+//                     }
+//                   }
+//                 );
+//               });
+//             }
+//           );
+//         }
+//       );
+//     }
+//   );
+// });
+
+// router.post("/addNewInvoice", (req, res) => {
+//   console.log("HIII");
+
+//   const {
+//     detailList,
+//     inv_date,
+//     challan_id,
+//     buyername,
+//     buyer_id,
+//     challan_no,
+//     custname,
+//     customeraddress,
+//     modeoftransport,
+//     po_no,
+//     po_date,
+//     vehicle_no,
+//     grand_total,
+//     advance,
+//     net_total,
+//     date_issue,
+//     time_issue,
+//     date_removal,
+//     time_removal,
+//     uid,
+//     by_road,
+//     buyer_addr,
+//     consign_addr,
+//     roundoff,
+//     consigneename,
+//     orderacceptance_id,
+//     cgst,
+//     basic_total,
+//     sgst,
+//     igst,
+//     oa_id,
+//     gstno,
+//     costing_id,
+//     enquiry_id,
+//     invoice_no, // ✅ Get invoice_no directly from frontend
+//   } = req.body;
+
+//   const chqty = req.body.qty;
+//   const detailArray = Array.isArray(detailList) ? detailList : [detailList];
+
+//   // ✅ Use invoice_no directly from frontend with trim
+//   const invno = String(invoice_no || "").trim();
+
+//   // ✅ Validate invoice_no
+//   if (!invno) {
+//     return res.status(400).json({
+//       success: false,
+//       message: "Invoice number is required"
+//     });
+//   }
+
+//   // Safe numeric conversions
+//   const numericAdvance = 0;
+//   const numericNetTotal = parseFloat(net_total) || 0;
+//   const numericGrandTotal = parseFloat(grand_total) || 0;
+//   const numericBasicTotal = parseFloat(basic_total) || 0;
+//   const numericCGST = parseFloat(cgst) || 0;
+//   const numericSGST = parseFloat(sgst) || 0;
+//   const numericIGST = parseFloat(igst) || 0;
+//   const numericRoundoff = parseFloat(roundoff) || 0;
+
+//   // ✅ Convert empty string to NULL for integer fields
+//   const safeBuyerId = buyer_id && buyer_id !== '' ? parseInt(buyer_id) : null;
+//   const safeCostingId = costing_id && costing_id !== '' ? parseInt(costing_id) : null;
+//   const safeEnquiryId = enquiry_id && enquiry_id !== '' ? parseInt(enquiry_id) : null;
+
+//   const addOneDay = (dateString) => {
+//     if (!dateString) return null;
+//     const date = new Date(dateString);
+//     date.setDate(date.getDate() + 1); // Add 1 day
+//     const day = String(date.getDate()).padStart(2, "0");
+//     const month = String(date.getMonth() + 1).padStart(2, "0");
+//     const year = date.getFullYear();
+//     return `${year}-${month}-${day}`;
+//   };
+
+
+//   const formatDateForDB = (dateString) => {
+//     if (!dateString) return null;
+
+//     let date;
+
+//     // Check if date is in DD-MM-YYYY or DD/MM/YYYY format
+//     const separator = dateString.includes('-') ? '-' : dateString.includes('/') ? '/' : null;
+
+//     if (separator) {
+//       const parts = dateString.split(separator);
+//       if (parts[0].length <= 2) {
+//         // Input is in DD-MM-YYYY or DD/MM/YYYY format
+//         const [day, month, year] = parts;
+//         // Create date in YYYY-MM-DD format for proper parsing
+//         date = new Date(`${year}-${month}-${day}`);
+//       } else {
+//         // Already in YYYY-MM-DD or YYYY/MM/DD format
+//         date = new Date(dateString);
+//       }
+//     } else {
+//       // Handle ISO format or other standard formats
+//       date = new Date(dateString);
+//     }
+
+//     if (isNaN(date.getTime())) return null;
+
+//     const day = String(date.getDate()).padStart(2, "0");
+//     const month = String(date.getMonth() + 1).padStart(2, "0");
+//     const year = date.getFullYear();
+
+//     return `${year}-${month}-${day}`;
+//   };
+
+//   const formattedPODate = formatDateForDB(po_date);
+//   const formattedInvDate = addOneDay(formatDateForDB(inv_date));
+//   console.log("inv_date", inv_date);
+//   console.log("invoice_no from frontend:", invno);
+
+//   // Update remaining advance in order_acceptance
+//   let remainingAdvance = numericNetTotal <= 0 ? Math.abs(numericNetTotal) : 0;
+
+//   // ✅ First check if invoice_no already exists
+//   pool.query(
+//     "SELECT invoice_no FROM invoices WHERE invoice_no = ?",
+//     [invno],
+//     (err, existingInvoice) => {
+//       if (err) {
+//         console.log("Error checking invoice number:", err);
+//         return res.status(500).json({
+//           success: false,
+//           message: "Error checking invoice number"
+//         });
+//       }
+
+//       if (existingInvoice && existingInvoice.length > 0) {
+//         return res.status(409).json({
+//           success: false,
+//           message: `Invoice number '${invno}' already exists. Please use a different invoice number.`,
+//           duplicateInvoiceNo: invno
+//         });
+//       }
+
+//       // Continue with the rest of the process
+//       pool.query(
+//         "UPDATE order_acceptance SET remainingadvance = ? WHERE id = ?",
+//         [remainingAdvance, oa_id],
+//         (err) => {
+//           if (err) {
+//             console.log("Error updating remainingadvance:", err);
+//             return res.status(500).json({
+//               success: false,
+//               message: "Error updating remaining advance"
+//             });
+//           }
+//         }
+//       );
+
+//       // Fetch challan_id from challan_no if needed
+//       pool.query(
+//         `SELECT id FROM challans WHERE challan_no = ?`,
+//         [challan_no],
+//         (err, chid) => {
+//           if (err) {
+//             console.log("Error fetching challan ID:", err);
+//             return res.status(500).json({
+//               success: false,
+//               message: "Error fetching challan ID"
+//             });
+//           }
+
+//           const challanId = chid[0]?.id || null;
+
+//           // Insert into invoices table directly
+//           pool.query(
+//             `INSERT INTO invoices (
+//           invoice_no, inv_date, challan_id, buyer_id, buyername, customeraddress, transport_mode,
+//           po_no, po_date, vehicle_no, basic_total, cgst, sgst, igst, grand_total, advance,
+//           net_total, date_issue, date_removal, uid, by_road, buyer_addr, consign_addr,
+//           roundoff, consigneename, orderacceptance_id, gstno
+//         ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+//             [
+//               invno, // ✅ Using invoice_no directly from frontend
+//               formattedInvDate,
+//               challanId,
+//               safeBuyerId, // ✅ Using safe buyer_id
+//               buyername,
+//               customeraddress,
+//               modeoftransport,
+//               po_no,
+//               formattedPODate,
+//               vehicle_no,
+//               numericBasicTotal,
+//               numericCGST,
+//               numericSGST,
+//               numericIGST,
+//               numericGrandTotal,
+//               numericAdvance,
+//               numericNetTotal,
+//               formatDateForDB(date_issue),
+//               formatDateForDB(date_removal),
+//               uid,
+//               by_road,
+//               buyer_addr,
+//               consign_addr,
+//               numericRoundoff,
+//               consigneename,
+//               orderacceptance_id,
+//               gstno,
+//             ],
+//             (err, result) => {
+//               if (err) {
+//                 console.log("Error inserting invoice:", err);
+
+//                 // ✅ Handle duplicate entry error specifically
+//                 if (err.code === 'ER_DUP_ENTRY') {
+//                   return res.status(409).json({
+//                     success: false,
+//                     message: `Invoice number '${invno}' already exists. Please use a different invoice number.`,
+//                     duplicateInvoiceNo: invno
+//                   });
+//                 }
+
+//                 return res.status(500).json({
+//                   success: false,
+//                   message: "Error inserting invoice"
+//                 });
+//               }
+
+//               const insertedInvoiceId = result.insertId;
+
+//               // Fetch last invoice_balance for this order
+//               pool.query(
+//                 `SELECT invoice_balance FROM invoice_transactions WHERE oid = ? ORDER BY invoice_id DESC LIMIT 1`,
+//                 [orderacceptance_id],
+//                 (err, balanceResult) => {
+//                   if (err) {
+//                     console.log("Error fetching last invoice balance:", err);
+//                     return res.status(500).json({
+//                       success: false,
+//                       message: "Error fetching last invoice balance"
+//                     });
+//                   }
+
+//                   const lastBalance = parseFloat(balanceResult[0]?.invoice_balance || 0);
+//                   const newInvoiceBalance = numericAdvance - numericNetTotal;
+
+//                   // Insert invoice details and transactions
+//                   let pendingDetails = detailArray.length;
+//                   let pendingTransactions = detailArray.length;
+
+//                   if (pendingDetails === 0) {
+//                     return res.status(200).json({
+//                       success: true,
+//                       message: "POSTED",
+//                       invoiceId: insertedInvoiceId,
+//                       invoiceNo: invno
+//                     });
+//                   }
+
+//                   detailArray.forEach(({ plan_id, desc, qty, hsn, rate, amt }) => {
+//                     // Insert into invoice_details table
+//                     pool.query(
+//                       "INSERT INTO invoice_details (invoice_id, plan_id, `desc`, qty, hsn, rate, amt) VALUES (?, ?, ?, ?, ?, ?, ?)",
+//                       [insertedInvoiceId, plan_id, desc, qty, hsn, rate, amt],
+//                       (err) => {
+//                         if (err) {
+//                           console.log("Error inserting invoice details:", err);
+//                           return res.status(500).json({
+//                             success: false,
+//                             message: "Error inserting invoice details"
+//                           });
+//                         }
+
+//                         pendingDetails--;
+//                         if (pendingDetails === 0) {
+//                           console.log("All invoice details inserted successfully");
+
+//                           // ✅ Update challan_details after all invoice details are inserted
+//                           if (challanId) {
+//                             pool.query(
+//                               `UPDATE challan_details 
+//                            SET remainingqty = GREATEST(remainingqty - ?, 0)
+//                            WHERE challan_id = ?`,
+//                               [parseInt(chqty), challanId],
+//                               (err) => {
+//                                 if (err) {
+//                                   console.log("Error updating remainingqty in challan_details:", err);
+//                                   return res.status(500).json({
+//                                     success: false,
+//                                     message: "Error updating challan_details"
+//                                   });
+//                                 }
+//                                 console.log("Challan details updated successfully");
+//                               }
+//                             );
+//                           }
+//                         }
+//                       }
+//                     );
+
+//                     // Insert into invoice_transactions table
+//                     pool.query(
+//                       `INSERT INTO invoice_transactions (
+//                     invoice_id, invoice_no, oid, costing_id, enquiry_id, plan_id,
+//                     item_desc, qty, hsn, rate, item_amount, basic_total, cgst, sgst, igst,
+//                     roundoff, grand_total, advance, net_total, invoice_balance,
+//                     buyer_id, buyer_name, invoice_date, uid, created_at
+//                   ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())`,
+//                       [
+//                         insertedInvoiceId,
+//                         invno, // ✅ Using invoice_no directly from frontend
+//                         orderacceptance_id,
+//                         safeCostingId, // ✅ Using safe costing_id
+//                         safeEnquiryId, // ✅ Using safe enquiry_id
+//                         plan_id,
+//                         desc,
+//                         qty,
+//                         hsn,
+//                         rate,
+//                         amt,
+//                         numericBasicTotal,
+//                         numericCGST,
+//                         numericSGST,
+//                         numericIGST,
+//                         numericRoundoff,
+//                         numericGrandTotal,
+//                         numericAdvance,
+//                         numericNetTotal,
+//                         newInvoiceBalance,
+//                         safeBuyerId, // ✅ Using safe buyer_id
+//                         custname,
+//                         formattedInvDate,
+//                         uid
+//                       ],
+//                       (err) => {
+//                         if (err) {
+//                           console.log("Error inserting invoice transaction:", err);
+//                           return res.status(500).json({
+//                             success: false,
+//                             message: "Error inserting invoice transaction"
+//                           });
+//                         }
+
+//                         pendingTransactions--;
+//                         if (pendingTransactions === 0) {
+//                           console.log("All invoice transactions inserted successfully");
+//                           return res.status(200).json({
+//                             success: true,
+//                             message: "POSTED",
+//                             invoiceId: insertedInvoiceId,
+//                             invoiceNo: invno
+//                           });
+//                         }
+//                       }
+//                     );
+//                   });
+//                 }
+//               );
+//             }
+//           );
+//         }
+//       );
+//     }
+//   );
+// });
+
 router.post("/addNewInvoice", (req, res) => {
+  console.log("HIII");
+
   const {
     detailList,
     inv_date,
@@ -17951,10 +18972,22 @@ router.post("/addNewInvoice", (req, res) => {
     gstno,
     costing_id,
     enquiry_id,
+    invoice_no,
   } = req.body;
 
   const chqty = req.body.qty;
   const detailArray = Array.isArray(detailList) ? detailList : [detailList];
+
+  // ✅ Use invoice_no directly from frontend with trim
+  const invno = String(invoice_no || "").trim();
+
+  // ✅ Validate invoice_no
+  if (!invno) {
+    return res.status(400).json({
+      success: false,
+      message: "Invoice number is required"
+    });
+  }
 
   // Safe numeric conversions
   const numericAdvance = 0;
@@ -17966,240 +18999,316 @@ router.post("/addNewInvoice", (req, res) => {
   const numericIGST = parseFloat(igst) || 0;
   const numericRoundoff = parseFloat(roundoff) || 0;
 
-  // Format dates safely
-  // Format dates safely - handles both DD-MM-YYYY and ISO formats
+  // ✅ Convert empty string to NULL for integer fields
+  const safeBuyerId = buyer_id && buyer_id !== '' ? parseInt(buyer_id) : null;
+  const safeCostingId = costing_id && costing_id !== '' ? parseInt(costing_id) : null;
+  const safeEnquiryId = enquiry_id && enquiry_id !== '' ? parseInt(enquiry_id) : null;
+
+  // ✅ Updated formatDateForDB - No timezone issues
+  // const formatDateForDB = (dateString) => {
+  //   if (!dateString) return null;
+
+  //   let day, month, year;
+
+  //   // Check if date is in DD-MM-YYYY or DD/MM/YYYY format
+  //   const separator = dateString.includes('-') ? '-' : dateString.includes('/') ? '/' : null;
+
+  //   if (separator) {
+  //     const parts = dateString.split(separator);
+  //     if (parts[0].length <= 2) {
+  //       // Input is in DD-MM-YYYY or DD/MM/YYYY format
+  //       [day, month, year] = parts;
+  //     } else {
+  //       // Already in YYYY-MM-DD or YYYY/MM/DD format
+  //       [year, month, day] = parts;
+  //     }
+  //   } else {
+  //     // For ISO format, extract date parts without creating Date object
+  //     const isoDate = dateString.substring(0, 10); // Get YYYY-MM-DD part
+  //     [year, month, day] = isoDate.split('-');
+  //   }
+
+  //   // Pad with zeros if needed
+  //   const paddedDay = String(day).padStart(2, "0");
+  //   const paddedMonth = String(month).padStart(2, "0");
+
+  //   return `${year}-${paddedMonth}-${paddedDay}`;
+  // };
   const formatDateForDB = (dateString) => {
     if (!dateString) return null;
 
-    let date;
+    let day, month, year;
 
-    // Check if date is in DD-MM-YYYY format
-    if (dateString.includes('-') && dateString.split('-')[0].length <= 2) {
-      const [day, month, year] = dateString.split('-');
-      // Create date in YYYY-MM-DD format for proper parsing
-      date = new Date(`${year}-${month}-${day}`);
+    // Check if date is in DD-MM-YYYY or DD/MM/YYYY format
+    const separator = dateString.includes('-') ? '-' : dateString.includes('/') ? '/' : null;
+
+    if (separator) {
+      const parts = dateString.split(separator);
+      if (parts[0].length <= 2) {
+        // Input is in DD-MM-YYYY or DD/MM/YYYY format
+        [day, month, year] = parts;
+      } else {
+        // Already in YYYY-MM-DD or YYYY/MM/DD format
+        [year, month, day] = parts;
+      }
     } else {
-      // Handle ISO format or other standard formats
-      date = new Date(dateString);
+      // For ISO format, extract date parts without creating Date object
+      const isoDate = dateString.substring(0, 10); // Get YYYY-MM-DD part
+      [year, month, day] = isoDate.split('-');
     }
 
-    if (isNaN(date.getTime())) return null;
+    // Pad with zeros if needed
+    const paddedDay = String(day).padStart(2, "0");
+    const paddedMonth = String(month).padStart(2, "0");
 
-    const day = String(date.getDate()).padStart(2, "0");
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const year = date.getFullYear();
-    return `${year}-${month}-${day}`;
+    return `${year}-${paddedMonth}-${paddedDay}`;
   };
 
   const formattedPODate = formatDateForDB(po_date);
   const formattedInvDate = formatDateForDB(inv_date);
   console.log("inv_date", inv_date);
-
-  console.log(formattedInvDate, "formattedInvDate");
-
+  console.log("formattedInvDate", formattedInvDate);
+  console.log("invoice_no from frontend:", invno);
 
   // Update remaining advance in order_acceptance
   let remainingAdvance = numericNetTotal <= 0 ? Math.abs(numericNetTotal) : 0;
-  pool.query(
-    "UPDATE order_acceptance SET remainingadvance = ? WHERE id = ?",
-    [remainingAdvance, oa_id],
-    (err) => {
-      if (err) {
-        console.log("Error updating remainingadvance:", err);
-        return res.status(500).send("Error updating remaining advance");
-      }
-    }
-  );
 
-  // Fetch challan_id from challan_no if needed
+  // ✅ First check if invoice_no already exists
   pool.query(
-    `SELECT id FROM challans WHERE challan_no = ?`,
-    [challan_no],
-    (err, chid) => {
+    "SELECT invoice_no FROM invoices WHERE invoice_no = ?",
+    [invno],
+    (err, existingInvoice) => {
       if (err) {
-        console.log("Error fetching challan ID:", err);
-        return res.status(500).send("Error fetching challan ID");
+        console.log("Error checking invoice number:", err);
+        return res.status(500).json({
+          success: false,
+          message: "Error checking invoice number"
+        });
       }
 
-      const challanId = chid[0]?.id || null;
+      if (existingInvoice && existingInvoice.length > 0) {
+        return res.status(409).json({
+          success: false,
+          message: `Invoice number '${invno}' already exists. Please use a different invoice number.`,
+          duplicateInvoiceNo: invno
+        });
+      }
 
-      // Fetch user info for invoice number generation
+      // Continue with the rest of the process
       pool.query(
-        `SELECT id, fname, lname, quot_serial FROM usermaster WHERE id = ?`,
-        [uid],
-        (err, user) => {
+        "UPDATE order_acceptance SET remainingadvance = ? WHERE id = ?",
+        [remainingAdvance, oa_id],
+        (err) => {
           if (err) {
-            console.log("Error fetching user info:", err);
-            return res.status(500).send("Error fetching user info");
+            console.log("Error updating remainingadvance:", err);
+            return res.status(500).json({
+              success: false,
+              message: "Error updating remaining advance"
+            });
+          }
+        }
+      );
+
+      // Fetch challan_id from challan_no if needed
+      pool.query(
+        `SELECT id FROM challans WHERE challan_no = ?`,
+        [challan_no],
+        (err, chid) => {
+          if (err) {
+            console.log("Error fetching challan ID:", err);
+            return res.status(500).json({
+              success: false,
+              message: "Error fetching challan ID"
+            });
           }
 
-          // Fetch last invoice number to generate new invoice_no
+          const challanId = chid[0]?.id || null;
+
+          // Insert into invoices table directly
           pool.query(
-            "SELECT invoice_no FROM invoices ORDER BY id DESC LIMIT 1",
+            `INSERT INTO invoices (
+          invoice_no, inv_date, challan_id, buyer_id, buyername, customeraddress, transport_mode,
+          po_no, po_date, vehicle_no, basic_total, cgst, sgst, igst, grand_total, advance,
+          net_total, date_issue, date_removal, uid, by_road, buyer_addr, consign_addr,
+          roundoff, consigneename, orderacceptance_id, gstno
+        ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+            [
+              invno,
+              formattedInvDate,
+              challanId,
+              safeBuyerId,
+              buyername,
+              customeraddress,
+              modeoftransport,
+              po_no,
+              formattedPODate,
+              vehicle_no,
+              numericBasicTotal,
+              numericCGST,
+              numericSGST,
+              numericIGST,
+              numericGrandTotal,
+              numericAdvance,
+              numericNetTotal,
+              formatDateForDB(date_issue),
+              formatDateForDB(date_removal),
+              uid,
+              by_road,
+              buyer_addr,
+              consign_addr,
+              numericRoundoff,
+              consigneename,
+              orderacceptance_id,
+              gstno,
+            ],
             (err, result) => {
               if (err) {
-                console.log("Error fetching last invoice:", err);
-                return res.status(500).send("Error fetching last invoice");
+                console.log("Error inserting invoice:", err);
+
+                // ✅ Handle duplicate entry error specifically
+                if (err.code === 'ER_DUP_ENTRY') {
+                  return res.status(409).json({
+                    success: false,
+                    message: `Invoice number '${invno}' already exists. Please use a different invoice number.`,
+                    duplicateInvoiceNo: invno
+                  });
+                }
+
+                return res.status(500).json({
+                  success: false,
+                  message: "Error inserting invoice"
+                });
               }
 
-              let lastNumber = 0;
-              if (result[0] && result[0].invoice_no) {
-                const match = result[0].invoice_no.match(/(\d+)$/);
-                lastNumber = match ? parseInt(match[0]) : 0;
-              }
+              const insertedInvoiceId = result.insertId;
 
-              const newInvoiceNumber = lastNumber + 1;
-              const invno = getInvNumber(newInvoiceNumber, user);
-
-              // Insert into invoices table
+              // Fetch last invoice_balance for this order
               pool.query(
-                `INSERT INTO invoices (
-                  invoice_no, inv_date, challan_id, buyer_id, buyername, customeraddress, transport_mode,
-                  po_no, po_date, vehicle_no, basic_total, cgst, sgst, igst, grand_total, advance,
-                  net_total, date_issue, date_removal, uid, by_road, buyer_addr, consign_addr,
-                  roundoff, consigneename, orderacceptance_id, gstno
-                ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
-                [
-                  invno,
-                  formattedInvDate,
-                  challanId,
-                  buyer_id,
-                  buyername,
-                  customeraddress,
-                  modeoftransport,
-                  po_no,
-                  formattedPODate,
-                  vehicle_no,
-                  numericBasicTotal,
-                  numericCGST,
-                  numericSGST,
-                  numericIGST,
-                  numericGrandTotal,
-                  numericAdvance,
-                  numericNetTotal,
-                  formatDateForDB(date_issue),
-                  formatDateForDB(date_removal),
-                  uid,
-                  by_road,
-                  buyer_addr,
-                  consign_addr,
-                  numericRoundoff,
-                  consigneename,
-                  orderacceptance_id,
-                  gstno,
-                ],
-                (err, result) => {
+                `SELECT invoice_balance FROM invoice_transactions WHERE oid = ? ORDER BY invoice_id DESC LIMIT 1`,
+                [orderacceptance_id],
+                (err, balanceResult) => {
                   if (err) {
-                    console.log("Error inserting invoice:", err);
-                    return res.status(500).send("Error inserting invoice");
+                    console.log("Error fetching last invoice balance:", err);
+                    return res.status(500).json({
+                      success: false,
+                      message: "Error fetching last invoice balance"
+                    });
                   }
 
-                  const insertedInvoiceId = result.insertId;
+                  const lastBalance = parseFloat(balanceResult[0]?.invoice_balance || 0);
+                  const newInvoiceBalance = numericAdvance - numericNetTotal;
 
-                  // Fetch last invoice_balance for this order
-                  pool.query(
-                    `SELECT invoice_balance FROM invoice_transactions WHERE oid = ? ORDER BY invoice_id DESC LIMIT 1`,
-                    [orderacceptance_id],
-                    (err, balanceResult) => {
-                      if (err) {
-                        console.log("Error fetching last invoice balance:", err);
-                        return res.status(500).send("Error fetching last invoice balance");
-                      }
+                  // Insert invoice details and transactions
+                  let pendingDetails = detailArray.length;
+                  let pendingTransactions = detailArray.length;
 
-                      const lastBalance = parseFloat(balanceResult[0]?.invoice_balance || 0);
-                      const newInvoiceBalance = numericAdvance - numericNetTotal;
+                  if (pendingDetails === 0) {
+                    return res.status(200).json({
+                      success: true,
+                      message: "POSTED",
+                      invoiceId: insertedInvoiceId,
+                      invoiceNo: invno
+                    });
+                  }
 
-                      // Insert invoice details and transactions
-                      let pendingDetails = detailArray.length;
-                      let pendingTransactions = detailArray.length;
+                  detailArray.forEach(({ plan_id, desc, qty, hsn, rate, amt }) => {
+                    const trimmedHsn = String(hsn || "").trim();
+                    // Insert into invoice_details table
+                    pool.query(
+                      "INSERT INTO invoice_details (invoice_id, plan_id, `desc`, qty, hsn, rate, amt) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                      [insertedInvoiceId, plan_id, desc, qty, trimmedHsn, rate, amt],
+                      (err) => {
+                        if (err) {
+                          console.log("Error inserting invoice details:", err);
+                          return res.status(500).json({
+                            success: false,
+                            message: "Error inserting invoice details"
+                          });
+                        }
 
-                      if (pendingDetails === 0) return res.send("POSTED");
+                        pendingDetails--;
+                        if (pendingDetails === 0) {
+                          console.log("All invoice details inserted successfully");
 
-                      detailArray.forEach(({ plan_id, desc, qty, hsn, rate, amt }) => {
-                        // Insert into invoice_details table
-                        pool.query(
-                          "INSERT INTO invoice_details (invoice_id, plan_id, `desc`, qty, hsn, rate, amt) VALUES (?, ?, ?, ?, ?, ?, ?)",
-                          [insertedInvoiceId, plan_id, desc, qty, hsn, rate, amt],
-                          (err) => {
-                            if (err) {
-                              console.log("Error inserting invoice details:", err);
-                              return res.status(500).send("Error inserting invoice details");
-                            }
-
-                            pendingDetails--;
-                            if (pendingDetails === 0) {
-                              console.log("All invoice details inserted successfully");
-
-                              // ✅ Update challan_details after all invoice details are inserted
-                              if (challanId) {
-                                pool.query(
-                                  `UPDATE challan_details 
-                                   SET remainingqty = GREATEST(remainingqty - ?, 0)
-                                   WHERE challan_id = ?`,
-                                  [parseInt(chqty), challanId],
-                                  (err) => {
-                                    if (err) {
-                                      console.log("Error updating remainingqty in challan_details:", err);
-                                      return res.status(500).send("Error updating challan_details");
-                                    }
-                                    console.log("Challan details updated successfully");
-                                  }
-                                );
+                          // ✅ Update challan_details after all invoice details are inserted
+                          if (challanId) {
+                            pool.query(
+                              `UPDATE challan_details 
+                           SET remainingqty = GREATEST(remainingqty - ?, 0)
+                           WHERE challan_id = ?`,
+                              [parseInt(chqty), challanId],
+                              (err) => {
+                                if (err) {
+                                  console.log("Error updating remainingqty in challan_details:", err);
+                                  return res.status(500).json({
+                                    success: false,
+                                    message: "Error updating challan_details"
+                                  });
+                                }
+                                console.log("Challan details updated successfully");
                               }
-                            }
+                            );
                           }
-                        );
+                        }
+                      }
+                    );
 
-                        // Insert into invoice_transactions table
-                        pool.query(
-                          `INSERT INTO invoice_transactions (
-                            invoice_id, invoice_no, oid, costing_id, enquiry_id, plan_id,
-                            item_desc, qty, hsn, rate, item_amount, basic_total, cgst, sgst, igst,
-                            roundoff, grand_total, advance, net_total, invoice_balance,
-                            buyer_id, buyer_name, invoice_date, uid, created_at
-                          ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())`,
-                          [
-                            insertedInvoiceId,
-                            invno,
-                            orderacceptance_id,
-                            costing_id,
-                            enquiry_id,
-                            plan_id,
-                            desc,
-                            qty,
-                            hsn,
-                            rate,
-                            amt,
-                            numericBasicTotal,
-                            numericCGST,
-                            numericSGST,
-                            numericIGST,
-                            numericRoundoff,
-                            numericGrandTotal,
-                            numericAdvance,
-                            numericNetTotal,
-                            newInvoiceBalance,
-                            buyer_id,
-                            custname,
-                            formattedInvDate,
-                            uid
-                          ],
-                          (err) => {
-                            if (err) {
-                              console.log("Error inserting invoice transaction:", err);
-                              return res.status(500).send("Error inserting invoice transaction");
-                            }
+                    // Insert into invoice_transactions table
+                    pool.query(
+                      `INSERT INTO invoice_transactions (
+                    invoice_id, invoice_no, oid, costing_id, enquiry_id, plan_id,
+                    item_desc, qty, hsn, rate, item_amount, basic_total, cgst, sgst, igst,
+                    roundoff, grand_total, advance, net_total, invoice_balance,
+                    buyer_id, buyer_name, invoice_date, uid, created_at
+                  ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())`,
+                      [
+                        insertedInvoiceId,
+                        invno,
+                        orderacceptance_id,
+                        safeCostingId,
+                        safeEnquiryId,
+                        plan_id,
+                        desc,
+                        qty,
+                        trimmedHsn,
+                        rate,
+                        amt,
+                        numericBasicTotal,
+                        numericCGST,
+                        numericSGST,
+                        numericIGST,
+                        numericRoundoff,
+                        numericGrandTotal,
+                        numericAdvance,
+                        numericNetTotal,
+                        newInvoiceBalance,
+                        safeBuyerId,
+                        custname,
+                        formattedInvDate,
+                        uid
+                      ],
+                      (err) => {
+                        if (err) {
+                          console.log("Error inserting invoice transaction:", err);
+                          return res.status(500).json({
+                            success: false,
+                            message: "Error inserting invoice transaction"
+                          });
+                        }
 
-                            pendingTransactions--;
-                            if (pendingTransactions === 0) {
-                              console.log("All invoice transactions inserted successfully");
-                              return res.send("POSTED");
-                            }
-                          }
-                        );
-                      });
-                    }
-                  );
+                        pendingTransactions--;
+                        if (pendingTransactions === 0) {
+                          console.log("All invoice transactions inserted successfully");
+                          return res.status(200).json({
+                            success: true,
+                            message: "POSTED",
+                            invoiceId: insertedInvoiceId,
+                            invoiceNo: invno
+                          });
+                        }
+                      }
+                    );
+                  });
                 }
               );
             }
@@ -19789,8 +20898,83 @@ router.get("/getpodata/:id", (req, res) => {
 //   });
 // });
 
+// router.put("/editInvoiceInfo/:id", (req, res) => {
+//   console.log("Request Body:", req.body);
+
+//   const q = `
+//     UPDATE invoices i
+//     JOIN invoice_details id ON i.id = id.invoice_id
+//     LEFT JOIN challans c ON i.challan_id = c.id
+//     SET 
+//       i.buyername = ?, 
+//       i.consigneename = ?, 
+//       i.buyer_addr = ?, 
+//       i.consignee_cat = ?, 
+//       i.gstno = ?,
+//       i.po_no = ?, 
+//       i.po_date = ?,
+//       i.vehicle_no = ?,
+//       i.grand_total = ?,
+//       i.advance = ?,
+//       i.date_issue = ?,
+//       i.time_issue = ?,
+//       i.date_removal = ?,
+//       i.time_removal = ?,
+//       i.by_road = ?,
+//       i.consign_addr = ?,
+//       i.customeraddress = ?,
+//       id.hsn = ?, 
+//       id.rate = ?,
+//       c.challan_no = ?,
+//       c.chdate = ?
+//     WHERE i.id = ?`;
+
+//   pool.query(
+//     q,
+//     [
+//       req.body.buyername,
+//       req.body.consigneename,
+//       req.body.buyer_addr,
+//       req.body.consignee_cat,
+//       req.body.gstno,
+//       req.body.po_no,
+//       req.body.po_date,
+//       req.body.vehicle_no,
+//       req.body.grand_total,
+//       req.body.advance,
+//       req.body.date_issue,
+//       req.body.time_issue,
+//       req.body.date_removal,
+//       req.body.time_removal,
+//       req.body.by_road,
+//       req.body.consign_addr,
+//       req.body.consumer_address, // Assuming this maps to customeraddress
+//       req.body.hsn,
+//       req.body.rate,
+//       req.body.challan_no,
+//       req.body.chdate,
+//       req.params.id,
+//     ],
+//     (err, result, fields) => {
+//       if (err) {
+//         console.error("Update error:", err);
+//         return res.status(500).json({ error: "Failed to update data" });
+//       } else {
+//         return res.json({ message: "Invoice updated successfully" });
+//       }
+//     }
+//   );
+// });
+
 router.put("/editInvoiceInfo/:id", (req, res) => {
   console.log("Request Body:", req.body);
+
+  // ✅ Trim hsn and other important string fields
+  const trimmedHsn = String(req.body.hsn || "").trim();
+  const trimmedGstno = String(req.body.gstno || "").trim();
+  const trimmedPoNo = String(req.body.po_no || "").trim();
+  const trimmedVehicleNo = String(req.body.vehicle_no || "").trim();
+  const trimmedChallanNo = String(req.body.challan_no || "").trim();
 
   const q = `
     UPDATE invoices i
@@ -19827,10 +21011,10 @@ router.put("/editInvoiceInfo/:id", (req, res) => {
       req.body.consigneename,
       req.body.buyer_addr,
       req.body.consignee_cat,
-      req.body.gstno,
-      req.body.po_no,
+      trimmedGstno,           // ✅ Trimmed
+      trimmedPoNo,            // ✅ Trimmed
       req.body.po_date,
-      req.body.vehicle_no,
+      trimmedVehicleNo,       // ✅ Trimmed
       req.body.grand_total,
       req.body.advance,
       req.body.date_issue,
@@ -19840,9 +21024,9 @@ router.put("/editInvoiceInfo/:id", (req, res) => {
       req.body.by_road,
       req.body.consign_addr,
       req.body.consumer_address, // Assuming this maps to customeraddress
-      req.body.hsn,
+      trimmedHsn,             // ✅ Trimmed
       req.body.rate,
-      req.body.challan_no,
+      trimmedChallanNo,       // ✅ Trimmed
       req.body.chdate,
       req.params.id,
     ],
@@ -20212,9 +21396,15 @@ const getChallanNumber = (number, user) => {
   let orderNo = `CHL/${quot_serial}/${getCurrentFinancialYear()}/${number}`;
   return orderNo;
 };
+// const getInvNumber = (number, user) => {
+//   const { fname = "", lname = "", quot_serial } = user[0] || {};
+//   let orderNo = `SEP/${quot_serial}/${getCurrentFinancialYear()}/${number}`;
+//   return orderNo;
+// };
+
 const getInvNumber = (number, user) => {
-  const { fname = "", lname = "", quot_serial } = user[0] || {};
-  let orderNo = `SEP/${quot_serial}/${getCurrentFinancialYear()}/${number}`;
+  const { fname = "", lname = "" } = user[0] || {};
+  let orderNo = `SEP/${getCurrentFinancialYear()}/${number}`;
   return orderNo;
 };
 const getBOMNumber = (number, user) => {

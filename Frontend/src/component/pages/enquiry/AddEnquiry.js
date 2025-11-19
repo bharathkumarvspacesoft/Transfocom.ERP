@@ -1359,7 +1359,7 @@ const New = () => {
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item xs={7} sm={3.5}>
+              {/* <Grid item xs={7} sm={3.5}>
                 <FormControl style={{ width: "26vw", textAlign: "left" }}>
                   <InputLabel id="costing-design-label">Costing Design *</InputLabel>
                   <Select
@@ -1377,7 +1377,7 @@ const New = () => {
                     <MenuItem value="D4">D4</MenuItem>
                   </Select>
                 </FormControl>
-              </Grid>
+              </Grid> */}
 
               <Grid item xs={7} sm={7}>
                 <TextField

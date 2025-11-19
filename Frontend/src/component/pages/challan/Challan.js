@@ -331,9 +331,9 @@ export default function Challan() {
                                 </Box>
                               </TableCell>
 
-                              <TableCell style={{ textAlign: 'center' }}>{item.po_no}</TableCell>
+                              <TableCell style={{ textAlign: 'center' }}>{item.po_no ? item.po_no : "-"}</TableCell>
                               <TableCell style={{ textAlign: 'center' }}>
-                                {item.po_date ? formatDate(item.po_date) : ""}
+                                {item.po_date ? formatDate(item.po_date) : "-"}
                               </TableCell>                              <TableCell style={{ textAlign: 'center' }}>
                                 {/* <div className="action-buttons"> */}
                                 <Link to={`/EditChallan/${item.id}`}>

@@ -399,7 +399,7 @@ const OrderAccPrint = () => {
                     <p class="s2" style="padding-top: 1pt;padding-left: 2pt;text-indent: 0pt;line-height: 10pt;text-align: left;">Bank Details:-</p>
                     <p class="s2" style="padding-top: 1pt;padding-left: 2pt;text-indent: 0pt;line-height: 9pt;text-align: left;">Name: Static Electricals Pune</p>
                     <p class="s2" style="padding-top: 1pt;padding-left: 2pt;padding-right: 122pt;text-indent: 0pt;line-height: 87%;text-align: left;">ICIC Bank – A/c No: 003905501942 </p>
-                    <p class="s2" style="padding-top: 1pt;padding-left: 2pt;text-indent: 0pt;line-height: 9pt;text-align: left;">Branch:ShivajiNager Branch,Ghole Road, Pune 411005</p>
+                    <p class="s2" style="padding-top: 1pt;padding-left: 2pt;text-indent: 0pt;line-height: 9pt;text-align: left;">Branch:ShivajiNager,Pune 411005</p>
                     <p class="s2" style="padding-top: 2pt;padding-left: 2pt;text-indent: 0pt;line-height: 9pt;text-align: left;">RTGS / NEFT / IFSC Code: ICIC0000039</p>
                     <p class="s2" style="padding-top: 7pt;padding-left: 2pt;text-indent: 0pt;line-height: 10pt;text-align: left;">GST No: 27ABEFS1957R1ZD</p>
                     <p class="s2" style="padding-top: 1pt;padding-left: 2pt;padding-right: 67pt;text-indent: 0pt;line-height: 87%;text-align: left;">Name of Commodity:ELECTRICAL TRANSFORMER.</p>

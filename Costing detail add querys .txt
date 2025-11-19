@@ -1,0 +1,2004 @@
+-- capacity	hvvoltage	lvvoltage	vectorgroup	matofwind	typecolling	core	priratio	secratio	tapingSwitch
+-- 100	Delta Connected	Star Connected	Dyn11	Copper	ONAN	CRGO	22000	433	NOTTAPING
+
+-- ===============================================================================================
+-- First, view which records will be updated (RECOMMENDED - Run this first!)
+SELECT 
+    id,
+    custname,
+    cid as current_cid,
+    '1' as new_cid,
+    capacity,
+    hvvoltage,
+    lvvoltage,
+    vectorgroup,
+    matofwind,
+    typecolling,
+    core,
+    priratio,
+    secratio,
+    tapingSwitch
+FROM enquiry_master
+WHERE 
+    capacity = '100'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'NOTTAPING'
+ORDER BY id;
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Then, UPDATE the CID to 1 for all matching records
+SET SQL_SAFE_UPDATES = 0;
+
+UPDATE enquiry_master
+SET cid = '1'
+WHERE 
+    capacity = '100'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'NOTTAPING';
+	
+	
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Update costing_master table's eid to the first matching enquiry id
+UPDATE costing_master
+SET eid = (
+    SELECT MIN(id)
+    FROM enquiry_master
+    WHERE 
+        capacity = '100'
+        AND hvvoltage = 'Delta Connected'
+        AND lvvoltage = 'Star Connected'
+        AND vectorgroup = 'Dyn11'
+        AND matofwind = 'Copper'
+        AND typecolling = 'ONAN'
+        AND core = 'CRGO'
+        AND priratio = '22000'
+        AND secratio = '433'
+        AND tapingSwitch = 'NOTTAPING'
+        AND cid = '1'
+)
+WHERE id = 1;
+
+
+
+SET SQL_SAFE_UPDATES = 1;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Verify the enquiry_master update was successful
+SELECT 
+    id,
+    custname,
+    cid,
+    capacity,
+    hvvoltage,
+    lvvoltage,
+    vectorgroup,
+    matofwind,
+    typecolling,
+    core,
+    priratio,
+    secratio,
+    tapingSwitch
+FROM enquiry_master
+WHERE 
+    capacity = '100'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'NOTTAPING'
+ORDER BY id;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Verify the costing_master update
+SELECT 
+    id,
+    eid,
+    'Updated to first matching enquiry id' as note
+FROM costing_master
+WHERE id = 1;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+
+
+-- capacity	hvvoltage	lvvoltage	vectorgroup	matofwind	typecolling	core	priratio	secratio	tapingSwitch
+-- 200	Delta Connected	Star Connected	Dyn11	Copper	ONAN	CRGO	22000	433	OCTC
+
+
+-- ===============================================================================================
+-- First, view which records will be updated (RECOMMENDED - Run this first!)
+SELECT 
+    id,
+    custname,
+    cid as current_cid,
+    '2' as new_cid,
+    capacity,
+    hvvoltage,
+    lvvoltage,
+    vectorgroup,
+    matofwind,
+    typecolling,
+    core,
+    priratio,
+    secratio,
+    tapingSwitch
+FROM enquiry_master
+WHERE 
+    capacity = '200'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'OCTC'
+ORDER BY id;
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Then, UPDATE the CID to 1 for all matching records
+SET SQL_SAFE_UPDATES = 0;
+
+UPDATE enquiry_master
+SET cid = '2'
+WHERE 
+    capacity = '200'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'OCTC';
+	
+	
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Update costing_master table's eid to the first matching enquiry id
+UPDATE costing_master
+SET eid = (
+    SELECT MIN(id)
+    FROM enquiry_master
+    WHERE 
+        capacity = '200'
+        AND hvvoltage = 'Delta Connected'
+        AND lvvoltage = 'Star Connected'
+        AND vectorgroup = 'Dyn11'
+        AND matofwind = 'Copper'
+        AND typecolling = 'ONAN'
+        AND core = 'CRGO'
+        AND priratio = '22000'
+        AND secratio = '433'
+        AND tapingSwitch = 'OCTC'
+        AND cid = '2'
+)
+WHERE id = 2;
+
+SET SQL_SAFE_UPDATES = 1;
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Verify the enquiry_master update was successful
+SELECT 
+    id,
+    custname,
+    cid,
+    capacity,
+    hvvoltage,
+    lvvoltage,
+    vectorgroup,
+    matofwind,
+    typecolling,
+    core,
+    priratio,
+    secratio,
+    tapingSwitch
+FROM enquiry_master
+WHERE 
+    capacity = '200'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'OCTC'
+ORDER BY id;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Verify the costing_master update
+SELECT 
+    id,
+    eid,
+    'Updated to first matching enquiry id' as note
+FROM costing_master
+WHERE id = 2;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+
+
+-- capacity	hvvoltage	lvvoltage	vectorgroup	matofwind	typecolling	core	priratio	secratio	tapingSwitch
+-- 63	Delta Connected	Star Connected	Dyn11	Copper	ONAN	CRGO	22000	433	NOTTAPING
+
+
+-- ===============================================================================================
+-- First, view which records will be updated (RECOMMENDED - Run this first!)
+SELECT 
+    id,
+    custname,
+    cid as current_cid,
+    '3' as new_cid,
+    capacity,
+    hvvoltage,
+    lvvoltage,
+    vectorgroup,
+    matofwind,
+    typecolling,
+    core,
+    priratio,
+    secratio,
+    tapingSwitch
+FROM enquiry_master
+WHERE 
+    capacity = '63'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'NOTTAPING'
+ORDER BY id;
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Then, UPDATE the CID to 1 for all matching records
+SET SQL_SAFE_UPDATES = 0;
+
+UPDATE enquiry_master
+SET cid = '3'
+WHERE 
+    capacity = '63'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'NOTTAPING';
+	
+	
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Update costing_master table's eid to the first matching enquiry id
+UPDATE costing_master
+SET eid = (
+    SELECT MIN(id)
+    FROM enquiry_master
+    WHERE 
+        capacity = '63'
+        AND hvvoltage = 'Delta Connected'
+        AND lvvoltage = 'Star Connected'
+        AND vectorgroup = 'Dyn11'
+        AND matofwind = 'Copper'
+        AND typecolling = 'ONAN'
+        AND core = 'CRGO'
+        AND priratio = '22000'
+        AND secratio = '433'
+        AND tapingSwitch = 'NOTTAPING'
+        AND cid = '3'
+)
+WHERE id = 3;
+
+
+
+SET SQL_SAFE_UPDATES = 1;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Verify the enquiry_master update was successful
+SELECT 
+    id,
+    custname,
+    cid,
+    capacity,
+    hvvoltage,
+    lvvoltage,
+    vectorgroup,
+    matofwind,
+    typecolling,
+    core,
+    priratio,
+    secratio,
+    tapingSwitch
+FROM enquiry_master
+WHERE 
+    capacity = '63'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'NOTTAPING'
+ORDER BY id;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Verify the costing_master update
+SELECT 
+    id,
+    eid,
+    'Updated to first matching enquiry id' as note
+FROM costing_master
+WHERE id = 3;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+
+
+-- capacity	hvvoltage	lvvoltage	vectorgroup	matofwind	typecolling	core	priratio	secratio	tapingSwitch
+-- 500	Delta Connected	Star Connected	Dyn11	Copper	ONAN	CRGO	22000	433	OLTC
+
+
+-- ===============================================================================================
+-- First, view which records will be updated (RECOMMENDED - Run this first!)
+SELECT 
+    id,
+    custname,
+    cid as current_cid,
+    '4' as new_cid,
+    capacity,
+    hvvoltage,
+    lvvoltage,
+    vectorgroup,
+    matofwind,
+    typecolling,
+    core,
+    priratio,
+    secratio,
+    tapingSwitch
+FROM enquiry_master
+WHERE 
+    capacity = '500'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'OLTC'
+ORDER BY id;
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Then, UPDATE the CID to 1 for all matching records
+SET SQL_SAFE_UPDATES = 0;
+
+UPDATE enquiry_master
+SET cid = '4'
+WHERE 
+    capacity = '500'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'OLTC';
+	
+	
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Update costing_master table's eid to the first matching enquiry id
+UPDATE costing_master
+SET eid = (
+    SELECT MIN(id)
+    FROM enquiry_master
+    WHERE 
+        capacity = '500'
+        AND hvvoltage = 'Delta Connected'
+        AND lvvoltage = 'Star Connected'
+        AND vectorgroup = 'Dyn11'
+        AND matofwind = 'Copper'
+        AND typecolling = 'ONAN'
+        AND core = 'CRGO'
+        AND priratio = '22000'
+        AND secratio = '433'
+        AND tapingSwitch = 'OLTC'
+        AND cid = '4'
+)
+WHERE id = 4;
+
+
+
+SET SQL_SAFE_UPDATES = 1;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Verify the enquiry_master update was successful
+SELECT 
+    id,
+    custname,
+    cid,
+    capacity,
+    hvvoltage,
+    lvvoltage,
+    vectorgroup,
+    matofwind,
+    typecolling,
+    core,
+    priratio,
+    secratio,
+    tapingSwitch
+FROM enquiry_master
+WHERE 
+    capacity = '500'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'OLTC'
+ORDER BY id;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Verify the costing_master update
+SELECT 
+    id,
+    eid,
+    'Updated to first matching enquiry id' as note
+FROM costing_master
+WHERE id = 4;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- capacity	hvvoltage	lvvoltage	vectorgroup	matofwind	typecolling	core	priratio	secratio	tapingSwitch
+-- 25	Delta Connected	Star Connected	Dyn11	Aluminium	ONAN	CRGO	22000	433	NOTTAPING
+
+
+-- ===============================================================================================
+-- First, view which records will be updated (RECOMMENDED - Run this first!)
+SELECT 
+    id,
+    custname,
+    cid as current_cid,
+    '12' as new_cid,
+    capacity,
+    hvvoltage,
+    lvvoltage,
+    vectorgroup,
+    matofwind,
+    typecolling,
+    core,
+    priratio,
+    secratio,
+    tapingSwitch
+FROM enquiry_master
+WHERE 
+    capacity = '25'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Aluminium'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'NOTTAPING'
+ORDER BY id;
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Then, UPDATE the CID to 1 for all matching records
+SET SQL_SAFE_UPDATES = 0;
+
+UPDATE enquiry_master
+SET cid = '12'
+WHERE 
+    capacity = '25'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Aluminium'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'NOTTAPING';
+	
+	
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Update costing_master table's eid to the first matching enquiry id
+UPDATE costing_master
+SET eid = (
+    SELECT MIN(id)
+    FROM enquiry_master
+    WHERE 
+        capacity = '25'
+        AND hvvoltage = 'Delta Connected'
+        AND lvvoltage = 'Star Connected'
+        AND vectorgroup = 'Dyn11'
+        AND matofwind = 'Aluminium'
+        AND typecolling = 'ONAN'
+        AND core = 'CRGO'
+        AND priratio = '22000'
+        AND secratio = '433'
+        AND tapingSwitch = 'NOTTAPING'
+        AND cid = '12'
+)
+WHERE id = 12;
+
+
+
+SET SQL_SAFE_UPDATES = 1;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Verify the enquiry_master update was successful
+SELECT 
+    id,
+    custname,
+    cid,
+    capacity,
+    hvvoltage,
+    lvvoltage,
+    vectorgroup,
+    matofwind,
+    typecolling,
+    core,
+    priratio,
+    secratio,
+    tapingSwitch
+FROM enquiry_master
+WHERE 
+    capacity = '25'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Aluminium'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'NOTTAPING'
+ORDER BY id;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Verify the costing_master update
+SELECT 
+    id,
+    eid,
+    'Updated to first matching enquiry id' as note
+FROM costing_master
+WHERE id = 12;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+
+-- capacity	hvvoltage	lvvoltage	vectorgroup	matofwind	typecolling	core	priratio	secratio	tapingSwitch
+-- 100	Delta Connected	Star Connected	Dyn11	Aluminium	ONAN	CRGO	11000	433	NOTTAPING
+
+
+-- ===============================================================================================
+-- First, view which records will be updated (RECOMMENDED - Run this first!)
+SELECT 
+    id,
+    custname,
+    cid as current_cid,
+    '10' as new_cid,
+    capacity,
+    hvvoltage,
+    lvvoltage,
+    vectorgroup,
+    matofwind,
+    typecolling,
+    core,
+    priratio,
+    secratio,
+    tapingSwitch
+FROM enquiry_master
+WHERE 
+    capacity = '100'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Aluminium'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '11000'
+    AND secratio = '433'
+    AND tapingSwitch = 'NOTTAPING'
+ORDER BY id;
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Then, UPDATE the CID to 1 for all matching records
+SET SQL_SAFE_UPDATES = 0;
+
+UPDATE enquiry_master
+SET cid = '10'
+WHERE 
+    capacity = '100'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Aluminium'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '11000'
+    AND secratio = '433'
+    AND tapingSwitch = 'NOTTAPING';
+	
+	
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Update costing_master table's eid to the first matching enquiry id
+UPDATE costing_master
+SET eid = (
+    SELECT MIN(id)
+    FROM enquiry_master
+    WHERE 
+        capacity = '100'
+        AND hvvoltage = 'Delta Connected'
+        AND lvvoltage = 'Star Connected'
+        AND vectorgroup = 'Dyn11'
+        AND matofwind = 'Aluminium'
+        AND typecolling = 'ONAN'
+        AND core = 'CRGO'
+        AND priratio = '11000'
+        AND secratio = '433'
+        AND tapingSwitch = 'NOTTAPING'
+        AND cid = '10'
+)
+WHERE id = 10;
+
+
+
+SET SQL_SAFE_UPDATES = 1;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Verify the enquiry_master update was successful
+SELECT 
+    id,
+    custname,
+    cid,
+    capacity,
+    hvvoltage,
+    lvvoltage,
+    vectorgroup,
+    matofwind,
+    typecolling,
+    core,
+    priratio,
+    secratio,
+    tapingSwitch
+FROM enquiry_master
+WHERE 
+    capacity = '100'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Aluminium'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '11000'
+    AND secratio = '433'
+    AND tapingSwitch = 'NOTTAPING'
+ORDER BY id;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Verify the costing_master update
+SELECT 
+    id,
+    eid,
+    'Updated to first matching enquiry id' as note
+FROM costing_master
+WHERE id = 10;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+
+
+-- capacity	hvvoltage	lvvoltage	vectorgroup	matofwind	typecolling	core	priratio	secratio	tapingSwitch
+-- 315	Delta Connected	Star Connected	Dyn11	Copper	ONAN	CRGO	22000	433	OCTC
+
+
+
+-- ===============================================================================================
+-- First, view which records will be updated (RECOMMENDED - Run this first!)
+SELECT 
+    id,
+    custname,
+    cid as current_cid,
+    '6' as new_cid,
+    capacity,
+    hvvoltage,
+    lvvoltage,
+    vectorgroup,
+    matofwind,
+    typecolling,
+    core,
+    priratio,
+    secratio,
+    tapingSwitch
+FROM enquiry_master
+WHERE 
+    capacity = '315'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'OCTC'
+ORDER BY id;
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Then, UPDATE the CID to 1 for all matching records
+SET SQL_SAFE_UPDATES = 0;
+
+UPDATE enquiry_master
+SET cid = '6'
+WHERE 
+    capacity = '315'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'OCTC';
+	
+	
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Update costing_master table's eid to the first matching enquiry id
+UPDATE costing_master
+SET eid = (
+    SELECT MIN(id)
+    FROM enquiry_master
+    WHERE 
+        capacity = '315'
+        AND hvvoltage = 'Delta Connected'
+        AND lvvoltage = 'Star Connected'
+        AND vectorgroup = 'Dyn11'
+        AND matofwind = 'Copper'
+        AND typecolling = 'ONAN'
+        AND core = 'CRGO'
+        AND priratio = '22000'
+        AND secratio = '433'
+        AND tapingSwitch = 'OCTC'
+        AND cid = '6'
+)
+WHERE id = 6;
+
+
+
+SET SQL_SAFE_UPDATES = 1;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Verify the enquiry_master update was successful
+SELECT 
+    id,
+    custname,
+    cid,
+    capacity,
+    hvvoltage,
+    lvvoltage,
+    vectorgroup,
+    matofwind,
+    typecolling,
+    core,
+    priratio,
+    secratio,
+    tapingSwitch
+FROM enquiry_master
+WHERE 
+    capacity = '315'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'OCTC'
+ORDER BY id;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Verify the costing_master update
+SELECT 
+    id,
+    eid,
+    'Updated to first matching enquiry id' as note
+FROM costing_master
+WHERE id = 6;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+-- capacity	hvvoltage	lvvoltage	vectorgroup	matofwind	typecolling	core	priratio	secratio	tapingSwitch
+-- 630	Delta Connected	Star Connected	Dyn11	Copper	ONAN	CRGO	22000	433	OCTC
+
+
+
+-- ===============================================================================================
+-- First, view which records will be updated (RECOMMENDED - Run this first!)
+SELECT 
+    id,
+    custname,
+    cid as current_cid,
+    '7' as new_cid,
+    capacity,
+    hvvoltage,
+    lvvoltage,
+    vectorgroup,
+    matofwind,
+    typecolling,
+    core,
+    priratio,
+    secratio,
+    tapingSwitch
+FROM enquiry_master
+WHERE 
+    capacity = '630'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'OCTC'
+ORDER BY id;
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Then, UPDATE the CID to 1 for all matching records
+SET SQL_SAFE_UPDATES = 0;
+
+UPDATE enquiry_master
+SET cid = '7'
+WHERE 
+    capacity = '630'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'OCTC';
+	
+	
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Update costing_master table's eid to the first matching enquiry id
+UPDATE costing_master
+SET eid = (
+    SELECT MIN(id)
+    FROM enquiry_master
+    WHERE 
+        capacity = '630'
+        AND hvvoltage = 'Delta Connected'
+        AND lvvoltage = 'Star Connected'
+        AND vectorgroup = 'Dyn11'
+        AND matofwind = 'Copper'
+        AND typecolling = 'ONAN'
+        AND core = 'CRGO'
+        AND priratio = '22000'
+        AND secratio = '433'
+        AND tapingSwitch = 'OCTC'
+        AND cid = '7'
+)
+WHERE id = 7;
+
+
+
+SET SQL_SAFE_UPDATES = 1;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Verify the enquiry_master update was successful
+SELECT 
+    id,
+    custname,
+    cid,
+    capacity,
+    hvvoltage,
+    lvvoltage,
+    vectorgroup,
+    matofwind,
+    typecolling,
+    core,
+    priratio,
+    secratio,
+    tapingSwitch
+FROM enquiry_master
+WHERE 
+    capacity = '630'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'OCTC'
+ORDER BY id;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Verify the costing_master update
+SELECT 
+    id,
+    eid,
+    'Updated to first matching enquiry id' as note
+FROM costing_master
+WHERE id = 7;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+
+-- capacity	hvvoltage	lvvoltage	vectorgroup	matofwind	typecolling	core	priratio	secratio	tapingSwitch
+-- 630	Delta Connected	Star Connected	Dyn11	Copper	ONAN	CRGO	22000	433	OLTC
+
+
+
+-- ===============================================================================================
+-- First, view which records will be updated (RECOMMENDED - Run this first!)
+SELECT 
+    id,
+    custname,
+    cid as current_cid,
+    '13' as new_cid,
+    capacity,
+    hvvoltage,
+    lvvoltage,
+    vectorgroup,
+    matofwind,
+    typecolling,
+    core,
+    priratio,
+    secratio,
+    tapingSwitch
+FROM enquiry_master
+WHERE 
+    capacity = '630'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'OLTC'
+ORDER BY id;
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Then, UPDATE the CID to 1 for all matching records
+SET SQL_SAFE_UPDATES = 0;
+
+UPDATE enquiry_master
+SET cid = '13'
+WHERE 
+    capacity = '630'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'OLTC';
+	
+	
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Update costing_master table's eid to the first matching enquiry id
+UPDATE costing_master
+SET eid = (
+    SELECT MIN(id)
+    FROM enquiry_master
+    WHERE 
+        capacity = '630'
+        AND hvvoltage = 'Delta Connected'
+        AND lvvoltage = 'Star Connected'
+        AND vectorgroup = 'Dyn11'
+        AND matofwind = 'Copper'
+        AND typecolling = 'ONAN'
+        AND core = 'CRGO'
+        AND priratio = '22000'
+        AND secratio = '433'
+        AND tapingSwitch = 'OLTC'
+        AND cid = '13'
+)
+WHERE id = 13;
+
+
+
+SET SQL_SAFE_UPDATES = 1;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Verify the enquiry_master update was successful
+SELECT 
+    id,
+    custname,
+    cid,
+    capacity,
+    hvvoltage,
+    lvvoltage,
+    vectorgroup,
+    matofwind,
+    typecolling,
+    core,
+    priratio,
+    secratio,
+    tapingSwitch
+FROM enquiry_master
+WHERE 
+    capacity = '630'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'OLTC'
+ORDER BY id;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Verify the costing_master update
+SELECT 
+    id,
+    eid,
+    'Updated to first matching enquiry id' as note
+FROM costing_master
+WHERE id = 13;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+
+-- capacity	hvvoltage	lvvoltage	vectorgroup	matofwind	typecolling	core	priratio	secratio	tapingSwitch
+-- 800	Delta Connected	Star Connected	Dyn11	Copper	ONAN	CRGO	22000	433	OLTC
+
+
+
+-- ===============================================================================================
+-- First, view which records will be updated (RECOMMENDED - Run this first!)
+SELECT 
+    id,
+    custname,
+    cid as current_cid,
+    '5' as new_cid,
+    capacity,
+    hvvoltage,
+    lvvoltage,  
+    vectorgroup,
+    matofwind,
+    typecolling,
+    core,
+    priratio,
+    secratio,
+    tapingSwitch
+FROM enquiry_master
+WHERE 
+    capacity = '800'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'OLTC'
+ORDER BY id;
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Then, UPDATE the CID to 1 for all matching records
+SET SQL_SAFE_UPDATES = 0;
+
+UPDATE enquiry_master
+SET cid = '5'
+WHERE 
+    capacity = '800'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'OLTC';
+	
+	
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Update costing_master table's eid to the first matching enquiry id
+UPDATE costing_master
+SET eid = (
+    SELECT MIN(id)
+    FROM enquiry_master
+    WHERE 
+        capacity = '800'
+        AND hvvoltage = 'Delta Connected'
+        AND lvvoltage = 'Star Connected'
+        AND vectorgroup = 'Dyn11'
+        AND matofwind = 'Copper'
+        AND typecolling = 'ONAN'
+        AND core = 'CRGO'
+        AND priratio = '22000'
+        AND secratio = '433'
+        AND tapingSwitch = 'OLTC'
+        AND cid = '5'
+)
+WHERE id = 5;
+
+
+
+SET SQL_SAFE_UPDATES = 1;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Verify the enquiry_master update was successful
+SELECT 
+    id,
+    custname,
+    cid,
+    capacity,
+    hvvoltage,
+    lvvoltage,
+    vectorgroup,
+    matofwind,
+    typecolling,
+    core,
+    priratio,
+    secratio,
+    tapingSwitch
+FROM enquiry_master
+WHERE 
+    capacity = '800'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'OLTC'
+ORDER BY id;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Verify the costing_master update
+SELECT 
+    id,
+    eid,
+    'Updated to first matching enquiry id' as note
+FROM costing_master
+WHERE id = 5;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+
+
+
+
+-- capacity	hvvoltage	lvvoltage	vectorgroup	matofwind	typecolling	core	priratio	secratio	tapingSwitch
+-- 25	Delta Connected	Star Connected	Dyn11	Aluminium	ONAN	CRGO	11000	433	NOTTAPING
+
+
+
+-- ===============================================================================================
+-- First, view which records will be updated (RECOMMENDED - Run this first!)
+SELECT 
+    id,
+    custname,
+    cid as current_cid,
+    '11' as new_cid,
+    capacity,
+    hvvoltage,
+    lvvoltage,  
+    vectorgroup,
+    matofwind,
+    typecolling,
+    core,
+    priratio,
+    secratio,
+    tapingSwitch
+FROM enquiry_master
+WHERE 
+    capacity = '25'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Aluminium'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '11000'
+    AND secratio = '433'
+    AND tapingSwitch = 'NOTTAPING'
+ORDER BY id;
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Then, UPDATE the CID to 1 for all matching records
+SET SQL_SAFE_UPDATES = 0;
+
+UPDATE enquiry_master
+SET cid = '11'
+WHERE 
+    capacity = '25'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Aluminium'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '11000'
+    AND secratio = '433'
+    AND tapingSwitch = 'NOTTAPING';
+	
+	
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Update costing_master table's eid to the first matching enquiry id
+UPDATE costing_master
+SET eid = (
+    SELECT MIN(id)
+    FROM enquiry_master
+    WHERE 
+        capacity = '25'
+        AND hvvoltage = 'Delta Connected'
+        AND lvvoltage = 'Star Connected'
+        AND vectorgroup = 'Dyn11'
+        AND matofwind = 'Aluminium'
+        AND typecolling = 'ONAN'
+        AND core = 'CRGO'
+        AND priratio = '11000'
+        AND secratio = '433'
+        AND tapingSwitch = 'NOTTAPING'
+        AND cid = '11'
+)
+WHERE id = 11;
+
+
+
+SET SQL_SAFE_UPDATES = 1;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Verify the enquiry_master update was successful
+SELECT 
+    id,
+    custname,
+    cid,
+    capacity,
+    hvvoltage,
+    lvvoltage,
+    vectorgroup,
+    matofwind,
+    typecolling,
+    core,
+    priratio,
+    secratio,
+    tapingSwitch
+FROM enquiry_master
+WHERE 
+    capacity = '25'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Aluminium'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '11000'
+    AND secratio = '433'
+    AND tapingSwitch = 'NOTTAPING'
+ORDER BY id;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Verify the costing_master update
+SELECT 
+    id,
+    eid,
+    'Updated to first matching enquiry id' as note
+FROM costing_master
+WHERE id = 11;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+
+-- capacity	hvvoltage	lvvoltage	vectorgroup	matofwind	typecolling	core	priratio	secratio	tapingSwitch
+-- 500	Delta Connected	Star Connected	Dyn11	Copper	ONAN	CRGO	22000	433	OCTC
+
+
+
+-- ===============================================================================================
+-- First, view which records will be updated (RECOMMENDED - Run this first!)
+SELECT 
+    id,
+    custname,
+    cid as current_cid,
+    '14' as new_cid,
+    capacity,
+    hvvoltage,
+    lvvoltage,  
+    vectorgroup,
+    matofwind,
+    typecolling,
+    core,
+    priratio,
+    secratio,
+    tapingSwitch
+FROM enquiry_master
+WHERE 
+    capacity = '500'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'OCTC'
+ORDER BY id;
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Then, UPDATE the CID to 1 for all matching records
+SET SQL_SAFE_UPDATES = 0;
+
+UPDATE enquiry_master
+SET cid = '14'
+WHERE 
+    capacity = '500'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'OCTC';
+	
+	
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Update costing_master table's eid to the first matching enquiry id
+UPDATE costing_master
+SET eid = (
+    SELECT MIN(id)
+    FROM enquiry_master
+    WHERE 
+        capacity = '500'
+        AND hvvoltage = 'Delta Connected'
+        AND lvvoltage = 'Star Connected'
+        AND vectorgroup = 'Dyn11'
+        AND matofwind = 'Copper'
+        AND typecolling = 'ONAN'
+        AND core = 'CRGO'
+        AND priratio = '22000'
+        AND secratio = '433'
+        AND tapingSwitch = 'OCTC'
+        AND cid = '14'
+)
+WHERE id = 14;
+
+
+
+SET SQL_SAFE_UPDATES = 1;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Verify the enquiry_master update was successful
+SELECT 
+    id,
+    custname,
+    cid,
+    capacity,
+    hvvoltage,
+    lvvoltage,
+    vectorgroup,
+    matofwind,
+    typecolling,
+    core,
+    priratio,
+    secratio,
+    tapingSwitch
+FROM enquiry_master
+WHERE 
+    capacity = '500'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'OCTC'
+ORDER BY id;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Verify the costing_master update
+SELECT 
+    id,
+    eid,
+    'Updated to first matching enquiry id' as note
+FROM costing_master
+WHERE id = 14;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+
+
+-- capacity	hvvoltage	lvvoltage	vectorgroup	matofwind	typecolling	core	priratio	secratio	tapingSwitch
+-- 1250	Delta Connected	Star Connected	Dyn11	Copper	ONAN	CRGO	22000	433	OLTC
+
+
+
+
+-- ===============================================================================================
+-- First, view which records will be updated (RECOMMENDED - Run this first!)
+SELECT 
+    id,
+    custname,
+    cid as current_cid,
+    '9' as new_cid,
+    capacity,
+    hvvoltage,
+    lvvoltage,  
+    vectorgroup,
+    matofwind,
+    typecolling,
+    core,
+    priratio,
+    secratio,
+    tapingSwitch
+FROM enquiry_master
+WHERE 
+    capacity = '1250'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'OLTC'
+ORDER BY id;
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Then, UPDATE the CID to 1 for all matching records
+SET SQL_SAFE_UPDATES = 0;
+
+UPDATE enquiry_master
+SET cid = '9'
+WHERE 
+    capacity = '1250'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'OLTC';
+	
+	
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Update costing_master table's eid to the first matching enquiry id
+UPDATE costing_master
+SET eid = (
+    SELECT MIN(id)
+    FROM enquiry_master
+    WHERE 
+        capacity = '1250'
+        AND hvvoltage = 'Delta Connected'
+        AND lvvoltage = 'Star Connected'
+        AND vectorgroup = 'Dyn11'
+        AND matofwind = 'Copper'
+        AND typecolling = 'ONAN'
+        AND core = 'CRGO'
+        AND priratio = '22000'
+        AND secratio = '433'
+        AND tapingSwitch = 'OLTC'
+        AND cid = '9'
+)
+WHERE id = 9;
+
+
+
+SET SQL_SAFE_UPDATES = 1;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Verify the enquiry_master update was successful
+SELECT 
+    id,
+    custname,
+    cid,
+    capacity,
+    hvvoltage,
+    lvvoltage,
+    vectorgroup,
+    matofwind,
+    typecolling,
+    core,
+    priratio,
+    secratio,
+    tapingSwitch
+FROM enquiry_master
+WHERE 
+    capacity = '1250'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '22000'
+    AND secratio = '433'
+    AND tapingSwitch = 'OLTC'
+ORDER BY id;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Verify the costing_master update
+SELECT 
+    id,
+    eid,
+    'Updated to first matching enquiry id' as note
+FROM costing_master
+WHERE id = 9;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+
+-- capacity	hvvoltage	lvvoltage	vectorgroup	matofwind	typecolling	core	priratio	secratio	tapingSwitch
+-- 315	Delta Connected	Star Connected	Dyn11	Copper	ONAN	CRGO	11000	433	OCTC
+
+
+
+
+-- ===============================================================================================
+-- First, view which records will be updated (RECOMMENDED - Run this first!)
+SELECT 
+    id,
+    custname,
+    cid as current_cid,
+    '15' as new_cid,
+    capacity,
+    hvvoltage,
+    lvvoltage,  
+    vectorgroup,
+    matofwind,
+    typecolling,
+    core,
+    priratio,
+    secratio,
+    tapingSwitch
+FROM enquiry_master
+WHERE 
+    capacity = '315'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '11000'
+    AND secratio = '433'
+    AND tapingSwitch = 'OCTC'
+ORDER BY id;
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Then, UPDATE the CID to 1 for all matching records
+SET SQL_SAFE_UPDATES = 0;
+
+UPDATE enquiry_master
+SET cid = '15'
+WHERE 
+    capacity = '315'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '11000'
+    AND secratio = '433'
+    AND tapingSwitch = 'OCTC';
+	
+	
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Update costing_master table's eid to the first matching enquiry id
+UPDATE costing_master
+SET eid = (
+    SELECT MIN(id)
+    FROM enquiry_master
+    WHERE 
+        capacity = '315'
+        AND hvvoltage = 'Delta Connected'
+        AND lvvoltage = 'Star Connected'
+        AND vectorgroup = 'Dyn11'
+        AND matofwind = 'Copper'
+        AND typecolling = 'ONAN'
+        AND core = 'CRGO'
+        AND priratio = '11000'
+        AND secratio = '433'
+        AND tapingSwitch = 'OCTC'
+        AND cid = '15'
+)
+WHERE id = 15;
+
+
+
+SET SQL_SAFE_UPDATES = 1;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Verify the enquiry_master update was successful
+SELECT 
+    id,
+    custname,
+    cid,
+    capacity,
+    hvvoltage,
+    lvvoltage,
+    vectorgroup,
+    matofwind,
+    typecolling,
+    core,
+    priratio,
+    secratio,
+    tapingSwitch
+FROM enquiry_master
+WHERE 
+    capacity = '315'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '11000'
+    AND secratio = '433'
+    AND tapingSwitch = 'OCTC'
+ORDER BY id;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Verify the costing_master update
+SELECT 
+    id,
+    eid,
+    'Updated to first matching enquiry id' as note
+FROM costing_master
+WHERE id = 15;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- capacity	hvvoltage	lvvoltage	vectorgroup	matofwind	typecolling	core	priratio	secratio	tapingSwitch
+-- 630	Delta Connected	Star Connected	Dyn11	Copper	ONAN	CRGO	11000	433	OCTC
+
+
+
+
+-- ===============================================================================================\
+-- First, view which records will be updated (RECOMMENDED - Run this first!)
+SELECT 
+    id,
+    custname,
+    cid as current_cid,
+    '16' as new_cid,
+    capacity,
+    hvvoltage,
+    lvvoltage,  
+    vectorgroup,
+    matofwind,
+    typecolling,
+    core,
+    priratio,
+    secratio,
+    tapingSwitch
+FROM enquiry_master
+WHERE 
+    capacity = '630'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '11000'
+    AND secratio = '433'
+    AND tapingSwitch = 'OCTC'
+ORDER BY id;
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Then, UPDATE the CID to 1 for all matching records
+SET SQL_SAFE_UPDATES = 0;
+
+UPDATE enquiry_master
+SET cid = '16'
+WHERE 
+    capacity = '630'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '11000'
+    AND secratio = '433'
+    AND tapingSwitch = 'OCTC';
+	
+	
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Update costing_master table's eid to the first matching enquiry id
+UPDATE costing_master
+SET eid = (
+    SELECT MIN(id)
+    FROM enquiry_master
+    WHERE 
+        capacity = '630'
+        AND hvvoltage = 'Delta Connected'
+        AND lvvoltage = 'Star Connected'
+        AND vectorgroup = 'Dyn11'
+        AND matofwind = 'Copper'
+        AND typecolling = 'ONAN'
+        AND core = 'CRGO'
+        AND priratio = '11000'
+        AND secratio = '433'
+        AND tapingSwitch = 'OCTC'
+        AND cid = '16'
+)
+WHERE id = 16;
+
+
+
+SET SQL_SAFE_UPDATES = 1;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Verify the enquiry_master update was successful
+SELECT 
+    id,
+    custname,
+    cid,
+    capacity,
+    hvvoltage,
+    lvvoltage,
+    vectorgroup,
+    matofwind,
+    typecolling,
+    core,
+    priratio,
+    secratio,
+    tapingSwitch
+FROM enquiry_master
+WHERE 
+    capacity = '630'
+    AND hvvoltage = 'Delta Connected'
+    AND lvvoltage = 'Star Connected'
+    AND vectorgroup = 'Dyn11'
+    AND matofwind = 'Copper'
+    AND typecolling = 'ONAN'
+    AND core = 'CRGO'
+    AND priratio = '11000'
+    AND secratio = '433'
+    AND tapingSwitch = 'OCTC'
+ORDER BY id;
+
+
+-- ===============================================================================================
+-- ===============================================================================================
+
+-- Verify the costing_master update
+SELECT 
+    id,
+    eid,
+    'Updated to first matching enquiry id' as note
+FROM costing_master
+WHERE id = 16;
+
+
+-- -- ===============================================================================================
+-- ===============================================================================================

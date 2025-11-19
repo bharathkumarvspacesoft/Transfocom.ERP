@@ -168,8 +168,58 @@ export default function Orderacceptance() {
   // };
 
 
+  // const handlesearch = (event) => {
+  //   const getSearch = event.target.value.trim().toLowerCase();
+  //   console.log("Search Input:", getSearch);
+
+  //   if (getSearch === "") {
+  //     setRows(filterdata); // Reset if empty
+  //   } else {
+  //     const searchdata = filterdata.filter((item) => {
+  //       // Convert everything to string safely
+  //       const custname = item.custname ? String(item.custname).toLowerCase() : "";
+  //       const ref_no = item.ref_no ? String(item.ref_no).toLowerCase() : "";
+  //       const capacity = item.capacity ? String(item.capacity).toLowerCase() : "";
+  //       const testing_div = item.testing_div ? String(item.testing_div).toLowerCase() : "";
+  //       const consumer = item.consumer ? String(item.consumer).toLowerCase() : "";
+  //       const ponum = item.ponum ? String(item.ponum).toLowerCase() : "";
+  //       const podate = item.podate ? String(item.podate).toLowerCase() : "";
+  //       const ostatus = item.ostatus ? String(item.ostatus).toLowerCase() : "";
+  //       const priratio = item.priratio ? String(item.priratio).toLowerCase() : "";
+  //       const secratio = item.secratio ? String(item.secratio).toLowerCase() : "";
+  //       return (
+  //         custname.includes(getSearch) ||
+  //         ref_no.includes(getSearch) ||
+  //         capacity.includes(getSearch) ||
+  //         testing_div.includes(getSearch) ||
+  //         consumer.includes(getSearch) ||
+  //         ponum.includes(getSearch) ||
+  //         podate.includes(getSearch) ||
+  //         ostatus.includes(getSearch) ||
+  //         priratio.includes(getSearch) ||
+  //         secratio.includes(getSearch)
+  //       );
+  //     });
+
+  //     console.log("Filtered Data:", searchdata);
+
+  //     if (searchdata.length > 0) {
+  //       setRows(searchdata);
+  //     } else {
+  //       Swal.fire({
+  //         title: "No Data Found",
+  //         timer: 1000,
+  //         showConfirmButton: false,
+  //         icon: "warning",
+  //       });
+  //     }
+  //   }
+
+  //   setQuery(getSearch);
+  // };
+
   const handlesearch = (event) => {
-    const getSearch = event.target.value.trim().toLowerCase();
+    const getSearch = event.target.value.toLowerCase(); // Remove trim() to keep spaces
     console.log("Search Input:", getSearch);
 
     if (getSearch === "") {
@@ -187,6 +237,7 @@ export default function Orderacceptance() {
         const ostatus = item.ostatus ? String(item.ostatus).toLowerCase() : "";
         const priratio = item.priratio ? String(item.priratio).toLowerCase() : "";
         const secratio = item.secratio ? String(item.secratio).toLowerCase() : "";
+
         return (
           custname.includes(getSearch) ||
           ref_no.includes(getSearch) ||
@@ -215,7 +266,7 @@ export default function Orderacceptance() {
       }
     }
 
-    setQuery(getSearch);
+    setQuery(event.target.value); // Store original value without trim
   };
 
 

@@ -104,20 +104,20 @@ const AddInvoice = () => {
       } finally {
         setIsLoading(false);
       }
-      try {
-        setIsLoading(true);
-        const response = await fetch(`${APP_BASE_PATH}/getInvoiceNumber`); // Replace with your API endpoint
-        const jsonData = await response.json();
+      // try {
+      //   setIsLoading(true);
+      //   const response = await fetch(`${APP_BASE_PATH}/getInvoiceNumber`); // Replace with your API endpoint
+      //   const jsonData = await response.json();
 
-        setUser((prevDta) => ({
-          ...prevDta,
-          invoice_no: jsonData.invoiceNumber,
-        }));
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setIsLoading(false);
-      }
+      //   setUser((prevDta) => ({
+      //     ...prevDta,
+      //     invoice_no: jsonData.invoiceNumber,
+      //   }));
+      // } catch (error) {
+      //   console.error("Error fetching data:", error);
+      // } finally {
+      //   setIsLoading(false);
+      // }
     };
     fetchData();
   }, []);
@@ -180,6 +180,17 @@ const AddInvoice = () => {
     e.preventDefault();
     setIsLoading(true);
     console.log("user data before submission:", user);
+    if (!user.invoice_no) {
+      Swal.fire({
+        title: "Error",
+        text: "Invoice number is required!",
+        icon: "error",
+        confirmButtonText: "OK",
+        confirmButtonColor: "red",
+      });
+      setIsLoading(false);
+      return;
+    }
 
     const advance = parseFloat(user.advance);
     // user.remainingadvance !== null
@@ -555,7 +566,7 @@ const AddInvoice = () => {
                     />
                   </Grid>
 
-                  <Grid item xs={4}>
+                  {/* <Grid item xs={4}>
                     <TextField
                       fullWidth
                       id="po_date"
@@ -566,6 +577,21 @@ const AddInvoice = () => {
                       InputLabelProps={{ shrink: true }}
                       InputProps={{
                         readOnly: true, // Add the readOnly attribute
+                      }}
+                    />
+                  </Grid> */}
+
+                  <Grid item xs={4}>
+                    <TextField
+                      fullWidth
+                      id="po_date"
+                      label="PO Date"
+                      name="po_date"
+                      value={user.po_date ? formatDate(user.po_date) : ""}
+                      onChange={handleInputs}
+                      InputLabelProps={{ shrink: true }}
+                      InputProps={{
+                        readOnly: true,
                       }}
                     />
                   </Grid>

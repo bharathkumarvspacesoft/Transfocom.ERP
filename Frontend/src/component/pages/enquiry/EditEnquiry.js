@@ -931,7 +931,7 @@ const EditEnquiry = () => {
                       disabled={data.enqstatus >= 1 && data.enqstatus != 10}
                     />
                   </Grid>
-                  <Grid item xs={7} sm={3.5}>
+                  {/* <Grid item xs={7} sm={3.5}>
                     <FormControl style={{ width: "26vw", textAlign: "left" }}>
                       <InputLabel id="costing-design-label">Costing Design *</InputLabel>
                       <Select
@@ -953,7 +953,7 @@ const EditEnquiry = () => {
                         <MenuItem value="D4">D4</MenuItem>
                       </Select>
                     </FormControl>
-                  </Grid>
+                  </Grid> */}
                   <Grid item xs={7} sm={3.5}>
                     <TextField
                       fullWidth
@@ -1133,6 +1133,8 @@ const EditEnquiry = () => {
                     justifyContent: "center",
                     alignContent: "center",
                     alignItems: "center",
+                    display: "flex",
+                    gap: 2, // Adds space between buttons (2 = 16px)
                   }}
                 >
                   <Button

@@ -334,13 +334,19 @@ export default function Invoice() {
                               style={{ textAlign: "center" }}
                               key={item.h}
                             >
-                              {item.po_no}
+                              {item.po_no? item.po_no : "-"}
                             </TableCell>
+                            {/* <TableCell
+                              style={{ textAlign: "center" }}
+                              key={item.s}
+                            >
+                              {formatDate(item.po_date)}
+                            </TableCell> */}
                             <TableCell
                               style={{ textAlign: "center" }}
                               key={item.s}
                             >
-                              {item.po_date}
+                              {item.po_date ? formatDate(item.po_date) : "-"}
                             </TableCell>
                             <TableCell
                               style={{ textAlign: "center" }}

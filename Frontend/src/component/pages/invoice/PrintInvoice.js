@@ -102,6 +102,15 @@ const StyledTextareaElement = styled(TextareaAutosize)(
 `
 );
 
+const formatDate = (dateString) => {
+  if (!dateString) return '';
+  const date = new Date(dateString);
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
+};
+
 const PrintInvoice = () => {
   const { id } = useParams();
   const [data, setData] = useState([]);
@@ -111,6 +120,17 @@ const PrintInvoice = () => {
   const formatDate = (date) => {
     return dayjs(date).format("DD/MM/YYYY");
   };
+
+  const formatDates = (dateString) => {
+    if (!dateString || dateString.trim() === '') return '';
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) return ''; // Check for invalid date
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+  };
+
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -422,82 +442,81 @@ const PrintInvoice = () => {
         <p style="text-indent: 0pt;text-align: left;">
             <br/>
         </p>
-        <table style="border-collapse:collapse;margin-left:6.965pt" cellspacing="0">
+        <table style="border-collapse:collapse;margin-left:0.965pt" cellspacing="0">
             <tr style="height:25pt">
-                <td style="width:484pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt" colspan="6">
+                <td style="width:484pt;border-top-style:solid;border-top-width:2pt;padding-top:10px;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1.5pt" colspan="8">
                     <p class="s3" style="padding-left: 204pt;padding-right: 203pt;text-indent: 0pt;line-height: 11pt;text-align: center;">TAX INVOICE</p>
                 </td>
             </tr>
             <tr style="height:74pt">
-                <td style="width:216pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt" colspan="3">
-                    <p class="s4" style="text-indent: 0pt;line-height: 9pt;text-align: left;">
-                        DIVISION <span class="s5">Division II- Pimpri</span>
+                <td style="width:268pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;
+                   border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt;padding:10px 2px;" colspan="3">
+                    <p class="s7" style="text-indent: 0pt;line-height: 9pt;text-align: left;">
+                        DIVISION <span class="s7">Division II- Pimpri</span>
                     </p>
-                    <p class="s4" style="padding-top: 1pt;padding-right: 103pt;text-indent: 0pt;line-height: 133%;text-align: left;">
-                      GST No. <span style="color: red;"> 27ABEFS1957R1ZD</span>
-</br>
-                        STATE <span class="s6">MAHARASHTRA </span></br>
-                        CODE.  <span class="s6">27</span>
+                    <p class="s7" style="padding-top: 1pt;padding-right: 103pt;text-indent: 0pt;line-height: 133%;text-align: left;">
+                      GST No. <span style="color: red;"> 27ABEFS1957R1ZD</span></br>
+                        STATE <span class="s7">MAHARASHTRA </span></br>
+                        CODE.  <span class="s7">27</span>
                     </p>
-                    <p class="s4" style="padding-top: 1pt;text-indent: 0pt;text-align: left;">Name of Commodity: ELECTRICAL TRANSFORMER.</p>
-                    <p class="s4" style="padding-top: 3pt;text-indent: 0pt;text-align: left;">
-                        PAN No. <span class="s6">ABEFS1957R</span>
+                    <p class="s7" style="padding-top: 1pt;text-indent: 0pt;text-align: left;">Name of Commodity: ELECTRICAL TRANSFORMER.</p>
+                    <p class="s7" style="padding-top: 3pt;text-indent: 0pt;text-align: left;">
+                        PAN No. <span class="s7">ABEFS1957R</span>
                     </p>
                 </td>
-                <td style="width:268pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt" colspan="4">
+                <td style="width:268pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;
+                   border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:0.5pt;padding:10px 2px" colspan="4">
                     <p class="s7" style="text-indent: 0pt;text-align: left;">Original for Buyer/Duplicate for Transporter</p>
                     <p class="s7" style="padding-top: 2pt;text-indent: 0pt;text-align: left;">/Triplicate for assessee</p>
-                    <p class="s8" style="padding-top: 2pt;text-indent: 0pt;text-align: left;">
-                        Invoice No :<span class="s9"></span>
-                        <span style=" color: #F00;">${data[0]?.invoice_no || ""
-      }</span> 
+                    <p class="s7" style="padding-top: 2pt;text-indent: 0pt;text-align: left;">
+                        Invoice No :<span class="s7"></span>
+                        <span style=" color: #F00;">${data[0]?.invoice_no || ""}</span> 
                     </p>
-                    <p class="s8" style="padding-top: 2pt;text-indent: 0pt;text-align: left;">
-                        Date:<span style=" color: #F00;">${data[0]?.inv_date || ""
-      } </span></br>
+                    <p class="s7" style="padding-top: 2pt;text-indent: 0pt;text-align: left;">
+                        Date:<span style=" color: #F00;">${formatDate(data[0]?.inv_date || "")} </span></br>
                         Challan No :${data[0]?.challan_no || ""} 
                     </p>
-                    <p class="s8" style="padding-top: 2pt;text-indent: 0pt;text-align: left;">
-                        Date:<span style=" color: #F00;">${data[0]?.chdate || ""
-      }</span>
+                    <p class="s7" style="padding-top: 2pt;text-indent: 0pt;text-align: left;">
+                        Date:<span style=" color: #F00;">${data[0]?.chdate || ""}</span>
                     </p>
                 </td>
             </tr>
             <tr style="height:11pt">
-                <td style="width:216pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-right-style:solid;border-right-width:2pt" colspan="3" bgcolor="#BFBFBF">
-                    <p class="s11" style="text-indent: 0pt;line-height: 9pt;text-align: left;">Name &amp;Address of the Buyer:</p>
+                <td style="width:216pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="3" bgcolor="#BFBFBF">
+                    <p class="s7" style="text-indent: 0pt;line-height: 9pt;text-align: left; padding-top:5px;padding-left:2px;">Name &amp;Address of the Buyer:</p>
                 </td>
-                <td style="width:268pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-right-style:solid;border-right-width:2pt" colspan="3" bgcolor="#BFBFBF">
-                    <p class="s11" style="text-indent: 0pt;line-height: 9pt;text-align: left;">Name &amp;Address of the Consignee/ Shipped To :</p>
+                <td style="width:268pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:0.5pt" colspan="4" bgcolor="#BFBFBF">
+                    <p class="s7" style="text-indent: 0pt;line-height: 9pt;text-align: left; padding-top:5px;padding-left:2px;">Name &amp;Address of the Consignee/ Shipped To :</p>
                 </td>
             </tr>
             <tr style="height:44pt">
-                <td style="width:216pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:2pt" colspan="3">
-                    <p class="s12" style="padding-top: 1pt;padding-right: 81pt;text-indent: 0pt;line-height: 125%;text-align: left;"> ${data[0]?.buyername || ""
-      } </p>
-                <p class="s12" style="text-indent: 0pt; line-height: 8pt; text-align: left;">
-  ${data[0]?.buyer_addr ? data[0].buyer_addr.split("\n").join(",<br>") : ""}
-</p>
+                <td style="width:216pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;
+                    border-right-style:solid;border-right-width:1pt;padding-left:2px;" colspan="3">
+                    <p class="s7" style="padding-top: 1pt;padding-right: 81pt;
+                    text-indent: 0pt;line-height: 125%;text-align: left;"> ${data[0]?.buyername || ""} </p>
+                      <p class="s7" style="text-indent: 0pt; line-height: 8pt;
+                      text-align: left;">${data[0]?.buyer_addr ? data[0].buyer_addr.split("\n").join(",<br>") : ""}</p>
 
                 </td>
-                <td style="width:268pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:2pt" colspan="3">
-                    <p class="s12" style="padding-top: 1pt;padding-right: 155pt;text-indent: 0pt;line-height: 125%;text-align: left;"> ${data[0]?.consumer || ""
-      },</p>
-             <p class="s12" style="text-indent: 0pt; text-align: left;">
-  ${data[0]?.delivery_address
+                    <td style="width:268pt;border-left-style:solid;border-left-width:1pt; 
+                       border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:0.5pt;padding-left:2px;" colspan="4">
+                      <p class="s7" style="padding-top: 1pt;padding-right: 155pt;text-indent: 0pt; 
+                        line-height: 125%;text-align: left;"> ${data[0]?.consumer || ""}
+                      </p>
+                      <p class="s7" style="text-indent: 0pt; text-align: left;">
+                          ${data[0]?.delivery_address
         ? data[0].delivery_address.split("\n").join(",<br>")
         : ""
       }
-</p>
-
-
+                        </p>
                     <p class="s12" style="padding-top: 2pt;text-indent: 0pt;line-height: 8pt;text-align: left;"></p>
                 </td>
             </tr>
-             <tr style="height:25pt">
-               <td style="width:216pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt" colspan="6">
-                    <p class="s4" style="text-indent: 0pt;line-height: 9pt;text-align: left;">
-                      <span class="s5">Order Acceptance Comment:-</span>
+             <tr style="height:35pt">
+               <td style="width:216pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;
+               border-right-width:1pt;padding:2px 2px" colspan="7">
+                    <p class="s7" style="text-indent: 0pt;line-height: 9pt;text-align: left;">
+                      <span class="s7">Order Acceptance Comment:-</span>
                     </p>
                     <p class="s4" style="padding-top: 1pt;padding-right: 103pt;text-indent: 0pt;line-height: 133%;text-align: left;">
                     ${(data[0]?.OAcomment ?? "").split("\n").join(",<br>")}
@@ -508,121 +527,122 @@ const PrintInvoice = () => {
             </tr>
             
             <tr style="height:33pt">
-              <td style="width:23pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:2pt" colspan="3">
-    <p class="s13" style="padding-right: 171pt;text-indent: 0pt;line-height: 125%;text-align: left;white-space: nowrap;">
-        STATE - MAHARASHTRA&nbsp;&nbsp; </br> CODE - 27&nbsp;&nbsp; </br> GST No.<span style="color: red;">${data[0]?.gstno
+              <td style="width:23pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;   
+                  border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt;padding:2px" colspan="3">
+                  <p class="s7" style="padding-right: 171pt;text-indent: 0pt;line-height: 125%;text-align: left;white-space: nowrap;">
+                      STATE - MAHARASHTRA&nbsp;&nbsp; </br> CODE - 27&nbsp;&nbsp; </br> GST No.<span style="color: red;">${data[0]?.gstno
         ? data[0].gstno
         : "<span style='color: red;'>NOT REGISTERED</span>"
       }</span>
 
-</span>
-    </p>
-</td>
-                <td style="width:268pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:2pt" colspan="3">
-                    <p class="s13" style="padding-right: 171pt;text-indent: 0pt;line-height: 125%;text-align: left;">STATE - MAHARASHTRA </br> CODE - 27</p>
-                    <p class="s13" style="text-indent: 0pt;line-height: 8pt;text-align: left;">
+              </span>
+                  </p>
+              </td>
+                <td style="width:268pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;
+                border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt;padding:2px" colspan="4">
+                    <p class="s7" style="padding-right: 171pt;text-indent: 0pt;line-height: 125%;text-align: left;">STATE - MAHARASHTRA </br> CODE - 27</p>
+                    <p class="s7" style="text-indent: 0pt;line-height: 8pt;text-align: left;">
                         GST NO. <span style=" color: #F00;">NOT REGISTERED</span>
                     </p>
                 </td>
             </tr>
             <tr style="height:23pt">
-                <td style="width:114pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt" colspan="2">
-                    <p class="s13" style="text-indent: 0pt;text-align: left;">Category of Consignee:-  ${data[0]?.consignee_cat || ""
-      }</p>
-                    <p class="s13" style="padding-top: 1pt;text-indent: 0pt;line-height: 8pt;text-align: left;">Mode of Transport:- By Road</p>
+                <td style="width:114pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid; 
+                   border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;padding:2px" colspan="2">
+                    <p class="s7" style="text-indent: 0pt;text-align: left;">Category of Consignee:- 
+                     ${data[0]?.consignee_cat || ""}</p>
+                    <p class="s7" style="padding-top: 1pt;text-indent: 0pt;line-height: 8pt;text-align: left;">Mode of Transport:- By Road</p>
                 </td>
-                <td style="width:102pt;border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt">
+                <td style="width:102pt;border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;
+                   border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
                     </p>
                 </td>
-               <td style="width: 93pt; border-top: 1pt solid; border-left: 2pt solid; border-bottom: 2pt solid;">
-    <p class="s13" style="text-indent: 0pt; text-align: left; margin: 0;">PO.No.:- ${data[0]?.po_no || ""
-      }</p>
-    <p class="s13" style="margin: 0; padding-top: 1pt; text-indent: 0pt; line-height: normal; text-align: left; white-space: nowrap;">
-        Vehicle Registration No.: ${data[0]?.vehicle_no || ""} -
-    </p>
-</td>
+               <td style="width: 93pt; border-top: 1pt solid; border-left: 1pt solid; border-bottom: 1pt 
+                   solid;padding:2px" colspan="3">
+                    <p class="s7" style="text-indent: 0pt; text-align: left; margin: 0;">PO.No.:-
+                    ${data[0]?.po_no || ""}</p>
+                    <p class="s7" style="margin: 0; padding-top: 1pt; text-indent: 0pt; line-height: normal; text-align: left; white-space: nowrap;">
+                        Vehicle Registration No.: ${data[0]?.vehicle_no || ""} -
+                    </p>
+                </td>
 
-                <td style="width:33pt;border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:2pt">
-                    <p style="text-indent: 0pt;text-align: left;">
-                        <br/>
-                    </p>
-                </td>
-                <td style="width:142pt;border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt">
-                    <p class="s13" style="padding-left: 54pt;padding-right: 64pt;text-indent: 0pt;text-align: center;">Date.${formatDate(data[0]?.po_date) || ""
-      }</p>
+             
+                <td style="width:142pt;border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt;padding:2px">
+                    <p class="s7" style="padding-left: 54pt;padding-right: 4pt;text-indent: 0pt;text-align: center;">Date.${formatDate(data[0]?.po_date) || ""}</p>
                     
                 </td>
             </tr>
             <tr style="height:14pt">
-                <td style="width:34pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt" bgcolor="#B8CCE4">
+                <td style="width:38pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;
+                border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt;padding-top:2px" bgcolor="#B8CCE4">
                     <p class="s14" style="padding-left: 4pt;padding-right: 3pt;text-indent: 0pt;line-height: 10pt;text-align: center;">S No</p>
                 </td>
-                <td style="width:182pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt" bgcolor="#B8CCE4">
+                <td style="width:182pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;
+                padding-top:2px;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="2" bgcolor="#B8CCE4">
                     <p class="s14" style="padding-left: 66pt;padding-right: 60pt;text-indent: 0pt;line-height: 10pt;text-align: center;">Description</p>
                 </td>
-                <td style="width:66pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt" bgcolor="#B8CCE4">
+                <td style="width:66pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;
+                padding-top:2px;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" bgcolor="#B8CCE4">
                     <p class="s14" style="padding-left: 10pt;padding-right: 9pt;text-indent: 0pt;line-height: 10pt;text-align: center;">HSN/SAC</p>
                 </td>
-                <td style="width:60pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt" bgcolor="#B8CCE4">
+                <td style="width:60pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;
+                padding-top:2px;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" bgcolor="#B8CCE4">
                     <p class="s14" style="padding-left: 19pt;padding-right: 18pt;text-indent: 0pt;line-height: 10pt;text-align: center;">Qty.</p>
                 </td>
-                <td style="width:55pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt" bgcolor="#B8CCE4">
+                <td style="width:55pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;
+                padding-top:2px; padding-left:10px;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" bgcolor="#B8CCE4">
                     <p class="s14" style="text-indent: 0pt;line-height: 10pt;text-align: left;">Rate/Unit</p>
                 </td>
-                <td style="width:87pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt" bgcolor="#B8CCE4">
-                    <p class="s14" style="text-indent: 0pt;line-height: 10pt;text-align: right;">Amount (Rs)</p>
+                <td style="width:87pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;
+                padding-top:2px;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" bgcolor="#B8CCE4">
+                    <p class="s14" style="text-indent: 0pt;line-height: 10pt;text-align: center;">Amount (Rs)</p>
                 </td>
             </tr>
             <tr style="height:23pt">
-                <td style="width:34pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-right-style:solid;border-right-width:1pt">
+                <td style="width:34pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
                     </p>
-                    <p class="s4" style="text-indent: 0pt;text-align: center;">1</p>
+                    <p class="s7" style="text-indent: 0pt;text-align: center;">1</p>
                 </td>
-                <td style="width:182pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
+                <td style="width:182pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="2">
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
                     </p>
-                    <p class="s4" style="text-indent: 0pt;text-align: left;">DISTRIBUTION TRANSFORMER</p>
+                    <p class="s7" style="text-indent: 0pt;text-align: left;padding-left:2px">DISTRIBUTION TRANSFORMER</p>
                 </td>
-                <td style="width:66pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
-                    <p style="text-indent: 0pt;text-align: left;">
-                        <br/>
-                    </p>
-                </td>
-                <td style="width:60pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
+                <td style="width:60pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
                     </p>
                 </td>
-                <td style="width:55pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
+                 <td style="width:60pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
                     </p>
                 </td>
-                <td style="width:87pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:2pt">
+                <td style="width:55pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
+                    <p style="text-indent: 0pt;text-align: left;">
+                        <br/>
+                    </p>
+                </td>
+                <td style="width:87pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
                     </p>
                 </td>
             </tr>
             <tr style="height:11pt">
-                <td style="width:34pt;border-left-style:solid;border-left-width:2pt;border-right-style:solid;border-right-width:1pt">
+                <td style="width:34pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
                     </p>
                 </td>
-                <td style="width:182pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
-                    <p class="s4" style="padding-top: 1pt;text-indent: 0pt;text-align: left;">TESTED &amp;SUPPLIED WITH SILICA GEL BREATHER</p>
-                </td>
-                <td style="width:66pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
-                    <p style="text-indent: 0pt;text-align: left;">
-                        <br/>
-                    </p>
-                </td>
+                <td style="width:182pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt;padding-left:2px" colspan="2">
+                    <p class="s7" style="padding-top: 1pt;text-indent: 0pt;text-align: left;">TESTED &amp;SUPPLIED WITH SILICA GEL BREATHER</p>
+                </td>                             
                 <td style="width:60pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
@@ -633,43 +653,45 @@ const PrintInvoice = () => {
                         <br/>
                     </p>
                 </td>
-                <td style="width:87pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:2pt">
+                 <td style="width:55pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
+                    <p style="text-indent: 0pt;text-align: left;">
+                        <br/>
+                    </p>
+                </td>
+                <td style="width:87pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
                     </p>
                 </td>
             </tr>
             <tr style="height:11pt">
-                <td style="width:34pt;border-left-style:solid;border-left-width:2pt;border-right-style:solid;border-right-width:1pt">
+                <td style="width:34pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
                     </p>
                 </td>
-                <td style="width:182pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
-                    <p class="s4" style="padding-top: 1pt;text-indent: 0pt;text-align: left;">
-                        CAPACITY   - <span style=" color: #F00;">${data[0]?.capacity || ""
-      } </span>
+                <td style="width:182pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="2">
+                    <p class="s7" style="padding-top: 1pt;padding-left:2px;text-indent: 0pt;text-align: left;">
+                        CAPACITY${"&nbsp;".repeat(12)}- <span style=" color: #F00;">      ${data[0]?.capacity || ""} </span>
                         KVA
                     </p>
-                </td>
+                </td>                
                 <td style="width:66pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
-                    <p class="s16" style="padding-top: 1pt;padding-left: 16pt;padding-right: 15pt;text-indent: 0pt;text-align: center;">${data[0]?.hsn || ""
-      }</p>
+                    <p class="s7" style="padding-top: 1pt;padding-left: 16pt;padding-right: 15pt;text-indent: 0pt;text-align: center;">${data[0]?.hsn || ""}</p>
                 </td>
                 <td style="width:60pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
-                    <p class="s16" style="padding-top: 1pt;padding-left: 22pt;padding-right: 21pt;text-indent: 0pt;text-align: center;">${data[0]?.inv_det_qty || ""
-      }</p>
+                    <p class="s7" style="padding-top: 1pt;padding-left: 22pt;padding-right: 21pt;text-indent: 0pt;text-align: center;">${data[0]?.inv_det_qty || ""}</p>
                 </td>
                 <td style="width:55pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
-                    <p class="s17" style="padding-top: 1pt;padding-left: 13pt;text-indent: 0pt;text-align: left;">${Number(
+                    <p class="s7" style="padding-top: 1pt;padding-left: 13pt;text-indent: 0pt;text-align: left;">${Number(
         data[0]?.rate || 0
       ).toLocaleString("en-IN", {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       })}</p>
                 </td>
-                <td style="width:87pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:2pt">
-                    <p class="s17" style="padding-top: 1pt;padding-right: 2pt;text-indent: 0pt;text-align: right;">${Number(
+                <td style="width:87pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
+                    <p class="s7" style="padding-top: 1pt;padding-right: 2pt;text-indent: 0pt;text-align: right;">${Number(
         data[0]?.amt || 0
       ).toLocaleString("en-IN", {
         minimumFractionDigits: 2,
@@ -678,51 +700,50 @@ const PrintInvoice = () => {
                 </td>
             </tr>
             <tr style="height:11pt">
-                <td style="width:34pt;border-left-style:solid;border-left-width:2pt;border-right-style:solid;border-right-width:1pt">
+                <td style="width:34pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
                     </p>
                 </td>
-                <td style="width:182pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
-                    <p class="s4" style="padding-top: 1pt;text-indent: 0pt;text-align: left;">
-                        VOLTAGE RATIO - <span style=" color: #F00;">${data[0]?.priratio || ""
-      }</span>
+                <td style="width:182pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="2">
+                    <p class="s7" style="padding-top: 1pt;padding-left:2px;text-indent: 0pt;text-align: left;">
+                        VOLTAGE RATIO - <span style=" color: #F00;">${data[0]?.priratio || ""}</span>
                         /${data[0]?.secratio || ""} KV
                     </p>
                 </td>
-                <td style="width:66pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
+                 <td style="width:66pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
                     </p>
                 </td>
                 <td style="width:60pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
-                    <p class="s17" style="padding-top: 1pt;padding-left: 22pt;padding-right: 21pt;text-indent: 0pt;text-align: center;">No.</p>
+                    <p class="s7" style="padding-top: 1pt;padding-left: 22pt;padding-right: 21pt;text-indent: 0pt;text-align: center;">No.</p>
                 </td>
                 <td style="width:55pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
                     </p>
                 </td>
-                <td style="width:87pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:2pt">
+                <td style="width:87pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
                     </p>
                 </td>
             </tr>
-            <tr style="height:43pt">
-                <td style="width:34pt;border-left-style:solid;border-left-width:2pt;border-right-style:solid;border-right-width:1pt">
+            <tr style="height:103pt">
+                <td style="width:34pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
                     </p>
                 </td>
-                <td style="width:182pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
-                    <p class="s4" style="padding-top: 1pt;text-indent: 0pt;text-align: left;">
-                        TYPE     - <span style=" color: #F00;">${typeLabel || ""
-      }</span>
+                <td style="width:182pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="2">
+                    <p class="s7" style="padding-top: 1pt;padding-left:2px;text-indent: 0pt;text-align: left;">
+                        TYPE ${"&nbsp;".repeat(18)}    - <span style=" color: #F00;">${typeLabel || ""}</span>
                         
                     </p>
                 </td>
-                <td style="width:66pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
+             
+                  <td style="width:66pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
                     </p>
@@ -737,26 +758,27 @@ const PrintInvoice = () => {
                         <br/>
                     </p>
                 </td>
-                <td style="width:87pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:2pt">
+                <td style="width:87pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
                     </p>
                 </td>
             </tr>
             <tr style="height:11pt">
-                <td style="width:34pt;border-left-style:solid;border-left-width:2pt;border-right-style:solid;border-right-width:1pt">
+                <td style="width:34pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
                     </p>
                 </td>
-                <td style="width:182pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
-                    <p class="s4" style="padding-top: 1pt;text-indent: 0pt;text-align: right;">Total Basic</p>
+                <td style="width:182pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="2">
+                    <p class="s14" style="padding-top: 1pt;text-indent: 0pt;text-align: right;">Total Basic</p>
                 </td>
                 <td style="width:66pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
                     </p>
                 </td>
+                 
                 <td style="width:60pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
@@ -767,28 +789,29 @@ const PrintInvoice = () => {
                         <br/>
                     </p>
                 </td>
-               <td style="width:87pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:2pt">
-    <p class="s17" style="text-indent: 0pt;line-height: 8pt;text-align: right;">
-        ${data[0]?.basic_total
+               <td style="width:87pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;
+               padding-top:2px;padding-right:5px;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                  <p class="s7" style="text-indent: 0pt;line-height: 8pt;text-align: right;">
+                      ${data[0]?.basic_total
         ? new Intl.NumberFormat("en-IN", {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
         }).format(data[0].basic_total)
         : ""
       }
-    </p>
-</td>
+                  </p>
+              </td>
 
             </tr>
             <tr style="height:11pt">
-                <td style="width:34pt;border-left-style:solid;border-left-width:2pt;border-right-style:solid;border-right-width:1pt">
+                <td style="width:34pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
                     </p>
                 </td>
-                <td style="width:182pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
-                    <p class="s4" style="padding-top: 1pt;text-indent: 0pt;text-align: right;">C. GST ${data[0]?.quotation_cgst || ""
-      } %</p>
+                
+                <td style="width:182pt;border-left-style:solid;border-left-width:1pt;padding-top:2px;padding-right:5px;border-right-style:solid;border-right-width:1pt" colspan="2">
+                    <p class="s6" style="padding-top: 1pt;text-indent: 0pt;text-align: right;">C. GST ${data[0]?.quotation_cgst || ""} %</p>
                 </td>
                 <td style="width:66pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
@@ -805,8 +828,9 @@ const PrintInvoice = () => {
                         <br/>
                     </p>
                 </td>
-                <td style="width:87pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:2pt">
-                    <p class="s17" style="padding-top: 1pt;text-indent: 0pt;text-align: right;">${Number(
+                <td style="width:87pt;border-top-style:solid;border-top-width:1pt;padding-top:2px;
+                padding-right:5px;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
+                    <p class="s6" style="padding-top: 1pt;text-indent: 0pt;text-align: right;">${Number(
         data[0]?.cgst || 0
       ).toLocaleString("en-IN", {
         minimumFractionDigits: 2,
@@ -815,14 +839,13 @@ const PrintInvoice = () => {
                 </td>
             </tr>
             <tr style="height:11pt">
-                <td style="width:34pt;border-left-style:solid;border-left-width:2pt;border-right-style:solid;border-right-width:1pt">
+                <td style="width:34pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
                     </p>
                 </td>
-                <td style="width:182pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
-                    <p class="s4" style="text-indent: 0pt;text-align: right;">S. GST ${data[0]?.quotation_sgst || ""
-      } %</p>
+                <td style="width:182pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;padding-top:2px;padding-right:5px;border-right-width:1pt" colspan="2">
+                    <p class="s6" style="text-indent: 0pt;text-align: right;">S. GST${data[0]?.quotation_sgst || ""} %</p>
                 </td>
                 <td style="width:66pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
@@ -839,8 +862,8 @@ const PrintInvoice = () => {
                         <br/>
                     </p>
                 </td>
-                <td style="width:87pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:2pt">
-                    <p class="s17" style="padding-top: 1pt;text-indent: 0pt;text-align: right;">${Number(
+                <td style="width:87pt;border-left-style:solid;border-left-width:1pt;padding-top:2px;padding-right:5px;border-right-style:solid;border-right-width:1pt">
+                    <p class="s6" style="padding-top: 1pt;text-indent: 0pt;text-align: right;">${Number(
         data[0]?.sgst || 0
       ).toLocaleString("en-IN", {
         minimumFractionDigits: 2,
@@ -849,13 +872,13 @@ const PrintInvoice = () => {
                 </td>
             </tr>
             <tr style="height:11pt">
-                <td style="width:34pt;border-left-style:solid;border-left-width:2pt;border-right-style:solid;border-right-width:1pt">
+                <td style="width:34pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
                     </p>
                 </td>
-                <td style="width:182pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
-                    <p class="s4" style="text-indent: 0pt;text-align: right;">I. GST</p>
+                <td style="width:182pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt;padding-top:2px;padding-right:5px;" colspan="2">
+                    <p class="s6" style="text-indent: 0pt;text-align: right;">I. GST</p>
                 </td>
                 <td style="width:66pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
@@ -872,8 +895,8 @@ const PrintInvoice = () => {
                         <br/>
                     </p>
                 </td>
-                <td style="width:87pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:2pt">
-                <p class="s17" style="padding-top: 1pt;text-indent: 0pt;text-align: right;">${Number(
+                <td style="width:87pt;border-left-style:solid;border-left-width:1pt;padding-top:2px;padding-right:5px;border-right-style:solid;border-right-width:1pt">
+                <p class="s6" style="padding-top: 1pt;text-indent: 0pt;text-align: right;">${Number(
         data[0]?.igst || 0
       ).toLocaleString("en-IN", {
         minimumFractionDigits: 2,
@@ -882,13 +905,13 @@ const PrintInvoice = () => {
             </td>
             </tr>
             <tr style="height:11pt">
-                <td style="width:34pt;border-left-style:solid;border-left-width:2pt;border-right-style:solid;border-right-width:1pt">
+                <td style="width:34pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
                     </p>
                 </td>
-                <td style="width:182pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
-                    <p class="s4" style="padding-top: 1pt;text-indent: 0pt;line-height: 8pt;text-align: right;">Round off</p>
+                <td style="width:182pt;border-left-style:solid;border-left-width:1pt;padding-top:2px;padding-right:5px;border-right-style:solid;border-right-width:1pt" colspan="2">
+                    <p class="s6" style="padding-top: 1pt;text-indent: 0pt;line-height: 8pt;text-align: right;">Round off</p>
                 </td>
                 <td style="width:66pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
@@ -905,18 +928,18 @@ const PrintInvoice = () => {
                         <br/>
                     </p>
                 </td>
-                <td style="width:87pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:2pt">
-                <p class="s17" style="padding-top: 1pt;text-indent: 0pt;text-align: right;">0</p>
+                <td style="width:87pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;padding-top:2px;padding-right:5px;border-right-width:1pt">
+                <p class="s6" style="padding-top: 1pt;text-indent: 0pt;text-align: right;">0</p>
             </td>
             </tr>
             <tr style="height:12pt">
-                <td style="width:34pt;border-left-style:solid;border-left-width:2pt;border-right-style:solid;border-right-width:1pt">
+                <td style="width:34pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
                     </p>
                 </td>
-                <td style="width:182pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
-                    <p class="s4" style="padding-top: 1pt;text-indent: 0pt;text-align: right;">Grand Total.</p>
+                <td style="width:182pt;border-left-style:solid;border-left-width:1pt;padding-top:2px;padding-right:5px;border-right-style:solid;border-right-width:1pt" colspan="2">
+                    <p class="s7" style="padding-top: 1pt;text-indent: 0pt;text-align: right;">Grand Total.</p>
                 </td>
                 <td style="width:66pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
@@ -933,24 +956,25 @@ const PrintInvoice = () => {
                         <br/>
                     </p>
                 </td>
-                <td style="width:87pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:2pt">
-                    <p class="s4" style="padding-top: 1pt;text-indent: 0pt;line-height: 7pt;text-align: right;">${Number(
+                <td style="width:87pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;padding-top:2px;
+                padding-right:5px;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                    <p class="s7" style="padding-top: 1pt;text-indent: 0pt;line-height: 7pt;text-align: right;">${Number(
         data[0]?.grand_total || 0
       ).toLocaleString("en-IN", {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       })}
-</p>
+                  </p>
                 </td>
             </tr>
             <tr style="height:12pt">
-                <td style="width:34pt;border-left-style:solid;border-left-width:2pt;border-right-style:solid;border-right-width:1pt">
+                <td style="width:34pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
                     </p>
                 </td>
-                <td style="width:182pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
-                    <p class="s4" style="padding-top: 2pt;text-indent: 0pt;line-height: 8pt;text-align: right;">Paid Amount</p>
+                <td style="width:182pt;border-left-style:solid;border-left-width:1pt;padding-top:2px;padding-right:5px;border-right-style:solid;border-right-width:1pt" colspan="2">
+                    <p class="s7" style="padding-top: 2pt;text-indent: 0pt;line-height: 8pt;text-align: right;">Paid Amount</p>
                 </td>
                 <td style="width:66pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
@@ -967,19 +991,20 @@ const PrintInvoice = () => {
                         <br/>
                     </p>
                 </td>
-                <td style="width:87pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:2pt">
-                <p class="s4" style="padding-top: 1pt;text-indent: 0pt;line-height: 7pt;text-align: right;">${data[0]?.paid_amount || ""
-      }</p>
+                <td style="width:87pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;padding-top:2px;padding-right:5px;
+                border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                <p class="s7" style="padding-top: 1pt;text-indent: 0pt;line-height: 7pt;text-align: right;">${data[0]?.paid_amount || ""}</p>
             </td>
             </tr>
             <tr style="height:11pt">
-                <td style="width:34pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                <td style="width:34pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
                     </p>
                 </td>
-                <td style="width:182pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-                    <p class="s4" style="padding-top: 1pt;text-indent: 0pt;line-height: 8pt;text-align: right;">Remaining Amount.</p>
+                <td style="width:182pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;padding-top:2px;
+                padding-right:5px;padding-bottom-2px;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="2">
+                    <p class="s7" style="padding-top: 1pt;text-indent: 0pt;line-height: 8pt;text-align: right;">Remaining Amount.</p>
                 </td>
                 <td style="width:66pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
@@ -996,127 +1021,115 @@ const PrintInvoice = () => {
                         <br/>
                     </p>
                 </td>
-                <td style="width:87pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:2pt">
-                   <p class="s4" style="padding-top: 1pt;text-indent: 0pt;line-height: 8pt;text-align: right;">
-  ${(
+                <td style="width:87pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;padding-top:1px;
+                padding-right:5px;padding-bottom-5px;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                   <p class="s7" style="padding-top: 1pt;text-indent: 0pt;line-height: 8pt;text-align: right;">
+                    ${(
         Number(data[0]?.grand_total || 0) - Number(data[0]?.paid_amount || 0)
       ).toLocaleString("en-IN", {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       })}
-</p>
+                  </p>
 
                 </td>
             </tr>
             <tr style="height:88pt">
-                <td style="width:484pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:2pt" colspan="6">
+                <td style="width:484pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;
+                border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="7">
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
                     </p>
-
-
-                <div style="text-align: center; width: 100%;">
-    <div style="display: inline-block;">
-        <div style="display: flex; align-items: center; margin-bottom: 5px;">
-            <span style="font-size:12px;font-weight: bold;">Date of Issue:</span>
-            <input type="text" value="${data[0]?.date_issue || ""}" 
-                style="margin-left: 5px; padding: 3px; border: 1px solid #ccc; border-radius: 4px; width: 90px;">
-            <span style="margin-left: 10px;font-size:12px;font-weight: bold;">Time of Issue:</span>
-            <input type="text" value="${data[0]?.time_issue || ""}" 
-                style="margin-left: 5px; padding: 3px; border: 1px solid #ccc; border-radius: 4px; width: 70px;">
-        </div>
-        <div style="display: flex; align-items: center;">
-            <span style="font-size:12px;font-weight: bold;">Date of Removal:</span>
-            <input type="text" value="${data[0]?.date_removal || ""}" 
-                style="margin-left: 5px; padding: 3px; border: 1px solid #ccc; border-radius: 4px; width: 90px;">
-            <span style="margin-left: 10px;font-size:12px;font-weight: bold;">Time of Removal:</span>
-            <input type="text" value="${data[0]?.time_removal || ""}" 
-                style="margin-left: 5px; padding: 3px; border: 1px solid #ccc; border-radius: 4px; width: 70px;">
-        </div>
-       
-                   
-    </div>
-     <p class="s17" style="padding-left: 2pt;padding-right: 84pt;text-indent: -1pt;line-height: 134%;text-align: left;">
-                       Certified that the particulars given above are true and correct and the amount indicated represent the price actually charged and that there  is no few of additional consideration directly or indirectly from buyer.
-                    </p>
-</div>
-
-
-
-                  
+           <div style="text-align: center; width: 100%;">
+           <div style="display: inline-block;">
+            <div style="display: flex; align-items: center; margin-bottom: 5px;">
+                <span style="font-size:15px; font-weight: bold; width: 130px;">Date of Issue     :</span>
+                <input type="text" value="${data[0]?.date_issue || ""}" 
+                    style="margin-left: 5px; padding: 3px; border: 1px solid #ccc; border-radius: 4px; width: 90px;">
+                <span style="margin-left: 10px; font-size:15px; font-weight: bold; width: 130px;">Time of Issue:</span>
+                <input type="text" value="${data[0]?.time_issue || ""}" 
+                    style="margin-left: 5px; padding: 3px; border: 1px solid #ccc; border-radius: 4px; width: 70px;">
+            </div>
+            <div style="display: flex; align-items: center;">
+                <span style="font-size:15px; font-weight: bold; width: 130px;">Date of Removal:</span>
+                <input type="text" value="${data[0]?.date_removal || ""}" 
+                    style="margin-left: 5px; padding: 3px; border: 1px solid #ccc; border-radius: 4px; width: 90px;">
+                <span style="margin-left: 10px; font-size:15px; font-weight: bold; width: 130px;">Time of Removal:</span>
+                <input type="text" value="${data[0]?.time_removal || ""}" 
+                    style="margin-left: 5px; padding: 3px; border: 1px solid #ccc; border-radius: 4px; width: 70px;">
+            </div>
+          </div>
+              <p class="s7" style="padding-left: 2pt;padding-top:5px;padding-right: 84pt;text-indent: -1pt;line-height: 134%;text-align: left;">
+                  Certified that the particulars given above are true and correct and the amount indicated represent the price actually charged and that there  is no few of additional consideration directly or indirectly from buyer.
+              </p>
+          </div> 
                 </td>
             </tr>
             <tr style="height:11pt">
-                <td style="width:216pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt" colspan="2" rowspan="2">
-                  <p class="s4" style="text-indent: 0pt;text-align: left;">
-    RUPEES <span style=" color: #F00;">${numberToWordsIndian(Number(data[0]?.grand_total)) || ""
-      } </span> Only
-</p>
+                <td style="width:216pt;border-top-style:solid;border-top-width:1pt;padding-top:2px;padding-left:2px;border-left-style:solid;
+                border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="4" rowspan="2">
+                  <p class="s7" style="text-indent: 0pt;text-align: left;">
+                      RUPEES <span style=" color: #F00;">${numberToWordsIndian(Number(data[0]?.grand_total)) || ""} </span> Only
+                  </p>
                 </td>
-                <td style="width:93pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:1pt" colspan="2">
-                    <p class="s4" style="padding-top: 1pt;text-indent: 0pt;line-height: 8pt;text-align: left;"> C. GST ${data[0]?.quotation_cgst || ""
-      } % -</p>
+                <td style="width:93pt;border-top-style:solid;border-top-width:1pt;border-left-style:padding-top:2px;padding-left:2px;solid;
+                border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt" colspan="2">
+                    <p class="s7" style="padding-top: 1pt;text-indent: 0pt;line-height: 8pt;text-align: left;"> C. GST ${data[0]?.quotation_cgst || ""} % -</p>
                 </td>
-                <td style="width:33pt;border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:1pt">
-                    <p class="s4" style="padding-top: 1pt;text-indent: 0pt;line-height: 8pt;text-align: center;">${Number(
-        data[0]?.cgst || 0
-      ).toLocaleString("en-IN")}</p>
-                </td>
-                <td style="width:142pt;border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:2pt">
-                    <p style="text-indent: 0pt;text-align: left;">
-                        <br/>
-                    </p>
+               
+                <td style="width:142pt;border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;padding-top:2px;padding-left:2px;
+                border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">                  
+                      <p class="s7" style="padding-top: 1pt;text-indent: 0pt;line-height: 8pt;text-align: center;">${Number(data[0]?.cgst || 0).toLocaleString("en-IN")}</p>
                 </td>
             </tr>
             <tr style="height:12pt">
-                <td style="width:93pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt" colspan="2">
-                    <p class="s4" style="padding-top: 1pt;text-indent: 0pt;line-height: 8pt;text-align: left;"> S.GST ${data[0]?.quotation_sgst || ""
-      } % -</p>
-                </td>
-                <td style="width:33pt;border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:2pt">
-                    <p class="s4" style="padding-top: 1pt;text-indent: 0pt;line-height: 8pt;text-align: center;">${Number(
-        data[0]?.sgst || 0
-      ).toLocaleString("en-IN")}</p>
-                </td>
-                <td style="width:142pt;border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt">
-                    <p style="text-indent: 0pt;text-align: left;">
-                        <br/>
-                    </p>
+                <td style="width:93pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;padding-top:2px;padding-left:2px;
+                border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt" colspan="2">
+                    <p class="s7" style="padding-top: 1pt;text-indent: 0pt;line-height: 8pt;text-align: left;"> S. GST ${data[0]?.quotation_sgst || ""} % -</p>
+                </td>               
+                <td style="width:142pt;border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                    <p class="s7" style="padding-top: 1pt;text-indent: 0pt;line-height: 8pt;text-align: center;">${Number(data[0]?.sgst || 0).toLocaleString("en-IN")}</p>
                 </td>
             </tr>
             <tr style="height:11pt">
-                <td style="width:216pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:2pt" colspan="2" rowspan="2">
-                    <p class="s20" style="text-indent: 0pt;line-height: 6pt;text-align: left;">I/We hereby certify that my/our registration certificate under the GST Act., 2017</p>
-                    <p class="s20" style="padding-top: 1pt;padding-right: 3pt;text-indent: 0pt;line-height: 114%;text-align: left;">is in force on the date on which the sale of the goods specified in filing of return and the due tax, if any payable on the sale has been paid or shall be paid. &quot;been effected by me/us and it shallbe accounted for in the turnover of sales while invoice is made by me/us and that the transaction of sale covered by this tax invoice has this tax</p>
+                <td style="width:216pt;border-top-style:solid;border-top-width:1pt;padding-top:2px;padding-left:2px;border-left-style:solid;
+                border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="4" rowspan="2">
+                    <p class="s14" style="text-indent: 0pt;line-height: 10pt;text-align: left;">I/We hereby certify that my/our registration certificate under the GST Act., 2017</p>
+                    <p class="s14" style="padding-top: 5pt;padding-right: 3pt;text-indent: 0pt;line-height: 114%;text-align: left;">is in force on the date on which the sale of the goods specified in filing of return and the due tax, if any payable on the sale has been paid or shall be paid. &quot;been effected by me/us and it shallbe accounted for in the turnover of sales while invoice is made by me/us and that the transaction of sale covered by this tax invoice has this tax</p>
                 </td>
-                <td style="width:126pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:2pt" colspan="2">
-                    <p class="s4" style="padding-left: 32pt;text-indent: 0pt;line-height: 8pt;text-align: left;">Pre Authenticated</p>
+                <td style="width:126pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;padding-top:5px;
+                border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="2">
+                    <p class="s14" style="padding-left: 32pt;text-indent: 0pt;line-height: 8pt;text-align: left;">Pre Authenticated</p>
                 </td>
-                <td style="width:142pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:2pt" colspan="2">
-                    <p class="s4" style="padding-left: 34pt;text-indent: 0pt;line-height: 8pt;text-align: left;">Authorised Signetory</p>
-                </td>
-            </tr>
-            <tr style="height:44pt">
-                <td style="width:126pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt" colspan="2" rowspan="2">
-                    <p style="text-indent: 0pt;text-align: left;">
-                        <br/>
-                    </p>
-                </td>
-                <td style="width:142pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt" colspan="2" rowspan="2">
-                    <p style="text-indent: 0pt;text-align: left;">
-                        <br/>
-                    </p>
+                <td style="width:142pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;padding-top:5px;border-left-width:1pt;
+                border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="1">
+                    <p class="s14" style="padding-left: 34pt;text-indent: 0pt;line-height: 8pt;text-align: left;">Authorised Signetory</p>
                 </td>
             </tr>
             <tr style="height:44pt">
-                <td style="width:216pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt" colspan="2">
-                    <p class="s21" style="padding-right: 9pt;text-indent: 0pt;line-height: 115%;text-align: justify;">
-                        Terms &amp;Conditions: <span class="s20">Intrest will be recovered@24%p.a.on overdue unpaid bills •No claims regarding the quantity,quality,damages or shortages will be given unless the same notified at the time of receiveing goods</span>
+                <td style="width:126pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;
+                border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="2" rowspan="2">
+                    <p style="text-indent: 0pt;text-align: left;">
+                        <br/>
+                    </p>
+                </td>
+                <td style="width:142pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;
+                border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="1" rowspan="2">
+                    <p style="text-indent: 0pt;text-align: left;">
+                        <br/>
+                    </p>
+                </td>
+            </tr>
+            <tr style="height:50pt">
+                <td style="width:216pt;border-top-style:solid;border-top-width:1pt;padding-top:2px;padding-left:2px;border-left-style:solid;border-left-width:1pt;
+                border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="4">
+                    <p class="s14" style="padding-right: 9pt;text-indent: 0pt;line-height: 115%;text-align: justify;">
+                        Terms &amp;Conditions: <span class="s14">Intrest will be recovered@24%p.a.on overdue unpaid bills •No claims regarding the quantity,quality,damages or shortages will be given unless the same notified at the time of receiveing goods</span>
                     </p>
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
                     </p>
-                    <p class="s21" style="text-indent: 0pt;line-height: 7pt;text-align: justify;">SUBJECT TO PUNE JURISDICTION.</p>
+                    <p class="s14" style="text-indent: 0pt;line-height: 7pt;text-align: justify;padding-bottom:2px;padding-left:2px;">SUBJECT TO PUNE JURISDICTION.</p>
                 </td>
             </tr>
         </table>
@@ -1339,7 +1352,7 @@ const PrintInvoice = () => {
                       id="invoicedate"
                       label="Invoice Date "
                       name="invoicedate"
-                      value={data[0]?.inv_date}
+                      value={formatDate(data[0]?.inv_date)}
                       InputLabelProps={{
                         shrink: true,
                       }}
