@@ -191,7 +191,7 @@ export default function AddGRN() {
                         PO Ref
                       </TableCell>
                       <TableCell className="MuiTableHead-root">
-                        PO Date
+                        P O Date
                       </TableCell>
                       <TableCell className="MuiTableHead-root">
                         Customer

@@ -561,7 +561,7 @@ const EditOrder = () => {
                 <TextField
                   fullWidth
                   id="ponum"
-                  label="PO No (Optional)"
+                  label="P O No (Optional)"
                   name="ponum"
                   value={data.ponum}
                   onChange={handleEdit}
@@ -579,8 +579,8 @@ const EditOrder = () => {
                     let lines = e.target.value.split("\n");
 
                     // Limit to max 4 lines
-                    if (lines.length > 4) {
-                      lines = lines.slice(0, 4);
+                    if (lines.length > 5) {
+                      lines = lines.slice(0, 5);
                     }
 
                     // Limit each line to 30 characters
@@ -593,9 +593,9 @@ const EditOrder = () => {
                       }
                     });
                   }}
-                  minRows={4}
-                  maxRows={4}
-                  helperText="Maximum 4 lines allowed, with up to 30 characters per line."
+                  minRows={5}
+                  maxRows={5}
+                  helperText="Maximum 5 lines allowed, with up to 30 characters per line."
                   FormHelperTextProps={{
                     style: { color: "red" },
                   }}
@@ -603,14 +603,14 @@ const EditOrder = () => {
                     shrink: true,
                   }}
                   inputProps={{
-                    maxLength: 123, // 30 * 4 + 3 newlines = safeguard
+                    maxLength: 154, // 30 * 4 + 3 newlines = safeguard
                   }}
                 />
               </Grid>
               <Grid className="date-pick-wrp" item xs={12} sm={6}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
-                    label="PO Date"
+                    label="P O Date"
                     name="qdate"
                     value={data.podate ? dayjs(data.podate) : null}
                     onChange={handleDate}
@@ -641,7 +641,7 @@ const EditOrder = () => {
                 <Stack direction="row" alignItems="center" spacing={2}>
                   <TextField
                     fullWidth
-                    label="PO File"
+                    label="P O File"
                     value={selectedFile || "No file is selected"}
                     InputProps={{
                       readOnly: true,

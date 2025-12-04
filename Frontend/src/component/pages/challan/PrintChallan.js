@@ -191,7 +191,7 @@ const PrintChallan = () => {
       
               <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
       
-              <title style="display:none;">Chellan</title>
+              <title style="display:none;">.</title>
       
               <meta name="author" content="STATIC ELECTRIC"/>
       
@@ -432,7 +432,7 @@ const PrintChallan = () => {
                               <span>&nbsp;${data[0]?.challan_no}</span>
                           </span>
                           <br/>
-                          <p class="s2">&nbsp;P.O.NO: ${po_no}</p>
+                          <p class="s2">&nbsp;P O NO: ${po_no}</p>
                       </td>
       
                      
@@ -476,12 +476,11 @@ const PrintChallan = () => {
                          <p class="s2" style="padding-left: 1pt;text-indent: 0pt;line-height: 8pt;text-align: left;text-decoration: underline;margin-bottom: 6px; padding-top:3px;  font-size:14px;">Delivery At:-</p>
                           <p class="s4" style="padding-left: 1pt;text-indent: 0pt;line-height: 11pt;text-align: left; margin-top:"10px;font-size:16px;">${data[0]?.delivary_at_name}</p>        
                           <p class="s4" style="padding-top: 1pt; padding-left: 1pt; text-indent: 0pt; line-height: 113%; text-align: left;font-size:14px;">
-                            ${data[0]?.delivery_address ? data[0].delivery_address.split('\n').join(',<br>') : ""}
+                            ${data[0]?.delivery_address ? data[0].delivery_address.split('\n').join('<br>') : ""}
                           </p>
                       </td>
       
                       <td style="width:43pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="4">
-                          <p class="s2" style="padding-left: 1pt;text-indent: 0pt;line-height: 8pt;text-align: left;text-decoration: underline; font-size:14px; padding-top:2px;">Order Acceptance Comment:-</p>
                           <p class="s4" style="padding-left: 1pt;text-indent: 0pt;line-height: 11pt;text-align: left; padding-top:8px;">
                             ${(data[0]?.OAcomment ?? "").split("\n").join("<br style='margin-top:4px'/>")}
                           </p>              
@@ -611,7 +610,7 @@ const PrintChallan = () => {
       
                   <tr style="height:117pt">      
                       <td style="width:281pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="2"> 
-                          <p class="s5" style="padding-left: 1pt;padding-right: 16pt;text-indent: 0pt;line-height: 157%;text-align: left;font-size:12px;">1) The item which is despatched to you directly or through a third party, the company reserves the right to take back the item against any delay/non payment.</p>
+                          <p class="s5" style="padding-left: 1pt;padding-right: 16pt;text-indent: 0pt;line-height: 157%;text-align: left;font-size:12px;">1) The item which is dispatched to you directly or through a third party, the company reserves the right to take back the item against any delay/non payment.</p>
                           <p class="s5" style="padding-top: 1pt;padding-left: 3pt;text-indent: 0pt;text-align: left;font-size:14px;"></p>      
                           <p style="text-indent: 0pt;text-align: left;">      
                               <br/>      
@@ -767,7 +766,7 @@ const PrintChallan = () => {
                 <TextField
                   fullWidth
                   id="dcno"
-                  label="PO NO"
+                  label="P O NO"
                   labelprope
                   name="po_no"
                   value={po_no}
@@ -783,7 +782,7 @@ const PrintChallan = () => {
                   <TextField
                     fullWidth
                     id="date"
-                    label="PO Date"
+                    label="P O Date"
                     name="date"
 
                     value={formatDate(data[0]?.po_date)}

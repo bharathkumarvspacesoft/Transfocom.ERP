@@ -289,7 +289,7 @@ const OrderAccPrint = () => {
                 <td style="width:238pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="3">
                     <p class="s2" style="padding-top: 2pt;padding-left: 2pt;text-indent: 0pt;line-height: 9pt;text-align: left;">GST NO:-&nbsp;&nbsp;${data.gstno}</p>
                 </td>    
-                  <td style="width:238pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="3">
+                  <td style="width:238pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="3" rowspan="2">
                       <p class="s2" style="padding-top: 2pt;padding-left: 2pt;text-indent: 0pt;line-height: 9pt;text-align: left;">  ${(data.comment ?? '').replace(/\n/g, '<br>')}&nbsp;&nbsp;</p>
                   </td>
                             
@@ -300,11 +300,6 @@ const OrderAccPrint = () => {
                     <p class="s2" style="padding-left: 2pt;text-indent: 0pt;line-height: 10pt;text-align: left;">
                 ${(data.consumer_address || "").replace(/\n/g, "<br>")}           
          </p>
-                </td>
-                 <td style="width:238pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="3">
-                    <p class="s2" style="padding-left: 2pt;text-indent: 0pt;line-height: 10pt;text-align: left;">
-                     
-                    </p>
                 </td>
                 
                 

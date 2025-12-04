@@ -155,37 +155,37 @@ const PrintInvoice = () => {
   function numberToWordsIndian(num) {
     const ones = [
       "",
-      "One",
-      "Two",
-      "Three",
-      "Four",
-      "Five",
-      "Six",
-      "Seven",
-      "Eight",
-      "Nine",
-      "Ten",
-      "Eleven",
-      "Twelve",
-      "Thirteen",
-      "Fourteen",
-      "Fifteen",
-      "Sixteen",
-      "Seventeen",
-      "Eighteen",
-      "Nineteen",
+      "ONE",
+      "TWO",
+      "THREE",
+      "FOUR",
+      "FIVE",
+      "SIX",
+      "SEVEN",
+      "EIGHT",
+      "NINE",
+      "TEN",
+      "ELEVEN",
+      "TWELVE",
+      "THIRTEEN",
+      "FOURTEEN",
+      "FIFTEEN",
+      "SIXTEEN",
+      "SEVENTEEN",
+      "EIGHTEEN",
+      "NINETEEN",
     ];
     const tens = [
       "",
       "",
-      "Twenty",
-      "Thirty",
-      "Forty",
-      "Fifty",
-      "Sixty",
-      "Seventy",
-      "Eighty",
-      "Ninety",
+      "TWENTY",
+      "THIRTY",
+      "FORTY",
+      "FIFTY",
+      "SIXTY",
+      "SEVENTY",
+      "EIGHTY",
+      "NINETY",
     ];
 
     function convertToWords(n) {
@@ -195,24 +195,24 @@ const PrintInvoice = () => {
       if (n < 1000)
         return (
           ones[Math.floor(n / 100)] +
-          " Hundred" +
+          " HUNDRED" +
           (n % 100 ? " " + convertToWords(n % 100) : "")
         );
       if (n < 100000)
         return (
           convertToWords(Math.floor(n / 1000)) +
-          " Thousand" +
+          " THOUSAND" +
           (n % 1000 ? " " + convertToWords(n % 1000) : "")
         );
       if (n < 10000000)
         return (
           convertToWords(Math.floor(n / 100000)) +
-          " Lakh" +
+          " LAKH" +
           (n % 100000 ? " " + convertToWords(n % 100000) : "")
         );
       return (
         convertToWords(Math.floor(n / 10000000)) +
-        " Crore" +
+        " CORE" +
         (n % 10000000 ? " " + convertToWords(n % 10000000) : "")
       );
     }
@@ -234,7 +234,7 @@ const PrintInvoice = () => {
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <title>Invoice Print </title>
+        <title>. </title>
         <meta name="author" content="STATIC ELECTRIC"/>
         <style type="text/css">
             * {
@@ -434,15 +434,15 @@ const PrintInvoice = () => {
     </head>
     <body>
         <p class="s1" style="padding-top: 3pt;text-indent: 0pt;text-align:center;">STATIC ELECTRICALS PUNE</p>
-        <p class="s2" style="padding-top: 2pt;text-indent: 0pt;text-align: center;">Manufacturers and Repairers of Power and Distribution Transformers.</p>
+        <p class="s2" style="padding-top: 2pt;text-indent: 0pt;text-align: center;"> Manufacturer and Repairer of Power and Distribution Transformers.</p>
         <p style="text-indent: 0pt;text-align: left;"/>
         <p style="text-indent: 0pt;text-align: left;"/>
         <p style="text-indent: 0pt;text-align: left;"/>
-        <p style="padding-top: 1pt;text-indent: 0pt;text-align: center;">S.No.229/2/2, Behind Wipro Phase-I, Hinjewadi, Tal-Mulshi, Dist-Pune, Pune-411057.</p>
+        <p style="padding-top: 1pt;text-indent: 0pt;text-align: center;">S.No.229/2/2, Behind Wipro Phase-I, Hinjawadi, Tal-Mulshi, Dist-Pune, Pune-411057.</p>
         <p style="text-indent: 0pt;text-align: left;">
             <br/>
         </p>
-        <table style="border-collapse:collapse;margin-left:0.965pt" cellspacing="0">
+        <table style="border-collapse:collapse;" cellspacing="0">
             <tr style="height:25pt">
                 <td style="width:484pt;border-top-style:solid;border-top-width:2pt;padding-top:10px;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1.5pt" colspan="8">
                     <p class="s3" style="padding-left: 204pt;padding-right: 203pt;text-indent: 0pt;line-height: 11pt;text-align: center;">TAX INVOICE</p>
@@ -477,49 +477,56 @@ const PrintInvoice = () => {
                         Challan No :${data[0]?.challan_no || ""} 
                     </p>
                     <p class="s7" style="padding-top: 2pt;text-indent: 0pt;text-align: left;">
-                        Date:<span style=" color: #F00;">${data[0]?.chdate || ""}</span>
+              Date:<span style="color:#F00;">
+                ${data[0]?.chdate ? data[0].chdate.replace(/-/g, "/") : ""}
+              </span>
                     </p>
                 </td>
             </tr>
             <tr style="height:11pt">
                 <td style="width:216pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="3" bgcolor="#BFBFBF">
-                    <p class="s7" style="text-indent: 0pt;line-height: 9pt;text-align: left; padding-top:5px;padding-left:2px;">Name &amp;Address of the Buyer:</p>
+                    <p class="s7" style="text-indent: 0pt;line-height: 9pt;text-align: left; padding-top:5px;padding-left:2px;"><strong>Name &amp;Address of the Buyer:</strong></p>
                 </td>
                 <td style="width:268pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:0.5pt" colspan="4" bgcolor="#BFBFBF">
-                    <p class="s7" style="text-indent: 0pt;line-height: 9pt;text-align: left; padding-top:5px;padding-left:2px;">Name &amp;Address of the Consignee/ Shipped To :</p>
+                    <p class="s7" style="text-indent: 0pt;line-height: 9pt;text-align: left; padding:5px;padding-left:2px;"><strong> Name &amp;Address of the Consignee/ Shipped To :</strong></p>
                 </td>
             </tr>
-            <tr style="height:44pt">
-                <td style="width:216pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;
-                    border-right-style:solid;border-right-width:1pt;padding-left:2px;" colspan="3">
-                    <p class="s7" style="padding-top: 1pt;padding-right: 81pt;
-                    text-indent: 0pt;line-height: 125%;text-align: left;"> ${data[0]?.buyername || ""} </p>
-                      <p class="s7" style="text-indent: 0pt; line-height: 8pt;
-                      text-align: left;">${data[0]?.buyer_addr ? data[0].buyer_addr.split("\n").join(",<br>") : ""}</p>
-
+           <tr style="height:74pt">
+                <td style="width:268pt;border-top:1pt solid;border-left:1pt solid;
+                  border-bottom:1pt solid;border-right:1pt solid;padding:2px 2px 10px 2px;" colspan="3">
+                  <p class="s7" style="margin:0; padding:4pt 0 4pt 0; text-indent:0pt; line-height:10pt; text-align:left;">
+                    ${data[0]?.buyername || ""}<br/>
+                    ${(() => {
+        let lines = (data[0]?.buyer_addr || "").split("\n");
+        let addressHtml = lines.join("<br/>");
+        if (lines.length < 5) {
+          addressHtml += "<br/>".repeat(5 - lines.length);
+        }
+        return addressHtml;
+      })()}
+                  </p>
                 </td>
-                    <td style="width:268pt;border-left-style:solid;border-left-width:1pt; 
-                       border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:0.5pt;padding-left:2px;" colspan="4">
-                      <p class="s7" style="padding-top: 1pt;padding-right: 155pt;text-indent: 0pt; 
-                        line-height: 125%;text-align: left;"> ${data[0]?.consumer || ""}
-                      </p>
-                      <p class="s7" style="text-indent: 0pt; text-align: left;">
-                          ${data[0]?.delivery_address
-        ? data[0].delivery_address.split("\n").join(",<br>")
+
+                <td style="width:268pt;border-top:1pt solid;border-left:1pt solid;
+                  border-bottom:1pt solid;border-right:1pt solid;padding:2px 2px 10px 2px;" colspan="4">
+                  <p class="s7" style="margin:0; padding:4pt 0 4pt 0; text-indent:0pt; line-height:10pt; text-align:left;">
+                    ${data[0]?.consumer || ""}<br/>
+                    ${data[0]?.delivery_address
+        ? data[0].delivery_address.split("\n").join("<br/>")
         : ""
       }
-                        </p>
-                    <p class="s12" style="padding-top: 2pt;text-indent: 0pt;line-height: 8pt;text-align: left;"></p>
+                  </p>
                 </td>
-            </tr>
-             <tr style="height:35pt">
+              </tr>
+
+             <tr style="height:11pt">
                <td style="width:216pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;
                border-right-width:1pt;padding:2px 2px" colspan="7">
                     <p class="s7" style="text-indent: 0pt;line-height: 9pt;text-align: left;">
-                      <span class="s7">Order Acceptance Comment:-</span>
+                      <span class="s7"></span>
                     </p>
-                    <p class="s4" style="padding-top: 1pt;padding-right: 103pt;text-indent: 0pt;line-height: 133%;text-align: left;">
-                    ${(data[0]?.OAcomment ?? "").split("\n").join(",<br>")}
+                    <p class="s4" style="padding-top: 1pt;padding-right: 103pt;text-indent: 0pt;line-height: 133%;text-align: left;font-size:12px">
+                    ${(data[0]?.comment ?? "").split("\n").join(",<br>")}
 
                     </p>
                    
@@ -570,7 +577,9 @@ const PrintInvoice = () => {
 
              
                 <td style="width:142pt;border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt;padding:2px">
-                    <p class="s7" style="padding-left: 54pt;padding-right: 4pt;text-indent: 0pt;text-align: center;">Date.${formatDate(data[0]?.po_date) || ""}</p>
+                  <p class="s7" style="padding-left: 54pt;padding-right: 4pt;text-indent: 0pt;text-align: center;">
+                              ${data[0]?.po_date ? `Date.${formatDate(data[0].po_date)}` : ""}
+                            </p>
                     
                 </td>
             </tr>
@@ -717,7 +726,7 @@ const PrintInvoice = () => {
                     </p>
                 </td>
                 <td style="width:60pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
-                    <p class="s7" style="padding-top: 1pt;padding-left: 22pt;padding-right: 21pt;text-indent: 0pt;text-align: center;">No.</p>
+                    <p class="s7" style="padding-top: 1pt;padding-left: 22pt;padding-right: 21pt;text-indent: 0pt;text-align: center;"> ${data[0]?.inv_det_qty == 1 ? "No." : "Nos."}</p>
                 </td>
                 <td style="width:55pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
@@ -730,7 +739,7 @@ const PrintInvoice = () => {
                     </p>
                 </td>
             </tr>
-            <tr style="height:103pt">
+            <tr style="height:43pt">
                 <td style="width:34pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
@@ -845,7 +854,7 @@ const PrintInvoice = () => {
                     </p>
                 </td>
                 <td style="width:182pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;padding-top:2px;padding-right:5px;border-right-width:1pt" colspan="2">
-                    <p class="s6" style="text-indent: 0pt;text-align: right;">S. GST${data[0]?.quotation_sgst || ""} %</p>
+                    <p class="s6" style="text-indent: 0pt;text-align: right;">S. GST ${data[0]?.quotation_sgst || ""} %</p>
                 </td>
                 <td style="width:66pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
@@ -878,7 +887,7 @@ const PrintInvoice = () => {
                     </p>
                 </td>
                 <td style="width:182pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt;padding-top:2px;padding-right:5px;" colspan="2">
-                    <p class="s6" style="text-indent: 0pt;text-align: right;">I. GST</p>
+                    <p class="s6" style="text-indent: 0pt;text-align: right;">I. GST  ${Number(data[0]?.quotation_cgst || 0) + Number(data[0]?.quotation_sgst || 0)} %</p>
                 </td>
                 <td style="width:66pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
@@ -993,7 +1002,10 @@ const PrintInvoice = () => {
                 </td>
                 <td style="width:87pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;padding-top:2px;padding-right:5px;
                 border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-                <p class="s7" style="padding-top: 1pt;text-indent: 0pt;line-height: 7pt;text-align: right;">${data[0]?.paid_amount || ""}</p>
+                <p class="s7" style="padding-top: 1pt;text-indent: 0pt;line-height: 7pt;text-align: right;">${data[0]?.paid_amount
+        ? Number(data[0].paid_amount).toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+        : ""}
+</p>
             </td>
             </tr>
             <tr style="height:11pt">
@@ -1067,13 +1079,13 @@ const PrintInvoice = () => {
             </tr>
             <tr style="height:11pt">
                 <td style="width:216pt;border-top-style:solid;border-top-width:1pt;padding-top:2px;padding-left:2px;border-left-style:solid;
-                border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="4" rowspan="2">
+                border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="3" rowspan="3">
                   <p class="s7" style="text-indent: 0pt;text-align: left;">
-                      RUPEES <span style=" color: #F00;">${numberToWordsIndian(Number(data[0]?.grand_total)) || ""} </span> Only
+                      RUPEES <span style=" color: #F00;">${numberToWordsIndian(Number(data[0]?.grand_total)) || ""} </span> ONLY
                   </p>
                 </td>
                 <td style="width:93pt;border-top-style:solid;border-top-width:1pt;border-left-style:padding-top:2px;padding-left:2px;solid;
-                border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt" colspan="2">
+                border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt" colspan="3">
                     <p class="s7" style="padding-top: 1pt;text-indent: 0pt;line-height: 8pt;text-align: left;"> C. GST ${data[0]?.quotation_cgst || ""} % -</p>
                 </td>
                
@@ -1084,26 +1096,35 @@ const PrintInvoice = () => {
             </tr>
             <tr style="height:12pt">
                 <td style="width:93pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;padding-top:2px;padding-left:2px;
-                border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt" colspan="2">
+                border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt" colspan="3">
                     <p class="s7" style="padding-top: 1pt;text-indent: 0pt;line-height: 8pt;text-align: left;"> S. GST ${data[0]?.quotation_sgst || ""} % -</p>
                 </td>               
                 <td style="width:142pt;border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p class="s7" style="padding-top: 1pt;text-indent: 0pt;line-height: 8pt;text-align: center;">${Number(data[0]?.sgst || 0).toLocaleString("en-IN")}</p>
                 </td>
             </tr>
+              <tr style="height:12pt">
+                <td style="width:93pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;padding-top:2px;padding-left:2px;
+                border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt" colspan="3">
+                    <p class="s7" style="padding-top: 1pt;text-indent: 0pt;line-height: 8pt;text-align: left;"> I. GST ${Number(data[0]?.quotation_sgst || 0) + Number(data[0]?.quotation_cgst || 0)} % -</p>
+                </td>               
+                <td style="width:142pt;border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                    <p class="s7" style="padding-top: 1pt;text-indent: 0pt;line-height: 8pt;text-align: center;">${Number(data[0]?.igst || 0).toLocaleString("en-IN")}</p>
+                </td>
+            </tr>
             <tr style="height:11pt">
                 <td style="width:216pt;border-top-style:solid;border-top-width:1pt;padding-top:2px;padding-left:2px;border-left-style:solid;
-                border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="4" rowspan="2">
-                    <p class="s14" style="text-indent: 0pt;line-height: 10pt;text-align: left;">I/We hereby certify that my/our registration certificate under the GST Act., 2017</p>
-                    <p class="s14" style="padding-top: 5pt;padding-right: 3pt;text-indent: 0pt;line-height: 114%;text-align: left;">is in force on the date on which the sale of the goods specified in filing of return and the due tax, if any payable on the sale has been paid or shall be paid. &quot;been effected by me/us and it shallbe accounted for in the turnover of sales while invoice is made by me/us and that the transaction of sale covered by this tax invoice has this tax</p>
+                border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="3" rowspan="2">
+                    <p class="s14" style="text-indent: 0pt;line-height: 10pt;text-align: left; font-size:10px">I/We hereby certify that my/our registration certificate under the GST Act., 2017</p>
+                    <p class="s14" style="padding-top: 5pt;padding-right: 3pt;text-indent: 0pt;line-height: 114%;text-align: left; font-size:10px">is in force on the date on which the sale of the goods specified in filing of return and the due tax, if any payable on the sale has been paid or shall be paid. &quot;been effected by me/us and it shallbe accounted for in the turnover of sales while invoice is made by me/us and that the transaction of sale covered by this tax invoice has this tax</p>
                 </td>
                 <td style="width:126pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;padding-top:5px;
                 border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="2">
-                    <p class="s14" style="padding-left: 32pt;text-indent: 0pt;line-height: 8pt;text-align: left;">Pre Authenticated</p>
+                    <p class="s14" style="padding: 2pt;text-indent: 0pt;line-height: 8pt;text-align: left;">Pre Authenticated</p>
                 </td>
                 <td style="width:142pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;padding-top:5px;border-left-width:1pt;
-                border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="1">
-                    <p class="s14" style="padding-left: 34pt;text-indent: 0pt;line-height: 8pt;text-align: left;">Authorised Signetory</p>
+                border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="2">
+                    <p class="s14" style="padding: 2pt;text-indent: 0pt;line-height: 8pt;text-align: left;">Authorised Signetory</p>
                 </td>
             </tr>
             <tr style="height:44pt">
@@ -1114,7 +1135,7 @@ const PrintInvoice = () => {
                     </p>
                 </td>
                 <td style="width:142pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;
-                border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="1" rowspan="2">
+                border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="2" rowspan="2">
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
                     </p>
@@ -1122,9 +1143,9 @@ const PrintInvoice = () => {
             </tr>
             <tr style="height:50pt">
                 <td style="width:216pt;border-top-style:solid;border-top-width:1pt;padding-top:2px;padding-left:2px;border-left-style:solid;border-left-width:1pt;
-                border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="4">
-                    <p class="s14" style="padding-right: 9pt;text-indent: 0pt;line-height: 115%;text-align: justify;">
-                        Terms &amp;Conditions: <span class="s14">Intrest will be recovered@24%p.a.on overdue unpaid bills •No claims regarding the quantity,quality,damages or shortages will be given unless the same notified at the time of receiveing goods</span>
+                border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="3">
+                    <p class="s14" style="padding-right: 9pt;text-indent: 0pt;line-height: 115%;text-align: justify; font-size:10px">
+                        Terms &amp;Conditions: <span class="s14" style="font-size:10px">Intrest will be recovered@24%p.a.on overdue unpaid bills •No claims regarding the quantity,quality,damages or shortages will be given unless the same notified at the time of receiveing goods</span>
                     </p>
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
@@ -1469,7 +1490,7 @@ const PrintInvoice = () => {
                 sm={3}
                 style={{ marginTop: -35, marginLeft: 200 }}
               >
-                <Link to="/quotation" style={{ textDecoration: "none" }}>
+                <Link to="/invoice" style={{ textDecoration: "none" }}>
                   <Button variant="contained" color="error">
                     Cancel
                   </Button>

@@ -6772,7 +6772,7 @@ router.post("/addQuotation", (req, res) => {
         deliveryperiod,
         guranteeperiod,
         validityofquote,
-        (taxes?.sgst || 0) + (taxes?.cgst || 0),
+        (Number(taxes?.sgst || 0)) + Number((taxes?.cgst || 0)),
         termscondition,
         uid,
         status,
@@ -6945,35 +6945,83 @@ router.delete("/deleteQuotation/:id", (req, res) => {
 
 //<----------------------------------------------------------------------------------------->
 //<----------------------------fetch  for edit quotation----------------------------------->
+// router.get("/editquotation/:id", (req, res) => {
+//   const id = req.params.id;
+
+//   const q =
+//     "SELECT q.*, e.`custname`, qt.cgst, qt.cgsttype," +
+//     "qt.sgst, qt.sgsttype FROM quotation q " +
+//     "INNER JOIN enquiry_master e ON q.eid = e.id " +
+//     "LEFT JOIN quot_taxes qt ON qt.qid = q.qid " +
+//     "WHERE q.qid = ?";
+//   pool.query(q, [id], (err, rows) => {
+//     if (err) {
+//       return res.json(err);
+//     }
+
+//     if (rows.length === 0) {
+//       return res.status(404).json({ message: "Quotation not found" });
+//     }
+//     console.log(rows);
+
+
+//     return res.json({
+//       ...rows[0],
+//       taxes: {
+//         cgst: +rows[0].cgst || 0,
+//         sgst: +rows[0].sgst || 0,
+//         cgsttype: rows[0].cgsttype,
+//         sgsttype: rows[0].sgsttype,
+//       },
+//     });
+//   });
+// });
+
 router.get("/editquotation/:id", (req, res) => {
   const id = req.params.id;
 
-  const q =
-    "SELECT q.*, e.`custname`, qt.cgst, qt.cgsttype," +
-    "qt.sgst, qt.sgsttype FROM quotation q " +
-    "INNER JOIN enquiry_master e ON q.eid = e.id " +
-    "LEFT JOIN quot_taxes qt ON qt.qid = q.qid " +
-    "WHERE q.qid = ?";
+  const q = `
+    SELECT q.*, e.custname,
+      qt.cgst, qt.cgsttype,
+      qt.sgst, qt.sgsttype
+    FROM quotation q
+    INNER JOIN enquiry_master e ON q.eid = e.id
+    LEFT JOIN quot_taxes qt ON qt.id = (
+        SELECT id FROM quot_taxes 
+        WHERE qid = q.qid 
+        ORDER BY id DESC LIMIT 1
+    )
+    WHERE q.qid = ?
+    LIMIT 1
+  `;
+
   pool.query(q, [id], (err, rows) => {
     if (err) {
-      return res.json(err);
+      console.error("DB Error:", err);
+      return res.status(500).json({ error: true, message: "Internal Server Error" });
     }
 
-    if (rows.length === 0) {
+    if (!rows.length) {
       return res.status(404).json({ message: "Quotation not found" });
     }
 
-    return res.json({
-      ...rows[0],
+    const row = rows[0];
+
+    // Sanitize the tax data
+    const response = {
+      ...row,
       taxes: {
-        cgst: +rows[0].cgst || 0,
-        sgst: +rows[0].sgst || 0,
-        cgsttype: rows[0].cgsttype,
-        sgsttype: rows[0].sgsttype,
+        cgst: row.cgst ? Number(row.cgst) : 0,
+        sgst: row.sgst ? Number(row.sgst) : 0,
+        cgsttype: row.cgsttype || "",
+        sgsttype: row.sgsttype || "",
       },
-    });
+    };
+
+    return res.json(response);
   });
 });
+
 
 //<---------------------------------------------------------------------------------->
 //<-----------------------------------------get quotation by id-------------------------->
@@ -7543,7 +7591,7 @@ router.get("/getQuotDetail/:id", (req, res) => {
     q.qty, 
     e.type, 
     e.address,
-    c.gstno
+    e.gstno
 FROM 
     quotation q
 INNER JOIN 
@@ -8546,51 +8594,107 @@ router.get("/getNewOrderAcc", (req, res) => {
   `;
 
   const dataQuery = `
-    SELECT
-      o.id,
-      o.qid,
-      o.podate,
-      q.quotref,
-      o.ponum,
-      custname,
-      o.testing_div,
-      o.fileflag,
-      deliveryperiod,
-      ref_no,
-      capacity,
-      voltageratio,
-      consumer,
-      o.ostatus,
-      o.consignor,
-      o.consignee,
-      o.quantity,
-      e.priratio,
-      e.uid,
-      e.secratio,
-      c.costingname AS selectedCosting,
-      e.cid,
-      CASE 
-        WHEN EXISTS (
-          SELECT 1
-          FROM production_plan_details p
-          WHERE p.oa_id = o.id
-        ) THEN 1
-        ELSE 0
-      END AS inProduction
-    FROM
-      order_acceptance o
-    INNER JOIN
-      quotation q ON q.qid = o.qid
-    INNER JOIN
-      enquiry_master e ON e.id = q.eid
-    LEFT JOIN
-      costing_master c ON c.id = e.cid
-    WHERE
-      o.ostatus = 1
-    ORDER BY
-      o.id DESC
-    LIMIT ? OFFSET ?;
-  `;
+  SELECT
+    o.id,
+    o.qid,
+    o.podate,
+    q.quotref,
+    o.ponum,
+    custname,
+    o.testing_div,
+    o.fileflag,
+    deliveryperiod,
+    ref_no,
+    capacity,
+    voltageratio,
+    consumer,
+    o.ostatus,
+    o.consignor,
+    o.consignee,
+    o.quantity,
+    e.priratio,
+    e.uid,
+    e.secratio,
+    c.costingname AS selectedCosting,
+    e.cid,
+    
+    -- Production Status
+    CASE 
+      WHEN EXISTS (
+        SELECT 1
+        FROM production_plan_details p
+        WHERE p.oa_id = o.id
+      ) THEN 1
+      ELSE 0
+    END AS inProduction,
+
+    -- BOM Issue Status
+    CASE 
+      WHEN EXISTS (
+        SELECT 1
+        FROM production_plan_details p
+        JOIN bom_request b ON b.plan_id = p.prod_plan_id
+        WHERE p.oa_id = o.id
+      ) THEN 1
+      ELSE 0
+    END AS bomIssueStatus
+
+  FROM order_acceptance o
+  INNER JOIN quotation q ON q.qid = o.qid
+  INNER JOIN enquiry_master e ON e.id = q.eid
+  LEFT JOIN costing_master c ON c.id = e.cid
+  WHERE o.ostatus = 1
+  ORDER BY o.id DESC
+  LIMIT ? OFFSET ?;
+`;
+
+
+  // const dataQuery = `
+  //   SELECT
+  //     o.id,
+  //     o.qid,
+  //     o.podate,
+  //     q.quotref,
+  //     o.ponum,
+  //     custname,
+  //     o.testing_div,
+  //     o.fileflag,
+  //     deliveryperiod,
+  //     ref_no,
+  //     capacity,
+  //     voltageratio,
+  //     consumer,
+  //     o.ostatus,
+  //     o.consignor,
+  //     o.consignee,
+  //     o.quantity,
+  //     e.priratio,
+  //     e.uid,
+  //     e.secratio,
+  //     c.costingname AS selectedCosting,
+  //     e.cid,
+  //     CASE 
+  //       WHEN EXISTS (
+  //         SELECT 1
+  //         FROM production_plan_details p
+  //         WHERE p.oa_id = o.id
+  //       ) THEN 1
+  //       ELSE 0
+  //     END AS inProduction
+  //   FROM
+  //     order_acceptance o
+  //   INNER JOIN
+  //     quotation q ON q.qid = o.qid
+  //   INNER JOIN
+  //     enquiry_master e ON e.id = q.eid
+  //   LEFT JOIN
+  //     costing_master c ON c.id = e.cid
+  //   WHERE
+  //     o.ostatus = 1
+  //   ORDER BY
+  //     o.id DESC
+  //   LIMIT ? OFFSET ?;
+  // `;
 
   pool.query(countQuery, (err, countResult) => {
     if (err) return res.status(500).json(err);
@@ -17544,6 +17648,99 @@ router.get("/fetchinvoicePrint/:id", (req, res) => {
 //   });
 // });
 
+// router.get("/getChallanDetail/:id", (req, res) => {
+//   const id = req.params.id;
+
+//   const q = `
+//     SELECT 
+//         c.id,
+//         c.challan_no,
+//         c.chdate,
+//         c.buyer_id,
+//         c.buyer_address,
+//         c.deliver_at,
+//         c.delivery_address,
+//         c.po_no,
+//         c.po_date,
+//         c.costing_id,
+//         c.uid,
+//         c.vehicle,
+//         c.orderacceptance_id,
+//         c.custname,
+//         c.modeoftransport,
+//         cd.id AS detail_id,
+//         cd.challan_id,
+//         cd.plan_id,
+//         cd.capacity,
+//         cd.desc,
+//         cd.qty,
+//         cd.rate,
+//         cd.amt,
+//         cd.remainingqty,
+//         em.custname AS buyername,
+//         em.address AS buyeraddress,
+//         oa.remainingadvance,
+//         oa.id AS oa_id,
+//         oa.gstNo,
+//         qt.cgst AS tax_cgst,
+//         qt.sgst AS tax_sgst,
+//         qt.cgsttype AS tax_cgsttype,
+//         qt.sgsttype AS tax_sgsttype,
+//         COALESCE(CAST(lb.invoice_balance AS DECIMAL(18,2)), 0) AS advance
+//     FROM 
+//         challans c
+//     LEFT JOIN 
+//         challan_details cd ON c.id = cd.challan_id
+//     LEFT JOIN 
+//         enquiry_master em ON c.buyer_id = em.id
+//     LEFT JOIN 
+//         order_acceptance oa ON c.orderacceptance_id = oa.id
+//     LEFT JOIN 
+//         quotation q ON oa.qid = q.qid
+//     LEFT JOIN 
+//         quot_taxes qt ON q.qid = qt.qid
+//     LEFT JOIN (
+//         SELECT 
+//             oid, 
+//             SUM(advance) AS total_payment_advance
+//         FROM 
+//             payments
+//         GROUP BY 
+//             oid
+//     ) p ON oa.id = p.oid
+//     LEFT JOIN (
+//         -- Get last invoice transaction balance using created_at
+//         SELECT it1.oid, it1.invoice_balance
+//         FROM invoice_transactions it1
+//         WHERE it1.created_at = (
+//             SELECT MAX(it2.created_at)
+//             FROM invoice_transactions it2
+//             WHERE it2.oid = it1.oid
+//         )
+//     ) lb ON oa.id = lb.oid
+//     WHERE 
+//         c.id = ?;
+//   `;
+
+//   pool.query(q, [id], (err, results) => {
+//     if (err) {
+//       console.error("Error fetching challan details:", err);
+//       return res.status(500).json({ error: "Internal server error" });
+//     }
+
+//     if (results.length === 0) {
+//       return res.status(404).json({ error: "Challan not found" });
+//     }
+
+//     // Convert last_invoice_balance to number
+//     const result = results[0];
+//     result.last_invoice_balance = parseFloat(result.last_invoice_balance || 0);
+
+//     return res.json(result);
+//   });
+// });
+
+
 router.get("/getChallanDetail/:id", (req, res) => {
   const id = req.params.id;
 
@@ -17596,16 +17793,11 @@ router.get("/getChallanDetail/:id", (req, res) => {
     LEFT JOIN 
         quot_taxes qt ON q.qid = qt.qid
     LEFT JOIN (
-        SELECT 
-            oid, 
-            SUM(advance) AS total_payment_advance
-        FROM 
-            payments
-        GROUP BY 
-            oid
+        SELECT oid, SUM(advance) AS total_payment_advance
+        FROM payments
+        GROUP BY oid
     ) p ON oa.id = p.oid
     LEFT JOIN (
-        -- Get last invoice transaction balance using created_at
         SELECT it1.oid, it1.invoice_balance
         FROM invoice_transactions it1
         WHERE it1.created_at = (
@@ -17614,8 +17806,7 @@ router.get("/getChallanDetail/:id", (req, res) => {
             WHERE it2.oid = it1.oid
         )
     ) lb ON oa.id = lb.oid
-    WHERE 
-        c.id = ?;
+    WHERE c.id = ?;
   `;
 
   pool.query(q, [id], (err, results) => {
@@ -17628,16 +17819,68 @@ router.get("/getChallanDetail/:id", (req, res) => {
       return res.status(404).json({ error: "Challan not found" });
     }
 
-    // Convert last_invoice_balance to number
-    const result = results[0];
-    result.last_invoice_balance = parseFloat(result.last_invoice_balance || 0);
+    const data = results[0];
 
-    return res.json(result);
+    // ========== GST CALCULATION IN BACKEND ==========
+    const qty = Number(data.qty) || 0;
+    const rate = Number(data.rate) || 0;
+    const basic_total = qty * rate;
+
+    const cgstRate = Number(data.tax_cgst) || 0;
+    const sgstRate = Number(data.tax_sgst) || 0;
+    const gstNumber = data.gstNo || "";
+
+    // Check if GST starts with 27 (Maharashtra)
+    const isMaharashtra = gstNumber && gstNumber.startsWith("27");
+
+    let cgst = 0, sgst = 0, igst = 0;
+
+    if (!gstNumber || !isMaharashtra) {
+      // Apply IGST (GST blank or NOT Maharashtra)
+      if (data.tax_cgsttype?.trim().toLowerCase() === "exclusive" && cgstRate > 0) {
+        igst = (basic_total * (cgstRate + sgstRate)) / 100;
+      }
+    } else {
+      // Maharashtra - Apply CGST + SGST
+      if (data.tax_cgsttype?.trim().toLowerCase() === "exclusive" && cgstRate > 0) {
+        cgst = (basic_total * cgstRate) / 100;
+      }
+      if (data.tax_sgsttype?.trim().toLowerCase() === "exclusive" && sgstRate > 0) {
+        sgst = (basic_total * sgstRate) / 100;
+      }
+    }
+
+    // Round values
+    const roundedCgst = Math.round(cgst * 100) / 100;
+    const roundedSgst = Math.round(sgst * 100) / 100;
+    const roundedIgst = Math.round(igst * 100) / 100;
+    const roundedBasicTotal = Math.round(basic_total * 100) / 100;
+
+    // Calculate totals
+    const subTotal = roundedBasicTotal + roundedCgst + roundedSgst + roundedIgst;
+    const grand_total = Math.floor(subTotal);
+    const advance = parseFloat(data.advance) || 0;
+    const net_total = (grand_total - advance).toFixed(2);
+
+    // Add calculated values to response
+    const response = {
+      ...data,
+      basic_total: roundedBasicTotal,
+      cgst: roundedCgst,
+      sgst: roundedSgst,
+      igst: roundedIgst,
+      cgst_rate: cgstRate,
+      sgst_rate: sgstRate,
+      igst_rate: cgstRate + sgstRate,
+      show_igst: !gstNumber || !isMaharashtra,
+      grand_total: grand_total.toFixed(2),
+      net_total: net_total,
+      advance: advance
+    };
+
+    return res.json(response);
   });
 });
-
-
-
 
 //<--------------------------------------------------------------->
 //<---------------------------------------get quotation number --------------------->
@@ -19129,9 +19372,9 @@ router.post("/addNewInvoice", (req, res) => {
             `INSERT INTO invoices (
           invoice_no, inv_date, challan_id, buyer_id, buyername, customeraddress, transport_mode,
           po_no, po_date, vehicle_no, basic_total, cgst, sgst, igst, grand_total, advance,
-          net_total, date_issue, date_removal, uid, by_road, buyer_addr, consign_addr,
+          net_total, date_issue,time_issue, date_removal,time_removal, uid, by_road, buyer_addr, consign_addr,
           roundoff, consigneename, orderacceptance_id, gstno
-        ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+        ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
             [
               invno,
               formattedInvDate,
@@ -19151,7 +19394,9 @@ router.post("/addNewInvoice", (req, res) => {
               numericAdvance,
               numericNetTotal,
               formatDateForDB(date_issue),
+              time_issue,
               formatDateForDB(date_removal),
+              time_removal,
               uid,
               by_road,
               buyer_addr,
@@ -20634,33 +20879,83 @@ router.post("/addNewInvoice", (req, res) => {
 
 
 //<----------------------------edit invoice------------------------------>
+// router.get("/editInvoice/:id", (req, res) => {
+//   console.log(req.params);
+//   const cid = req.params.id;
+//   const q = `SELECT 
+//     i.*, 
+//     d.*, 
+//     c.chdate,
+//     c.challan_no,
+//     i.buyername AS consumer,
+//     i.customeraddress AS consumer_address
+// FROM 
+//     invoices i
+// JOIN 
+//     invoice_details d ON i.id = d.invoice_id
+// LEFT JOIN 
+//     challans c ON i.challan_id = c.id
+// WHERE 
+//     i.id = ?;
+
+// `;
+
+//   pool.query(q, [cid], (err, rows) => {
+//     if (err) {
+//       console.log(err);
+
+//       return res.json(err);
+//     }
+//     console.log(rows);
+//     return res.json(rows[0]);
+//   });
+// });
+
 router.get("/editInvoice/:id", (req, res) => {
   console.log(req.params);
   const cid = req.params.id;
-  const q = `SELECT 
-    i.*, 
-    d.*, 
-    c.chdate,
-    c.challan_no,
-    i.buyername AS consumer,
-    i.customeraddress AS consumer_address
-FROM 
-    invoices i
-JOIN 
-    invoice_details d ON i.id = d.invoice_id
-LEFT JOIN 
-    challans c ON i.challan_id = c.id
-WHERE 
-    i.id = ?;
-
+  const q = `
+    SELECT 
+        i.*, 
+        d.*, 
+        c.chdate,
+        c.challan_no,
+        c.orderacceptance_id,
+        i.buyername AS consumer,
+        i.customeraddress AS consumer_address,
+        oa.id AS oa_id,
+        oa.gstNo,
+        qt.cgst AS tax_cgst,
+        qt.cgsttype AS tax_cgsttype,
+        qt.sgst AS tax_sgst,
+        qt.sgsttype AS tax_sgsttype
+    FROM 
+        invoices i
+    JOIN 
+        invoice_details d ON i.id = d.invoice_id
+    LEFT JOIN 
+        challans c ON i.challan_id = c.id
+    LEFT JOIN 
+        order_acceptance oa ON c.orderacceptance_id = oa.id
+    LEFT JOIN 
+        quotation q ON oa.qid = q.qid
+    LEFT JOIN 
+        quot_taxes qt ON q.qid = qt.qid
+    WHERE 
+        i.id = ?;
 `;
+
 
   pool.query(q, [cid], (err, rows) => {
     if (err) {
       console.log(err);
-
       return res.json(err);
     }
+
+    if (rows.length === 0) {
+      return res.status(404).json({ error: "Invoice not found" });
+    }
+
     console.log(rows);
     return res.json(rows[0]);
   });
@@ -21480,7 +21775,7 @@ router.get("/profomainvoice/:id", (req, res) => {
       o.podate,
       o.basicrate,
       o.advance,
-      o.gstno,
+      e.gstno,
       e.priratio,
       e.secratio,
       e.type
@@ -21892,6 +22187,44 @@ router.get("/getproductinlist/:id", (req, res) => {
 });
 
 //<--------------------------------Get Customer List for Transfer Stock----------------------------->
+// router.get("/getCustomerListForTransferStock", (req, res) => {
+//   try {
+//     const query = `
+//       SELECT
+//       MIN(em.id) AS enquiry_master_id,
+//       em.custname
+//       FROM
+//           bom_request br
+//       INNER JOIN
+//           production_plan pp ON pp.id = br.plan_id
+//       INNER JOIN
+//           production_plan_details ppd ON ppd.prod_plan_id = pp.id
+//       INNER JOIN
+//           order_acceptance oa ON oa.id = ppd.oa_id
+//       INNER JOIN
+//           quotation q ON q.qid = oa.qid
+//       INNER JOIN 
+//           enquiry_master em ON em.id = q.eid
+//       INNER JOIN 
+//           costing_master cm ON cm.id = br.costing_id 
+//       WHERE
+//           br.isissue = 0
+//       GROUP BY em.custname;
+//     `;
+
+//     pool.query(query, (err, result) => {
+//       if (err) {
+//         console.log(err);
+//         return res.send("Internal Server Error");
+//       }
+
+//       return res.send(result);
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
+
 router.get("/getCustomerListForTransferStock", (req, res) => {
   try {
     const query = `
@@ -21914,6 +22247,7 @@ router.get("/getCustomerListForTransferStock", (req, res) => {
           costing_master cm ON cm.id = br.costing_id 
       WHERE
           br.isissue = 0
+          AND br.bomtype IS NOT NULL
       GROUP BY em.custname;
     `;
 
@@ -21998,7 +22332,7 @@ router.post("/getCostingListForTransStock", (req, res) => {
       INNER JOIN 
           costing_master cm ON cm.id = br.costing_id  
        WHERE
-    br.isissue = 0 AND em.custname = ?;
+    br.isissue = 0 AND br.bomtype IS NOT NULL AND em.custname = ?;
     `;
 
     // const query = `
@@ -22067,7 +22401,7 @@ router.post("/getProdRefFroTransStock", (req, res) => {
       INNER JOIN 
          costing_master cm ON cm.id = br.costing_id
       WHERE
-      br.isissue = 0 AND
+      br.isissue = 0 AND br.bomtype IS NOT NULL AND
       em.custname = ? AND
       (em.selectedcosting = ? OR cm.costingname = ?);
     `;

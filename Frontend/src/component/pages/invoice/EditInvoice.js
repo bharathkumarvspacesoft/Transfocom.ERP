@@ -3,6 +3,11 @@ import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import FormControl from "@mui/material/FormControl";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs from "dayjs";
 import "./invoice.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -35,11 +40,12 @@ const EditInvoice = () => {
     by_road: "",
     buyer_addr: "",
     consign_addr: "",
-
+    cgstPercent: 0,
+    sgstPercent: 0,
+    igstPercent: 0,
     consigneename: "",
     challan_no: "",
     chdate: "",
-
     hsn: "",
     rate: "",
     consumer: "",
@@ -64,10 +70,8 @@ const EditInvoice = () => {
     by_road: "",
     buyer_addr: "",
     consign_addr: "",
-
     consigneename: "",
     consumer: "",
-
     hsn: "",
     rate: "",
     challan_no: "",
@@ -81,7 +85,15 @@ const EditInvoice = () => {
         console.log("Fetching data for invoice ID:", id);
         const reqData = await fetch(`${APP_BASE_PATH}/editInvoice/${id}`); // Replace with your API endpoint
         const resData = await reqData.json();
+        const gstNo = resData?.gstNo;
+        const isMaharashtra = gstNo && gstNo.startsWith("27");
         setData(resData);
+        setData((prev) => ({
+          ...prev,
+          cgstPercent: isMaharashtra ? resData.tax_cgst : 0,
+          sgstPercent: isMaharashtra ? resData.tax_sgst : 0,
+          igstPercent: isMaharashtra ? 0 : (Number(resData.tax_cgst) + Number(resData.tax_sgst)),
+        }));
         console.log(resData, "aaaaaaaaaaaaaaaaaaaaaaaaa");
         setEditableFields({
           buyername: resData.buyername,
@@ -309,7 +321,7 @@ const EditInvoice = () => {
                 <TextField
                   fullWidth
                   id="po_no"
-                  label="PO Number (Optional)"
+                  label="P O Number (Optional)"
                   name="po_no"
                   value={editableFields.po_no}
                   InputLabelProps={{ shrink: true }}
@@ -331,7 +343,7 @@ const EditInvoice = () => {
                 <TextField
                   fullWidth
                   id="vehicle_no"
-                  label="PO_Date"
+                  label="P O Date"
                   name="po_date"
                   autoComplete="Date"
                   value={data.po_date}
@@ -356,7 +368,7 @@ const EditInvoice = () => {
                 // }}
                 />
               </Grid>
-              <Grid item xs={7} sm={3.5}>
+              {/* <Grid item xs={7} sm={3.5}>
                 <TextField
                   fullWidth
                   id="date_issue"
@@ -367,6 +379,31 @@ const EditInvoice = () => {
                   InputLabelProps={{ shrink: true }}
                   onChange={(e) => handleEdit("date_issue", e.target.value)}
                 />
+              </Grid> */}
+              <Grid item xs={7} sm={3.5}>
+                <FormControl fullWidth>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                      label="Date Of Issue"
+                      name="date_issue"
+                      format="DD-MM-YYYY"
+                      value={
+                        editableFields.date_issue
+                          ? dayjs(editableFields.date_issue, ["DD-MM-YYYY", "YYYY-MM-DD", "MM-DD-YYYY"], true)
+                          : null
+                      }
+                      onChange={(newValue) => {
+                        const formattedDate = newValue ? dayjs(newValue).format("DD-MM-YYYY") : "";
+                        handleEdit("date_issue", formattedDate);
+                      }}
+                      slotProps={{
+                        textField: {
+                          InputLabelProps: { shrink: true }
+                        }
+                      }}
+                    />
+                  </LocalizationProvider>
+                </FormControl>
               </Grid>
               <Grid item xs={7} sm={3.5}>
                 <TextField
@@ -380,8 +417,32 @@ const EditInvoice = () => {
                   onChange={(e) => handleEdit("time_issue", e.target.value)}
                 />
               </Grid>
-
               <Grid item xs={7} sm={3.5}>
+                <FormControl fullWidth>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                      label="Date Of Removal"
+                      name="date_removal"
+                      format="DD-MM-YYYY"
+                      value={
+                        editableFields.date_removal
+                          ? dayjs(editableFields.date_removal, ["DD-MM-YYYY", "YYYY-MM-DD", "MM-DD-YYYY"], true)
+                          : null
+                      }
+                      onChange={(newValue) => {
+                        const formattedDate = newValue ? dayjs(newValue).format("DD-MM-YYYY") : "";
+                        handleEdit("date_removal", formattedDate);
+                      }}
+                      slotProps={{
+                        textField: {
+                          InputLabelProps: { shrink: true }
+                        }
+                      }}
+                    />
+                  </LocalizationProvider>
+                </FormControl>
+              </Grid>
+              {/* <Grid item xs={7} sm={3.5}>
                 <TextField
                   fullWidth
                   id="date_removal"
@@ -392,7 +453,7 @@ const EditInvoice = () => {
                   InputLabelProps={{ shrink: true }}
                   onChange={(e) => handleEdit("date_removal", e.target.value)}
                 />
-              </Grid>
+              </Grid> */}
               <Grid item xs={7} sm={3.5}>
                 <TextField
                   fullWidth
@@ -504,7 +565,7 @@ const EditInvoice = () => {
                   <tr>
                     <td style={{ width: "5%" }}></td>
                     <td style={{ width: "30%", textAlign: "right" }}>
-                      C.GST 9%
+                      C.GST {data.cgstPercent}%
                     </td>
                     <td style={{ width: "20%" }}></td>
                     <td style={{ width: "10%" }}></td>
@@ -514,7 +575,7 @@ const EditInvoice = () => {
                   <tr>
                     <td style={{ width: "5%" }}></td>
                     <td style={{ width: "30%", textAlign: "right" }}>
-                      S.GST 9%
+                      S.GST {data.sgstPercent}%
                     </td>
                     <td style={{ width: "20%" }}></td>
                     <td style={{ width: "10%" }}></td>
@@ -523,7 +584,7 @@ const EditInvoice = () => {
                   </tr>
                   <tr>
                     <td style={{ width: "5%" }}></td>
-                    <td style={{ width: "30%", textAlign: "right" }}>I.GST</td>
+                    <td style={{ width: "30%", textAlign: "right" }}> I.GST {data.igstPercent}%</td>
                     <td style={{ width: "20%" }}></td>
                     <td style={{ width: "10%" }}></td>
                     <td style={{ width: "15%" }}></td>

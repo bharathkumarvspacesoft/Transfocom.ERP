@@ -231,10 +231,10 @@ export default function PoEnquiry() {
                       <TableCell className="MuiTableHead-root" align="center"><NumbersIcon style={{ fontSize: "14px",marginRight:'2px' }} />Sr No</TableCell>
 
                       <TableCell className="MuiTableHead-root" align="center">
-                      <TextSnippetIcon style={{ fontSize: "16px",marginRight:'2px' }} />PO Ref
+                      <TextSnippetIcon style={{ fontSize: "16px",marginRight:'2px' }} />P O Ref
                       </TableCell>
                       <TableCell className="MuiTableHead-root" align="center">
-                      <CalendarMonthIcon style={{ fontSize: "16px",marginRight:'2px' }} /> PO Date
+                      <CalendarMonthIcon style={{ fontSize: "16px",marginRight:'2px' }} /> P O Date
                       </TableCell>
                       <TableCell className="MuiTableHead-root" align="center">
                       <ContactMailIcon style={{ fontSize: "16px",marginRight:'2px' }} /> Customer

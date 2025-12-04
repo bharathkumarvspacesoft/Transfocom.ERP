@@ -297,7 +297,7 @@ const Printprofoma = () => {
                     </td>
                   </tr>
                   <tr style="height:14pt">
-                      <td style="width:238pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                      <td style="width:238pt;border-left-style:solid;border-left-width:1pt;border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
                           <p class="s4" style="padding-top: 2pt;padding-left: 2pt;text-indent: 0pt;line-height: 10pt;text-align: left;">GST NO:-${data.gstno}</p>
                       </td>
                   </tr>

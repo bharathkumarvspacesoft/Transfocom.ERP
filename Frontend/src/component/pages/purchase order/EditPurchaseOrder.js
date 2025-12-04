@@ -405,7 +405,7 @@ export default function EditPurchaseOrder() {
                   <FormControl style={{ width: 300 }}>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <DatePicker
-                        label="PO Date"
+                        label="P O Date"
                         format="DD-MM-YYYY"
                         value={podate}
                         onChange={(newValue) => setPoDate(newValue)}

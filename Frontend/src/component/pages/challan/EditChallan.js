@@ -420,7 +420,7 @@ const EditChallan = (onsave) => {
                     <Grid item xs={4}>
                       <TextField
                         fullWidth
-                        label="PO Date"
+                        label="P O Date"
                         labelprope
                         id="buyerName"
                         disabled
@@ -438,7 +438,7 @@ const EditChallan = (onsave) => {
                     <Grid item xs={4}>
                       <TextField
 
-                        label="PO NO."
+                        label="P O NO."
                         fullWidth
 
                         id="poNo"

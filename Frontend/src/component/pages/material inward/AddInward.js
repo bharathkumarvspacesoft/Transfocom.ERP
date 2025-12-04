@@ -827,7 +827,7 @@ export default function AddStock() {
                               type="text"
                               name="accqty"
                               style={{ width: "120px" }}
-                              value={row.accqtyEdited ? (row.accqty || 0) : 0}
+                              value={row.accqtyEdited ? (row.accqty === 0 ? "" : row.accqty) : ""}
                               onChange={({ target }) => {
                                 // Allow only digits and optional single dot
                                 const cleanedValue = target.value.replace(/[^0-9.]/g, '');

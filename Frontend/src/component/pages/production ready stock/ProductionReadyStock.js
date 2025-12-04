@@ -174,7 +174,7 @@ const ProductionReadyStock = () => {
 
   const [page, setPage] = useState(0);
   const [rows, setRows] = useState([]);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(15);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -507,7 +507,7 @@ const ProductionReadyStock = () => {
                   </div>
                 </TableContainer>
                 <TablePagination
-                  rowsPerPageOptions={[5, 10]}
+                  rowsPerPageOptions={[15, 25]}
                   component="div"
                   count={rows.length}
                   rowsPerPage={rowsPerPage}

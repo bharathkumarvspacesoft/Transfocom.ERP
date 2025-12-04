@@ -553,7 +553,7 @@ export default function Orderacceptance() {
                       <TextSnippetIcon
                         style={{ fontSize: "14px", marginRight: "2px" }}
                       />
-                      PO <br /> Number
+                      P O <br /> Number
                     </TableCell>
                     <TableCell
                       className="MuiTableHead-root"
@@ -567,7 +567,7 @@ export default function Orderacceptance() {
                       <CalendarMonthIcon
                         style={{ fontSize: "14px", marginRight: "2px" }}
                       />
-                      PO <br />
+                      P O <br />
                       &nbsp;&nbsp; Date
                     </TableCell>
 
@@ -597,7 +597,7 @@ export default function Orderacceptance() {
                       <InsertDriveFileIcon
                         style={{ fontSize: "14px", marginRight: "2px" }}
                       />
-                      Po
+                      P o
                       <br /> &nbsp; &nbsp; &nbsp;File
                     </TableCell>
                     <TableCell
@@ -738,26 +738,37 @@ export default function Orderacceptance() {
                               textAlign: "center",
                             }}
                           >
-                            <Link to={`/editOrder/${item.id}`}>
-                              <Button
-                                size="small"
-                                variant="contained"
-                                sx={{
-                                  padding: "8px",
+                            <Button
+                              size="small"
+                              variant="contained"
+                              disabled={item.bomIssueStatus}
+                              sx={{
+                                padding: "8px",
+                                background: "#00d284",
+                                "&:hover": {
                                   background: "#00d284",
-                                  "&:hover": {
-                                    background: "#00d284", // Set the same color as the default background
-                                  },
-                                }}
+                                },
+                              }}
+                              onClick={
+                                item.bomIssueStatus
+                                  ? (e) => e.preventDefault()
+                                  : undefined
+                              }
+                            >
+                              <Link
+                                to={`/editOrder/${item.id}`}
+                                style={{ color: "#fff", textDecoration: "none" }}
                               >
                                 Edit
-                              </Button>
-                            </Link>
+                              </Link>
+                            </Button>
+
                             <Button
                               size="small"
                               variant="contained"
                               color="error"
-                              disabled={orderProductionStatus[item.id]}
+                              disabled={item.inProduction}
+                              // disabled={orderProductionStatus[item.id]}
                               onClick={() => handleDelete(item.id)}
                               title={orderProductionStatus[item.id] ? "Cannot delete - Order is in Production Plan" : "Delete Order"}
                               sx={{

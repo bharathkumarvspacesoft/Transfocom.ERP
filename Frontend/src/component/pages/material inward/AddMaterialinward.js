@@ -92,7 +92,7 @@ export default function AddMaterialInward() {
 
   const [page, setPage] = useState(0);
   const [rows, setRows] = useState([]);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(25);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -187,7 +187,7 @@ export default function AddMaterialInward() {
                           <CalendarMonthIcon
                             style={{ fontSize: "16px", marginRight: "2px" }}
                           />
-                          PO Date
+                          P O Date
                         </TableCell>
                         <TableCell className="MuiTableHead-root">
                           <ContactMailIcon
@@ -262,7 +262,7 @@ export default function AddMaterialInward() {
                 </div>
               </TableContainer>
               <TablePagination
-                rowsPerPageOptions={[5, 10]}
+                rowsPerPageOptions={[25, 50]}
                 component="div"
                 count={rows.length}
                 rowsPerPage={rowsPerPage}

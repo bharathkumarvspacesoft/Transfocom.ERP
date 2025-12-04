@@ -392,7 +392,7 @@ export default function Quotation() {
                               <>
                                 {part}
                                 {index < item.selectedcosting.split(',').length - 1 && ','}
-                                {index === 2 && <br />} 
+                                {index === 2 && <br />}
                               </>
                             ))}
                           </TableCell>
@@ -420,21 +420,22 @@ export default function Quotation() {
                             {item.priratio}/{item.secratio}V
                           </TableCell>
                           <TableCell className="wh-spc" style={{ textAlign: 'center' }}>
-                            <Link to={`/UpdateQuotation/${item.qid}`}>
-                              <Button
-                                variant="contained"
-                                sx={{
-                                  padding: "5px",
+                            <Button
+                              variant="contained"
+                              disabled={!!item.order_id}
+                              component={Link}
+                              to={`/UpdateQuotation/${item.qid}`}
+                              sx={{
+                                padding: "5px",
+                                background: "#00d284",
+                                "&:hover": {
                                   background: "#00d284",
-                                  "&:hover": {
-                                    background: "#00d284",
-                                    // Set the same color as the default background
-                                  },
-                                }}
-                              >
-                                Edit
-                              </Button>
-                            </Link>
+                                },
+                              }}
+                            >
+                              Edit
+                            </Button>
+
                             <Button
                               size="small"
                               onClick={() => handleDelete(item.qid)}

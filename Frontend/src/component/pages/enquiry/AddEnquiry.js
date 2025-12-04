@@ -1231,8 +1231,8 @@ const New = () => {
                     onChange={(e) => {
                       let value = e.target.value;
                       let lines = value.split("\n");
-                      if (lines.length > 3) {
-                        lines = lines.slice(0, 3);
+                      if (lines.length > 5) {
+                        lines = lines.slice(0, 5);
                       }
                       lines = lines.map((line) => line.slice(0, 40));
                       setComment(lines.join("\n"));
@@ -1240,10 +1240,10 @@ const New = () => {
                     onBlur={handleBlur}
                     onSubmit={handleSubmit}
                     inputProps={{
-                      maxLength: 122, // 40 chars * 3 lines + 2 newline characters
+                      maxLength: 204, // 40 chars * 3 lines + 2 newline characters
                     }}
-                    minRows={3}
-                    maxRows={3}
+                    minRows={5}
+                    maxRows={5}
                   />
                   <p
                     style={{
@@ -1252,7 +1252,7 @@ const New = () => {
                       marginTop: "4px",
                     }}
                   >
-                    Note: Maximum 3 lines allowed, with up to 40 characters per line.
+                    Note: Maximum 5 lines allowed, with up to 40 characters per line.
                   </p>
                 </div>
               </Grid>

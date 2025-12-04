@@ -934,7 +934,7 @@ const NewChallan = () => {
                       <TextField
                         fullWidth
                         id="podate"
-                        label="podate"
+                        label="P O Date"
                         name="podate"
                         value={values.podate ? formatDate(values.podate) : ""}
                         onChange={handleChange}
@@ -950,7 +950,7 @@ const NewChallan = () => {
                       <TextField
                         fullWidth
                         id="po_no"
-                        label="PO NO."
+                        label="P O NO."
                         name="po_no"
                         value={values.ponum}
                         onChange={handleChange}
