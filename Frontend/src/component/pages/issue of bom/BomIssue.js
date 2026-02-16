@@ -48,7 +48,7 @@ export default function AddStock() {
   const [rows, setRows] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedRows, setSelectedRows] = useState({});
-  const [disabledRows, setDisabledRows] = useState({});
+  // const [disabledRows, setDisabledRows] = useState({});
   const [selectAll, setSelectAll] = useState(false);
   const [isIssueEnabled, setIsIssueEnabled] = useState(false);
   const navigate = useNavigate();
@@ -94,21 +94,36 @@ export default function AddStock() {
     setHasSelectedCheckbox(anySelected);
   }, [selectedRows]);
 
-  useEffect(() => {
-    // Update disabledRows based on the condition
-    const updatedDisabledRows = {};
-    rows.forEach((row) => {
-      updatedDisabledRows[row.id] =
-        row.stock + row.qty + row.poqty >= row.totqty;
-    });
-    setDisabledRows(updatedDisabledRows);
+  // useEffect(() => {
+  //   // Update disabledRows based on the condition
+  //   const updatedDisabledRows = {};
+  //   rows.forEach((row) => {
+  //     updatedDisabledRows[row.id] =
+  //       row.stock + row.qty + row.poqty >= row.totqty;
+  //   });
+  //   setDisabledRows(updatedDisabledRows);
 
-    // Select or deselect all rows based on selectAll state
-    const updatedSelectedRows = {};
-    rows.forEach((row) => {
-      updatedSelectedRows[row.id] = selectAll && !updatedDisabledRows[row.id];
-    });
-    setSelectedRows(updatedSelectedRows);
+  //   // Select or deselect all rows based on selectAll state
+  //   const updatedSelectedRows = {};
+  //   rows.forEach((row) => {
+  //     updatedSelectedRows[row.id] = selectAll && !updatedDisabledRows[row.id];
+  //   });
+  //   setSelectedRows(updatedSelectedRows);
+  // }, [selectAll, rows]);
+
+
+  useEffect(() => {
+    if (selectAll) {
+      const updatedSelectedRows = {};
+      rows.forEach((row) => {
+        if (!isRowDisabled(row)) {
+          updatedSelectedRows[row.id] = true;
+        }
+      });
+      setSelectedRows(updatedSelectedRows);
+    } else {
+      setSelectedRows({});
+    }
   }, [selectAll, rows]);
 
   const onSelect = (value, index) => {
@@ -301,6 +316,15 @@ export default function AddStock() {
     }
   };
 
+  const isRowDisabled = (row) => {
+    const stock = parseInt(row.stock) || 0;
+    const qty = parseInt(row.qty) || 0;
+    const poqty = parseInt(row.poqty) || 0;
+    const totqty = parseInt(row.totqty) || 0;
+
+    return stock + qty + poqty >= totqty;
+  };
+
   return (
     <>
       {isLoading ? (
@@ -418,35 +442,21 @@ export default function AddStock() {
                             <IconButton
                               size="small"
                               title="Add Indent"
-                              color={
-                                row.totqty > row.stock ? "error" : "default"
-                              }
-                              disabled={
-                                parseInt(row.stock) + parseInt(row.qty) + parseInt(row.poqty) >= parseInt(row.totqty)
-                              }
+                              color={row.totqty > row.stock ? "error" : "default"}
+                              disabled={isRowDisabled(row)}
                               onClick={() => {
-                                if (
-                                  !(
-                                    parseInt(row.stock) + parseInt(row.qty) + parseInt(row.poqty) >= parseInt(row.totqty)
-                                  )
-                                ) {
+                                if (!isRowDisabled(row)) {
                                   onSelect(!selectedRows[row.id], row.id);
                                 }
                               }}
                             >
                               ADD
                             </IconButton>
-                            {!disabledRows[row.id] && (
+                            {!isRowDisabled(row) && (
                               <Checkbox
                                 checked={!!selectedRows[row.id]}
                                 onChange={(value) => {
-                                  if (
-                                    !(
-                                      parseInt(row.stock) + parseInt(row.qty) + parseInt(row.poqty) >= parseInt(row.totqty)
-                                    )
-                                  ) {
-                                    onSelect(value, row.id);
-                                  }
+                                  onSelect(value, row.id);
                                 }}
                               />
                             )}

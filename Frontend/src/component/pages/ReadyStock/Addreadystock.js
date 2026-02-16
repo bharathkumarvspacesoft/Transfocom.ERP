@@ -119,13 +119,76 @@ const Addreadystock = () => {
   };
   let remaingqty
 
+  // const handleQuantityChange = (id, value) => {
+  //   // Check if the input value is an integer
+  //   if (!Number.isInteger(Number(value))) {
+  //     // If it's not an integer, show an alert message and don't update the state
+  //     Swal.fire({
+  //       title: "Invalid Quantity",
+  //       text: "Quantity should be an integer.",
+  //       icon: "error",
+  //       confirmButtonText: "OK",
+  //       animation: "true",
+  //       confirmButtonColor: "red",
+  //     });
+  //     return;
+  //   }
+
+  //   const quantityValue = parseInt(value, 10);
+  //   remaingqty = quantityValue
+  //   // Find the row with the given id
+  //   const item = rows.find(row => row.id === id);
+
+  //   // Calculate the sum of total_qty_in_production and the inserting quantity
+  //   const totalSum = quantityValue + item.remaningredyqty;
+  //   console.log("totalSum", totalSum)
+  //   // Check if the sum is greater than the available quantity
+  //   // if (totalSum > rows[index].qty-rows[index].readyqty) {
+  //   //   Swal.fire({
+  //   //     title: "Invalid Quantity",
+  //   //     text: "Quantity in production cannot exceed the Order quantity.",
+  //   //     icon: "error",
+  //   //     confirmButtonText: "OK",
+  //   //     animation: "true",
+  //   //     confirmButtonColor: "red",
+  //   //   });
+  //   //   return;
+  //   // }
+  //   if (totalSum > item.qty) {
+  //     Swal.fire({
+  //       title: "Invalid Quantity",
+  //       text: "Quantity in production cannot exceed the Remaning Prodution quantity (RM PROD QTY). ",
+  //       icon: "error",
+  //       confirmButtonText: "OK",
+  //       animation: "true",
+  //       confirmButtonColor: "red",
+  //     });
+  //     return;
+  //   }
+  //   // If it's an integer and within the valid range, update the quantity list state
+  //   setQuantityList(prevState => ({
+  //     ...prevState,
+  //     [id]: quantityValue,
+  //   }));
+  // };
+
+
+
   const handleQuantityChange = (id, value) => {
+    // Check if the input value is empty
+    if (value === "") {
+      setQuantityList(prevState => ({
+        ...prevState,
+        [id]: "",
+      }));
+      return;
+    }
+
     // Check if the input value is an integer
-    if (!Number.isInteger(Number(value))) {
-      // If it's not an integer, show an alert message and don't update the state
+    if (!Number.isInteger(Number(value)) || Number(value) < 0) {
       Swal.fire({
         title: "Invalid Quantity",
-        text: "Quantity should be an integer.",
+        text: "Quantity should be a positive integer.",
         icon: "error",
         confirmButtonText: "OK",
         animation: "true",
@@ -135,29 +198,27 @@ const Addreadystock = () => {
     }
 
     const quantityValue = parseInt(value, 10);
-    remaingqty = quantityValue
+
     // Find the row with the given id
     const item = rows.find(row => row.id === id);
 
-    // Calculate the sum of total_qty_in_production and the inserting quantity
-    const totalSum = quantityValue + item.remaningredyqty;
-    console.log("totalSum", totalSum)
-    // Check if the sum is greater than the available quantity
-    // if (totalSum > rows[index].qty-rows[index].readyqty) {
-    //   Swal.fire({
-    //     title: "Invalid Quantity",
-    //     text: "Quantity in production cannot exceed the Order quantity.",
-    //     icon: "error",
-    //     confirmButtonText: "OK",
-    //     animation: "true",
-    //     confirmButtonColor: "red",
-    //   });
-    //   return;
-    // }
-    if (totalSum > item.qty) {
+    if (!item) {
+      console.error("Item not found");
+      return;
+    }
+
+    // Calculate remaining production quantity (RM PROD QTY)
+    const remainingProductionQty = item.qty - item.readyqty;
+
+    console.log("Remaining Production Qty:", remainingProductionQty);
+    console.log("Entered Quantity:", quantityValue);
+    console.log("Item:", item);
+
+    // Check if entered quantity exceeds remaining production quantity
+    if (quantityValue > remainingProductionQty) {
       Swal.fire({
         title: "Invalid Quantity",
-        text: "Quantity in production cannot exceed the Remaning Order quantity.",
+        text: `Quantity cannot exceed Remaining Production quantity (RM PROD QTY: ${remainingProductionQty}).`,
         icon: "error",
         confirmButtonText: "OK",
         animation: "true",
@@ -165,7 +226,8 @@ const Addreadystock = () => {
       });
       return;
     }
-    // If it's an integer and within the valid range, update the quantity list state
+
+    // If all validations pass, update the quantity list state
     setQuantityList(prevState => ({
       ...prevState,
       [id]: quantityValue,
@@ -239,7 +301,6 @@ const Addreadystock = () => {
       navigate(-1);
     }
   };
-  console.log(rows)
   return (
     <>
       {isLoading ? (
@@ -300,9 +361,10 @@ const Addreadystock = () => {
                           {/* <TableCell className="MuiTableHead-root"> <ListIcon style={{ fontSize: "16px" }} />
                         Order<br /> Quantity
                       </TableCell> */}
-                          <TableCell className="MuiTableHead-root"> <ReorderIcon style={{ fontSize: "16px" }} />Production <br />Quantity</TableCell>
-                          <TableCell className="MuiTableHead-root"> <TextSnippetIcon style={{ fontSize: "16px", marginRight: '2px' }} />Total <br /> <span style={{ marginLeft: '17px' }}>Stock</span> <br /><span style={{ marginLeft: '15px' }}> Quantity</span></TableCell>
-                          <TableCell className="MuiTableHead-root"> <TextSnippetIcon style={{ fontSize: "16px", marginRight: '2px' }} />Ready<br />  <span style={{ marginLeft: '17px' }}>Stock</span> <br /><span style={{ marginLeft: '15px' }}>Quantity</span> </TableCell>
+                          <TableCell className="MuiTableHead-root"> <ReorderIcon style={{ fontSize: "16px" }} />Production <br />QTY</TableCell>
+                          {/* <TableCell className="MuiTableHead-root"> <TextSnippetIcon style={{ fontSize: "16px", marginRight: '2px' }} />Total <br /> <span style={{ marginLeft: '17px' }}>Stock</span> <br /><span style={{ marginLeft: '15px' }}> QTY</span></TableCell> */}
+                          <TableCell className="MuiTableHead-root"> <TextSnippetIcon style={{ fontSize: "16px", marginRight: '2px' }} />Ready<br />  <span style={{ marginLeft: '17px' }}>Stock</span> <br /><span style={{ marginLeft: '15px' }}>QTY</span> </TableCell>
+                          <TableCell className="MuiTableHead-root"> <TextSnippetIcon style={{ fontSize: "16px", marginRight: '2px' }} />RM<br />  <span style={{ marginLeft: '17px' }}>PROD</span> <br /><span style={{ marginLeft: '15px' }}>QTY</span> </TableCell>
                           <TableCell className="MuiTableHead-root">   <ListIcon style={{ fontSize: "16px" }} /> Quantity</TableCell>
                           <TableCell className="MuiTableHead-root"> <ContactMailIcon style={{ fontSize: "16px", marginRight: '2px' }} />Customer</TableCell>
                           <TableCell className="MuiTableHead-root">  <BatteryCharging20Icon style={{ fontSize: "16px", marginRight: '2px' }} />Capacity</TableCell>
@@ -338,8 +400,9 @@ const Addreadystock = () => {
                                 <TableCell style={{ textAlign: 'center' }} key={item.id}>{index + 1}</TableCell>
 
                                 <TableCell style={{ textAlign: 'center' }} key={item.a}>{item.qty}</TableCell>
-                                <TableCell style={{ textAlign: 'center' }} key={item.a}>{item.remaningredyqty}</TableCell>
+                                {/* <TableCell style={{ textAlign: 'center' }} key={item.a}>{item.remaningredyqty}</TableCell> */}
                                 <TableCell style={{ textAlign: 'center' }} key={item.a}>{item.readyqty}</TableCell>
+                                <TableCell style={{ textAlign: 'center' }} key={item.a}>{item.qty - item.readyqty}</TableCell>
                                 <TableCell>
                                   <TextField
                                     value={quantityList[item.id] || ""}

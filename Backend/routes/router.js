@@ -12173,6 +12173,7 @@ router.get("/getindent", (req, res) => {
     LEFT JOIN quotation q ON q.qid = oa.qid
     LEFT JOIN enquiry_master e ON e.id = q.eid
     LEFT JOIN costing_master cm ON cm.id = e.cid
+    ORDER BY i.id ASC
   `;
   pool.query(q, (err, data) => {
     if (err) {
@@ -13483,42 +13484,94 @@ router.post("/getindentMaterial", (req, res) => {
 
 //<----------------------------------------------------------->
 //<-----------------------------view purchase order--------------------->
+// router.get("/viewpurchase/:id", (req, res) => {
+//   const poMasterId = req.params.id;
+
+//   const q = `
+//     SELECT
+//       pm.custname,
+//       pm.poref,
+//       pm.poref,
+//       pd.itemid,
+//       pd.qty,
+
+//       pm.podate As date,
+//       pd.rates,
+//       mm.item_code,
+//       mm.material_description,
+//       um.unit
+//     FROM
+//       po_master pm
+//     JOIN
+//       po_details pd ON pm.id = pd.poid
+//     JOIN
+//       material_master mm ON pd.itemid = mm.id
+//     JOIN
+//       unitmaster um ON mm.unit = um.id
+//     WHERE
+//       pm.id = ?
+//   `;
+
+//   pool.query(q, [poMasterId], (err, data) => {
+//     if (err) {
+//       return res.json({ error: "An error occurred while fetching data." });
+//     }
+
+//     return res.json(data);
+//   });
+// });
+
 router.get("/viewpurchase/:id", (req, res) => {
   const poMasterId = req.params.id;
 
   const q = `
     SELECT
+      -- PO master
       pm.custname,
       pm.poref,
-      pm.poref,
+      pm.podate AS date,
+
+      -- PO details
       pd.itemid,
       pd.qty,
-      
-      pm.podate As date,
       pd.rates,
+
+      -- Material
       mm.item_code,
       mm.material_description,
-      um.unit
-    FROM
-      po_master pm
-    JOIN
-      po_details pd ON pm.id = pd.poid
-    JOIN
-      material_master mm ON pd.itemid = mm.id
-    JOIN
-      unitmaster um ON mm.unit = um.id
-    WHERE
-      pm.id = ?
+
+      -- Unit
+      um.unit,
+
+      -- Supplier details
+      sm.name AS supplier_name,
+      sm.email AS supplier_email,
+      sm.contactno AS supplier_contactno,
+      sm.address AS supplier_address
+
+    FROM po_master pm
+    JOIN po_details pd 
+      ON pm.id = pd.poid
+    JOIN material_master mm 
+      ON pd.itemid = mm.id
+    JOIN unitmaster um 
+      ON mm.unit = um.id
+    JOIN supplier_master sm 
+      ON pm.supplierid = sm.id
+    WHERE pm.id = ?
   `;
 
   pool.query(q, [poMasterId], (err, data) => {
     if (err) {
+      console.error(err);
       return res.json({ error: "An error occurred while fetching data." });
     }
 
     return res.json(data);
   });
 });
+
+
 //<------------------------------------------------------------->
 router.get("/viewgrn/:id", (req, res) => {
   const poMasterId = req.params.id;
@@ -21752,59 +21805,59 @@ const getCurrentFinancialYear = () => {
 router.get("/profomainvoice/:id", (req, res) => {
   // console.log(req.params.id,'reqqqqqqqqqqqqqqqqqq');
   const q = `
-    SELECT
-      o.id,
-      o.qid,
-      o.orderacc_date,
-      quotref,
-      e.custname,
-      o.testing_div,
-      o.fileflag,
-      deliveryperiod,
-      ref_no,
-      capacity,
-      address,
-      voltageratio,
-      consumer,
-      consumer_address,  -- Include the 'consumer_address' field in the query
-      o.ostatus,
-      o.consignor,
-      o.consignee,
-      o.quantity,
-      o.ponum,
-      o.podate,
-      o.basicrate,
-      o.advance,
-      e.gstno,
-      e.priratio,
-      e.secratio,
-      e.type
-    FROM
-      order_acceptance o
-    INNER JOIN
-      quotation q ON q.qid = o.qid
-    INNER JOIN
-      enquiry_master e ON e.id = q.eid
-    WHERE
-      o.ostatus = 1
-    AND o.id  IN (SELECT oid FROM proforma_invoice) AND o.id=?
-    ORDER BY
-      o.id DESC;
-  `;
+      SELECT
+        o.id,
+        o.qid,
+        o.orderacc_date,
+        quotref,
+        e.custname,
+        o.testing_div,
+        o.fileflag,
+        deliveryperiod,
+        ref_no,
+        capacity,
+        address,
+        voltageratio,
+        consumer,
+        consumer_address,  -- Include the 'consumer_address' field in the query
+        o.ostatus,
+        o.consignor,
+        o.consignee,
+        o.quantity,
+        o.ponum,
+        o.podate,
+        o.basicrate,
+        o.advance,
+        e.gstno,
+        e.priratio,
+        e.secratio,
+        e.type
+      FROM
+        order_acceptance o
+      INNER JOIN
+        quotation q ON q.qid = o.qid
+      INNER JOIN
+        enquiry_master e ON e.id = q.eid
+      WHERE
+        o.ostatus = 1
+      AND o.id  IN (SELECT oid FROM proforma_invoice) AND o.id=?
+      ORDER BY
+        o.id DESC;
+    `;
 
   const q1 = `
-    SELECT cgst, sgst,cgsttype,sgsttype
-    FROM quot_taxes
-    WHERE qid = ?
-    ORDER BY qid DESC
-    LIMIT 1
-  `;
+      SELECT cgst, sgst,cgsttype,sgsttype
+      FROM quot_taxes
+      WHERE qid = ?
+      ORDER BY qid DESC
+      LIMIT 1
+    `;
 
   const q2 = `
-    SELECT pro_invrefno, pro_invdate
-    FROM proforma_invoice
-    WHERE oid = ?;
-  `;
+      SELECT pro_invrefno, pro_invdate
+      FROM proforma_invoice
+      WHERE oid = ?;
+    `;
 
   const customerId = req.params.id;
 
@@ -21814,9 +21867,12 @@ router.get("/profomainvoice/:id", (req, res) => {
     }
     // console.log(data,'messssssssaaaaaaaggggggggggeeeeeeeeeeeeeeee')
     pool.query(q1, [customerId], (err2, data1) => {
+      console.log("data1", data1);
+
       if (err2) {
         return res.status(500).json({ error: "Internal Server Error" });
       }
+
 
       pool.query(q2, [customerId], (err3, data2) => {
         if (err3) {
@@ -21826,8 +21882,8 @@ router.get("/profomainvoice/:id", (req, res) => {
         if (data?.length) {
           const response = {
             custname: data[0].custname,
-            cgsttype: data1[0].cgsttype,
-            sgsttype: data1[0].sgsttype,
+            cgsttype: data1?.[0]?.cgsttype || "PERCENT",
+            sgsttype: data1?.[0]?.sgsttype || "PERCENT",
             gstno: data[0].gstno,
             address: data[0].address,
             consumer_address: data[0].consumer_address, // Include 'consumer_address' in the response
@@ -22307,6 +22363,69 @@ router.get("/getCustomerListForTransferStock", (req, res) => {
 //   }
 // });
 
+// router.post("/getCostingListForTransStock", (req, res) => {
+//   try {
+//     const { custname } = req.body;
+//     if (!custname) {
+//       return res.status(400).send("Something went wrong");
+//     }
+
+//     const query = `
+//     SELECT DISTINCT
+//       IFNULL(cm.costingname, em.selectedcosting) AS costingname
+//       FROM
+//           bom_request br
+//       INNER JOIN
+//           production_plan pp ON pp.id = br.plan_id
+//       INNER JOIN
+//           production_plan_details ppd ON ppd.prod_plan_id = pp.id
+//       INNER JOIN
+//           order_acceptance oa ON oa.id = ppd.oa_id
+//       INNER JOIN
+//           quotation q ON q.qid = oa.qid
+//       INNER JOIN 
+//           enquiry_master em ON em.id = q.eid
+//       INNER JOIN 
+//           costing_master cm ON cm.id = br.costing_id  
+//        WHERE
+//     br.isissue = 0 AND br.bomtype IS NOT NULL AND em.custname = ?;
+//     `;
+
+//     // const query = `
+//     // SELECT DISTINCT
+//     //   cm.costingname AS costingname
+//     //   FROM
+//     //       bom_request br
+//     //   INNER JOIN
+//     //       production_plan pp ON pp.id = br.plan_id
+//     //   INNER JOIN
+//     //       production_plan_details ppd ON ppd.prod_plan_id = pp.id
+//     //   INNER JOIN
+//     //       order_acceptance oa ON oa.id = ppd.oa_id
+//     //   INNER JOIN
+//     //       quotation q ON q.qid = oa.qid
+//     //   INNER JOIN 
+//     //       enquiry_master em ON em.id = q.eid
+//     //   INNER JOIN 
+//     //       costing_master cm ON cm.id = em.cid  
+//     //    WHERE
+//     // br.isissue = 0 AND em.custname = ?;
+//     // `;
+
+//     pool.query(query, [custname], (err, result) => {
+//       if (err) {
+//         console.log(err);
+//         return res.status(500).send("Internal Server Error");
+//       }
+
+//       return res.json(result);
+//     });
+//   } catch (error) {
+//     console.log(error);
+//     return res.status(500).send("Internal Server Error");
+//   }
+// });
+
 router.post("/getCostingListForTransStock", (req, res) => {
   try {
     const { custname } = req.body;
@@ -22316,7 +22435,8 @@ router.post("/getCostingListForTransStock", (req, res) => {
 
     const query = `
     SELECT DISTINCT
-      IFNULL(cm.costingname, em.selectedcosting) AS costingname
+      IFNULL(cm.costingname, em.selectedcosting) AS costingname,
+      IFNULL(br.costing_id, em.cid) AS cid
       FROM
           bom_request br
       INNER JOIN
@@ -22334,27 +22454,6 @@ router.post("/getCostingListForTransStock", (req, res) => {
        WHERE
     br.isissue = 0 AND br.bomtype IS NOT NULL AND em.custname = ?;
     `;
-
-    // const query = `
-    // SELECT DISTINCT
-    //   cm.costingname AS costingname
-    //   FROM
-    //       bom_request br
-    //   INNER JOIN
-    //       production_plan pp ON pp.id = br.plan_id
-    //   INNER JOIN
-    //       production_plan_details ppd ON ppd.prod_plan_id = pp.id
-    //   INNER JOIN
-    //       order_acceptance oa ON oa.id = ppd.oa_id
-    //   INNER JOIN
-    //       quotation q ON q.qid = oa.qid
-    //   INNER JOIN 
-    //       enquiry_master em ON em.id = q.eid
-    //   INNER JOIN 
-    //       costing_master cm ON cm.id = em.cid  
-    //    WHERE
-    // br.isissue = 0 AND em.custname = ?;
-    // `;
 
     pool.query(query, [custname], (err, result) => {
       if (err) {
@@ -22385,7 +22484,8 @@ router.post("/getProdRefFroTransStock", (req, res) => {
       pp.wo_no,
       IFNULL(cm.costingname, em.selectedcosting) AS costingname,
       ppd.id AS prod_plan_de_id,
-      br.id AS bom_req_id
+      br.id AS bom_req_id,
+      ppd.remainingbomissueqty
       FROM
           bom_request br
       INNER JOIN
@@ -23635,7 +23735,7 @@ router.get("/getTransferStockDetails/:id", (req, res) => {
       FROM 
         transfer_stock ts
       LEFT JOIN enquiry_master em ON em.id = ts.eid
-      LEFT JOIN costing_master cm ON cm.id = ts.eid 
+      LEFT JOIN costing_master cm ON cm.id = em.cid
 
       LEFT JOIN production_plan_details ppd ON ppd.id = ts.ppd_id
       LEFT JOIN production_plan pl ON pl.id = ppd.prod_plan_id

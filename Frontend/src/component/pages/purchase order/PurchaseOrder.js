@@ -225,7 +225,7 @@ export default function PurchaseOrder() {
           </head>
           <body>
             <h3>STATIC ELECTRICALS PUNE</h3>
-            <p class="center-align">S.No.229/2/2,Behind Wipro Phase-1,Hinjewadi,Pune 411057 <br>
+            <p class="center-align">S.No.229/2/2,Behind Wipro Phase-1,Hinjawadi,Pune 411057 <br>
               Phone-020-22933059,8007771691</p>
             <p>Supplier Name: ${jsonData1[0].custname}</p>
             <p>PO.NO: ${jsonData1[0].poref}</p>

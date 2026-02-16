@@ -313,7 +313,7 @@ const PrintInvoice = () => {
                 font-style: normal;
                 font-weight: bold;
                 text-decoration: none;
-                font-size: 9.5pt;
+                font-size:9pt;
             }
 
             .s8 {
@@ -438,7 +438,7 @@ const PrintInvoice = () => {
         <p style="text-indent: 0pt;text-align: left;"/>
         <p style="text-indent: 0pt;text-align: left;"/>
         <p style="text-indent: 0pt;text-align: left;"/>
-        <p style="padding-top: 1pt;text-indent: 0pt;text-align: center;">S.No.229/2/2, Behind Wipro Phase-I, Hinjawadi, Tal-Mulshi, Dist-Pune, Pune-411057.</p>
+        <p style="padding-top: 1pt;text-indent: 0pt;text-align: center;">S.No.229/2/2, Behind Wipro Phase-I, Hinjawadi, Tal-Mulshi, Dist-Pune, 411057.</p>
         <p style="text-indent: 0pt;text-align: left;">
             <br/>
         </p>
@@ -467,17 +467,17 @@ const PrintInvoice = () => {
                 <td style="width:268pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;
                    border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:0.5pt;padding:10px 2px" colspan="4">
                     <p class="s7" style="text-indent: 0pt;text-align: left;">Original for Buyer/Duplicate for Transporter</p>
-                    <p class="s7" style="padding-top: 2pt;text-indent: 0pt;text-align: left;">/Triplicate for assessee</p>
+                    <p class="s7" style="padding-top: 2pt;text-indent: 0pt;text-align: left;">/Triplicate for Assessee</p>
                     <p class="s7" style="padding-top: 2pt;text-indent: 0pt;text-align: left;">
                         Invoice No :<span class="s7"></span>
                         <span style=" color: #F00;">${data[0]?.invoice_no || ""}</span> 
                     </p>
                     <p class="s7" style="padding-top: 2pt;text-indent: 0pt;text-align: left;">
-                        Date:<span style=" color: #F00;">${formatDate(data[0]?.inv_date || "")} </span></br>
+                        Date: <span style=" color: #F00;">${formatDate(data[0]?.inv_date || "")} </span></br>
                         Challan No :${data[0]?.challan_no || ""} 
                     </p>
                     <p class="s7" style="padding-top: 2pt;text-indent: 0pt;text-align: left;">
-              Date:<span style="color:#F00;">
+              Date: <span style="color:#F00;">
                 ${data[0]?.chdate ? data[0].chdate.replace(/-/g, "/") : ""}
               </span>
                     </p>
@@ -485,10 +485,10 @@ const PrintInvoice = () => {
             </tr>
             <tr style="height:11pt">
                 <td style="width:216pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="3" bgcolor="#BFBFBF">
-                    <p class="s7" style="text-indent: 0pt;line-height: 9pt;text-align: left; padding-top:5px;padding-left:2px;"><strong>Name &amp;Address of the Buyer:</strong></p>
+                    <p class="s7" style="text-indent: 0pt;line-height: 9pt;text-align: left; padding-top:5px;padding-left:2px;"><strong>Name & Address of the Buyer:</strong></p>
                 </td>
                 <td style="width:268pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:0.5pt" colspan="4" bgcolor="#BFBFBF">
-                    <p class="s7" style="text-indent: 0pt;line-height: 9pt;text-align: left; padding:5px;padding-left:2px;"><strong> Name &amp;Address of the Consignee/ Shipped To :</strong></p>
+                    <p class="s7" style="text-indent: 0pt;line-height: 9pt;text-align: left; padding:5px;padding-left:2px;"><strong> Name &amp; Address of the Consignee/ Shipped To :</strong></p>
                 </td>
             </tr>
            <tr style="height:74pt">
@@ -537,7 +537,7 @@ const PrintInvoice = () => {
               <td style="width:23pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;   
                   border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt;padding:2px" colspan="3">
                   <p class="s7" style="padding-right: 171pt;text-indent: 0pt;line-height: 125%;text-align: left;white-space: nowrap;">
-                      STATE - MAHARASHTRA&nbsp;&nbsp; </br> CODE - 27&nbsp;&nbsp; </br> GST No.<span style="color: red;">${data[0]?.gstno
+                      STATE - MAHARASHTRA&nbsp;&nbsp; </br> CODE - 27&nbsp;&nbsp; </br> GST No. <span style="color: red;">${data[0]?.gstno
         ? data[0].gstno
         : "<span style='color: red;'>NOT REGISTERED</span>"
       }</span>
@@ -547,9 +547,8 @@ const PrintInvoice = () => {
               </td>
                 <td style="width:268pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;
                 border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt;padding:2px" colspan="4">
-                    <p class="s7" style="padding-right: 171pt;text-indent: 0pt;line-height: 125%;text-align: left;">STATE - MAHARASHTRA </br> CODE - 27</p>
-                    <p class="s7" style="text-indent: 0pt;line-height: 8pt;text-align: left;">
-                        GST NO. <span style=" color: #F00;">NOT REGISTERED</span>
+                     <p class="s7" style="padding-right: 171pt;text-indent: 0pt;line-height: 125%;text-align: left;white-space: nowrap;">  
+                     STATE - MAHARASHTRA&nbsp;&nbsp; </br> CODE - 27&nbsp;&nbsp; </br> GST No. <span style=" color: #F00;">NOT REGISTERED</span>
                     </p>
                 </td>
             </tr>
@@ -650,7 +649,7 @@ const PrintInvoice = () => {
                     </p>
                 </td>
                 <td style="width:182pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt;padding-left:2px" colspan="2">
-                    <p class="s7" style="padding-top: 1pt;text-indent: 0pt;text-align: left;">TESTED &amp;SUPPLIED WITH SILICA GEL BREATHER</p>
+                    <p class="s7" style="padding-top: 1pt;text-indent: 0pt;text-align: left;">TESTED &amp; SUPPLIED WITH SILICA GEL BREATHER</p>
                 </td>                             
                 <td style="width:60pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
@@ -717,7 +716,7 @@ const PrintInvoice = () => {
                 <td style="width:182pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="2">
                     <p class="s7" style="padding-top: 1pt;padding-left:2px;text-indent: 0pt;text-align: left;">
                         VOLTAGE RATIO - <span style=" color: #F00;">${data[0]?.priratio || ""}</span>
-                        /${data[0]?.secratio || ""} KV
+                        /${data[0]?.secratio || ""} V
                     </p>
                 </td>
                  <td style="width:66pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
@@ -983,7 +982,7 @@ const PrintInvoice = () => {
                     </p>
                 </td>
                 <td style="width:182pt;border-left-style:solid;border-left-width:1pt;padding-top:2px;padding-right:5px;border-right-style:solid;border-right-width:1pt" colspan="2">
-                    <p class="s7" style="padding-top: 2pt;text-indent: 0pt;line-height: 8pt;text-align: right;">Paid Amount</p>
+                    <p class="s7" style="padding-top: 2pt;text-indent: 0pt;line-height: 8pt;text-align: right;"></p>
                 </td>
                 <td style="width:66pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
@@ -1002,10 +1001,12 @@ const PrintInvoice = () => {
                 </td>
                 <td style="width:87pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;padding-top:2px;padding-right:5px;
                 border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-                <p class="s7" style="padding-top: 1pt;text-indent: 0pt;line-height: 7pt;text-align: right;">${data[0]?.paid_amount
+              <!--
+                <p class="s7" style="padding-top: 1pt;text-indent: 0pt;line-height: 7pt;text-align: right;">ccc${data[0]?.paid_amount
         ? Number(data[0].paid_amount).toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
         : ""}
-</p>
+                </p>
+                -->
             </td>
             </tr>
             <tr style="height:11pt">
@@ -1014,10 +1015,12 @@ const PrintInvoice = () => {
                         <br/>
                     </p>
                 </td>
-                <td style="width:182pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;padding-top:2px;
-                padding-right:5px;padding-bottom-2px;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="2">
-                    <p class="s7" style="padding-top: 1pt;text-indent: 0pt;line-height: 8pt;text-align: right;">Remaining Amount.</p>
-                </td>
+              <td style="width:182pt; border-left-style:solid; border-left-width:1pt; border-bottom-style:solid; border-bottom-width:1pt; border-right-style:solid; border-right-width:1pt; padding-top:2px; padding-right:5px; padding-bottom:2px;" colspan="2">
+            <p class="s7" style="margin-top: -2pt; padding-top: 0pt; text-indent:0pt; line-height:8pt; text-align:right;">
+            ${0 ? "Net Total" : ""}  
+            </p>
+          </td>
+
                 <td style="width:66pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
@@ -1028,23 +1031,27 @@ const PrintInvoice = () => {
                         <br/>
                     </p>
                 </td>
-                <td style="width:55pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                <td style="width:55pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                     <p style="text-indent: 0pt;text-align: left;">
                         <br/>
                     </p>
                 </td>
-                <td style="width:87pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;padding-top:1px;
+                <td style="width:87pt;border-left-style:solid;padding-top:1px;
                 padding-right:5px;padding-bottom-5px;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-                   <p class="s7" style="padding-top: 1pt;text-indent: 0pt;line-height: 8pt;text-align: right;">
-                    ${(
-        Number(data[0]?.grand_total || 0) - Number(data[0]?.paid_amount || 0)
-      ).toLocaleString("en-IN", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      })}
-                  </p>
-
-                </td>
+                  ${0 ?
+        <>
+          <p class="s7" style="padding-top: 1pt;text-indent: 0pt;line-height: 8pt;text-align: right;">
+            ${(
+              Number(data[0]?.grand_total || 0) - Number(data[0]?.paid_amount || 0)
+            ).toLocaleString("en-IN", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
+          </p>
+        </>
+        : ""
+      } 
+              </td>
             </tr>
             <tr style="height:88pt">
                 <td style="width:484pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;
@@ -1054,18 +1061,30 @@ const PrintInvoice = () => {
                     </p>
            <div style="text-align: center; width: 100%;">
            <div style="display: inline-block;">
-            <div style="display: flex; align-items: center; margin-bottom: 5px;">
-                <span style="font-size:15px; font-weight: bold; width: 130px;">Date of Issue     :</span>
-                <input type="text" value="${data[0]?.date_issue || ""}" 
-                    style="margin-left: 5px; padding: 3px; border: 1px solid #ccc; border-radius: 4px; width: 90px;">
+           <div style="display: flex; align-items: center; margin-bottom: 5px;">
+            <span style="font-size:15px; font-weight: bold; width: 130px;">Date of Issue     :</span>
+                <input
+                  type="text"
+                  value="${data[0]?.date_issue
+        ? data[0].date_issue.split('-').reverse().join('-')
+        : ''
+      }"
+                  style="margin-left: 5px; padding: 3px; border: 1px solid #ccc; border-radius: 4px; width: 90px;"
+                >
                 <span style="margin-left: 10px; font-size:15px; font-weight: bold; width: 130px;">Time of Issue:</span>
                 <input type="text" value="${data[0]?.time_issue || ""}" 
                     style="margin-left: 5px; padding: 3px; border: 1px solid #ccc; border-radius: 4px; width: 70px;">
             </div>
             <div style="display: flex; align-items: center;">
                 <span style="font-size:15px; font-weight: bold; width: 130px;">Date of Removal:</span>
-                <input type="text" value="${data[0]?.date_removal || ""}" 
-                    style="margin-left: 5px; padding: 3px; border: 1px solid #ccc; border-radius: 4px; width: 90px;">
+                <input
+                  type="text"
+                  value="${data[0]?.date_removal
+        ? data[0].date_removal.split('-').reverse().join('-')
+        : ''
+      }"
+                  style="margin-left: 5px; padding: 3px; border: 1px solid #ccc; border-radius: 4px; width: 90px;"
+                >
                 <span style="margin-left: 10px; font-size:15px; font-weight: bold; width: 130px;">Time of Removal:</span>
                 <input type="text" value="${data[0]?.time_removal || ""}" 
                     style="margin-left: 5px; padding: 3px; border: 1px solid #ccc; border-radius: 4px; width: 70px;">

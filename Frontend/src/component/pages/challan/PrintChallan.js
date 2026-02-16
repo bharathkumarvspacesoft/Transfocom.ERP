@@ -369,7 +369,7 @@ const PrintChallan = () => {
       
           <p class="s1" style="padding-top: 3pt;  text-indent: 0pt; line-height: 19pt; text-align: center;">STATIC ELECTRICALS PUNE</p>      
               <p style="text-indent: 0pt; line-height: 9pt; text-align: center;">S. No. 229/2/2, Behind Wipro Technologies,</p>      
-              <p  style="text-indent: 0pt; line-height: 9pt; text-align: center;">Hinjewadi, Pune 411 057.</p>     
+              <p  style="text-indent: 0pt; line-height: 9pt; text-align: center;">Hinjawadi, Pune 411 057.</p>     
               <p  style="text-indent: 0pt; line-height: 9pt; text-align: center;"/>      
               <p  style="text-indent: 0pt; line-height: 9pt; text-align: center;">Telefax: 020-22933059.</p>      
               <p style="text-indent: 0pt; line-height: 9pt; text-align: center;">      
@@ -391,9 +391,32 @@ const PrintChallan = () => {
                         <p style="text-indent: 0pt;text-align: left;">      
                             <br/>      
                         </p>                            
-                        <p class="s7" style="padding-left: 135pt; padding-right: 132pt; padding-top: 20px; text-indent: 0pt; text-align: center; font-weight: 900; text-decoration: underline; margin-bottom: 10px; -webkit-text-stroke: 0.5px black;">
-                          D E L I V E R Y  C H A L L A N
-                        </p>    
+                        <p style="
+                            padding-top: 20px;
+                            text-align: center;
+                            font-weight: 900;
+                            margin-bottom: 10px;
+                          ">
+                            <span style="
+                              display: inline-block;
+                              border-bottom: 2px solid black;
+                              padding: 0 6px;
+                              letter-spacing: 4px;
+                            ">
+                              DELIVERY
+                            </span>
+
+                            <span style="
+                              display: inline-block;
+                              border-bottom: 2px solid black;
+                              padding: 0 6px;
+                              letter-spacing: 4px;
+                              margin-left: 6px;
+                            ">
+                              CHALLAN
+                            </span>
+                          </p>
+
                      </td>      
                   </tr>      
                   <tr style="height:9pt">      
@@ -443,7 +466,7 @@ const PrintChallan = () => {
                                   <br/>
                           </p>  
                             <br/>
-                               ${formatDates(po_date) ? `<p class="s2" style="font-size:12px;">&nbsp;Date: ${formatDates(po_date)}</p>` : ''}
+                               <p class="s2" style="font-size:12px;">&nbsp;P O Date: ${formatDates(po_date)}</p> 
                             <p style="text-indent: 0pt;text-align: left;">
                               <br/>
                             </p>

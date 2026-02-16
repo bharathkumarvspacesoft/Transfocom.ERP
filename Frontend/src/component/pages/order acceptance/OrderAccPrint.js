@@ -276,7 +276,7 @@ const OrderAccPrint = () => {
                     <p class="s2" style="padding-top: 4pt;padding-left: 2pt;text-indent: 0pt;line-height: 87%;text-align: left;">${data.ponum || ''}</p>
                 </td>
                 <td style="width:100pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" rowspan="2">
-                    <p class="s2" style="padding-top: 2pt;padding-left: 2pt;text-indent: 0pt;line-height: 261%;text-align: left;">DATE:${formattedDate}  ${formattedDate1 && `DATE:${formattedDate1}`}</p>
+                    <p class="s2" style="padding-top: 2pt;padding-left: 2pt;text-indent: 0pt;line-height: 261%;text-align: left;">DATE:${formattedDate}   DATE:${formattedDate1 ? formattedDate1 : ""}</p>
                 </td>
             </tr>
             <tr style="height:45pt">

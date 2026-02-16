@@ -325,7 +325,7 @@ const NewTransferStock = () => {
     );
     // console.log("Total : ", totalQty)
     // Check if total exceeds available quantity
-    if (totalQty > (selectedProdRef?.qty || 0)) {
+    if (totalQty > (selectedProdRef?.remainingbomissueqty || 0)) {
       return;
     }
 
@@ -523,7 +523,7 @@ const NewTransferStock = () => {
               <Typography color="error" fontWeight="medium" fontStyle="italic">
                 Tip:
                 "Please select the customer and associated costing to whom you want to transfer the ready stock transformer.
-                Only customers with a pending BOM Issue (i.e., raw material still needs to be issued to build the transformer) are shown here.
+                Only customers with a <strong>Pending BOM Issue</strong>  (i.e., raw material still needs to be issued to build the transformer) are shown here.
               </Typography>
             </Stack>
 
@@ -589,7 +589,7 @@ const NewTransferStock = () => {
                 />
               </Grid>
 
-              <Grid item xs={12} md={3} lg={3}>
+              <Grid item xs={12} md={3} lg={2}>
                 <Autocomplete
                   fullWidth
                   size="small"
@@ -613,12 +613,21 @@ const NewTransferStock = () => {
                 />
               </Grid>
 
-              <Grid item xs={12} md={3} lg={2}>
+              <Grid item xs={12} md={3} lg={1}>
                 <TextField
                   fullWidth
                   size="small"
-                  label="Quantity"
+                  label="Prod Quantity"
                   value={selectedProdRef?.qty || ""}
+                  InputProps={{ readOnly: true }}
+                />
+              </Grid>
+              <Grid item xs={12} md={3} lg={1}>
+                <TextField
+                  fullWidth
+                  size="small"
+                  label="Rem Bom Quantity"
+                  value={selectedProdRef?.remainingbomissueqty || ""}
                   InputProps={{ readOnly: true }}
                 />
               </Grid>
@@ -742,62 +751,71 @@ const NewTransferStock = () => {
 
             <Divider sx={{ mt: 2, mb: 2 }} />
 
-            <Grid mt={2}>
-              <TableContainer component={Paper}>
-                <Table aria-label="simple table">
-                  <TableHead>
-                    <TableRow sx={{ backgroundColor: "#B3E5FC" }}>
-                      <TableCell sx={{ width: "25%" }} align="center">
-                        Customer Name
-                      </TableCell>
-                      <TableCell sx={{ width: "25%" }} align="center">
-                        Prod Ref No.
-                      </TableCell>
-                      <TableCell sx={{ width: "25%" }} align="center">
-                        Ready Qty
-                      </TableCell>
-                      <TableCell sx={{ width: "25%" }} align="center">
-                        Transfer Qty
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {transferCustomers?.map((row, index) => (
-                      <TableRow
-                        key={index}
-                        sx={{
-                          "&:last-child td, &:last-child th": { border: 0 },
-                        }}
-                      >
-                        <TableCell align="center">{row.custname}</TableCell>
-                        <TableCell align="center">{row.wo_no}</TableCell>
-                        <TableCell align="center">{row.readyqty}</TableCell>
-                        <TableCell align="center">
-                          <TextField
-                            size="small"
-                            value={row?.transferQty || 0}
-                            inputProps={{ min: 0 }}
-                            onChange={(e) => {
-                              handleQtyChange(index, e.target.value);
-                            }}
-                          />
-                          <IconButton
-                            aria-label="delete"
-                            size="large"
-                            color="error"
-                            onClick={() =>
-                              deleteTransferStock(row.enquiry_master_id)
-                            }
-                          >
-                            <DeleteIcon />
-                          </IconButton>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Grid>
+          <Grid mt={2}>
+  <TableContainer component={Paper}>
+    <Table aria-label="simple table">
+      <TableHead>
+        <TableRow sx={{ backgroundColor: "#B3E5FC" }}>
+          <TableCell sx={{ width: "25%" }} align="center">
+            Customer Name
+          </TableCell>
+          <TableCell sx={{ width: "25%" }} align="center">
+            Prod Ref No.
+          </TableCell>
+          <TableCell sx={{ width: "25%" }} align="center">
+            Ready Qty
+          </TableCell>
+          <TableCell sx={{ width: "25%" }} align="center">
+            Transfer Qty
+            <Typography 
+              variant="caption" 
+              display="block" 
+              color="error" 
+              fontStyle="italic"
+              sx={{ mt: 0.5, fontSize: '0.7rem' }}
+            >
+                  Tip: The total sum of Transfer Qty must not be greater than the Rem BOM Quantity
+            </Typography>
+          </TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {transferCustomers?.map((row, index) => (
+          <TableRow
+            key={index}
+            sx={{
+              "&:last-child td, &:last-child th": { border: 0 },
+            }}
+          >
+            <TableCell align="center">{row.custname}</TableCell>
+            <TableCell align="center">{row.wo_no}</TableCell>
+            <TableCell align="center">{row.readyqty}</TableCell>
+            <TableCell align="center">
+              <TextField
+                size="small"
+                value={row?.transferQty || 0}
+                inputProps={{ min: 0 }}
+                onChange={(e) => {
+                  handleQtyChange(index, e.target.value);
+                }}
+              />
+              <IconButton
+                aria-label="delete"
+                size="large"
+                color="error"
+                onClick={() =>
+                  deleteTransferStock(row.enquiry_master_id)
+                }
+              >
+                <DeleteIcon />
+              </IconButton>
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  </TableContainer>
+</Grid>
 
             <Grid
               mt={3}

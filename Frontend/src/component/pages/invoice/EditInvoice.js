@@ -143,12 +143,35 @@ const EditInvoice = () => {
     e.preventDefault();
     try {
       setButton(true);
+      // Ensure dates are sent in YYYY-MM-DD format to the backend
+      const formattedDateIssue = editableFields.date_issue
+        ? dayjs(
+            editableFields.date_issue,
+            ["DD-MM-YYYY", "YYYY-MM-DD", "MM-DD-YYYY"],
+            true
+          ).format("YYYY-MM-DD")
+        : "";
+
+      const formattedDateRemoval = editableFields.date_removal
+        ? dayjs(
+            editableFields.date_removal,
+            ["DD-MM-YYYY", "YYYY-MM-DD", "MM-DD-YYYY"],
+            true
+          ).format("YYYY-MM-DD")
+        : "";
+
+      const payload = {
+        ...editableFields,
+        date_issue: formattedDateIssue,
+        date_removal: formattedDateRemoval,
+      };
+
       const res = await fetch(`${APP_BASE_PATH}/editInvoiceInfo/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(editableFields),
+        body: JSON.stringify(payload),
       });
 
       const resjson = await res.json();

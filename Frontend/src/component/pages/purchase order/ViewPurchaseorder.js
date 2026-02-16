@@ -85,7 +85,7 @@ export default function ViewPurchaseorder() {
       console.log("Raw Data:", jsonData);
 
       if (jsonData && jsonData.length > 0) {
-        setSupplier(jsonData[0].custname || "");
+        setSupplier(jsonData[0]);
         setPoref(jsonData[0].poref || "");
 
         const formattedDate = convertDateFormat(jsonData[0].date);
@@ -184,16 +184,48 @@ export default function ViewPurchaseorder() {
               thead th[colspan="7"] {
                 text-align: center;
               }
+                .supplier-details {
+                font-size: 14px;     /* reduce overall text size */
+              }
+
+              .supplier-details h4 {
+                font-size: 16px;     /* heading slightly bigger */
+                margin-bottom: 4px;
+              }
+
+              .supplier-details p {
+                margin: 1px 0;      /* reduce gap between lines */
+                line-height: 1.2;   /* tighter vertical spacing */
+              }
+               .po-row {
+            display: flex;
+            justify-content: space-between; /* pushes Date to the end */
+          }
+
+          .po-row p {
+            margin: 0;
+            line-height: 1.2;
+            }
+
+
             </style>
           </head>
           <body>
             <h3>STATIC ELECTRICALS PUNE</h3>
-            <p class="center-align" >S.No.229/2/2,Behind Wipro Phase-1,Hinjewadi,Pune 411057 <br>
+            <p class="center-align" >S.No.229/2/2,Behind Wipro Phase-1,Hinjawadi,Pune 411057 <br>
               Phone-020-22933059,8007771691</p>
-            <p>Supplier Name: ${supplier}</p>
-            <p>PO.NO: ${poref}</p>
-            <p>Date: ${date}</p>
-            
+        <div class="po-row">
+          <p>P.O.NO: ${poref}</p>
+          <p>P.O.Date: ${date}</p>
+        </div>
+
+         <div class="supplier-details">
+          <h4>Supplier Details:</h4>
+          <p>Name : ${supplier.supplier_name}</p>
+          <p>Address :  ${supplier.supplier_address}</p>
+          <p>Email :  ${supplier.supplier_email}</p>
+          <p>Mobile Number :  ${supplier.supplier_contactno}</p>
+        </div>
             <table>
               <thead>
                 <tr>
@@ -334,7 +366,7 @@ export default function ViewPurchaseorder() {
                       marginBottom: "4px",
                       width: 356,
                     }}
-                    value={supplier}
+                    value={supplier.custname}
                     onChange={(e) => setSupplier(e.target.value)}
                   />
                   <TextField

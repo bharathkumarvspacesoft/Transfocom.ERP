@@ -269,45 +269,73 @@ const Printprofoma = () => {
                   </tr>
                   <tr style="height:14pt">
                       <td style="width:238pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
-                          <p class="s4" style="padding-top: 2pt;padding-left: 2pt;text-indent: 0pt;line-height: 10pt;text-align: left; font-size: 10pt;">Customer:-</p>
+                          <p class="s4" style="padding-top: 2pt;padding-left: 2pt;text-indent: 0pt;line-height: 10pt;text-align: left; font-size: 10pt; text-decoration: underline;">Customer:-</p>
                       </td>
-                      <td style="width:62pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" rowspan="4">
-                          <p class="s4" style="padding-top: 2pt;padding-left: 4pt;padding-right: 15pt;text-indent: -2pt;line-height: 261%;text-align: left;">PRO.INV: PO.NO:</p>
-                      </td>
-                      <td style="width:100pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" rowspan="4">
-                          <p class="s4" style="padding-top: 2pt;padding-left: 2pt;text-indent: 0pt;text-align: left;">${data.pro_invrefno}</p>
-                          <p style="text-indent: 0pt;text-align: left;">
-                              <br/>
-                          </p>
-                          <p class="s4" style="padding-top: 7pt;padding-left: 2pt;text-indent: 0pt;line-height: 87%;text-align: left;">${data.ponum}</p>
-                      </td>
-                      <td style="width:100pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" rowspan="4">
-                        <p class="s4" style="padding-top: 2pt;padding-left: 2pt;text-indent: 0pt;line-height: 261%;text-align: left;">
-                        DATE:${formattedDate}
-                        ${formattedDate1 ? ` DATE:${formattedDate1}` : ''}
+                    <td style="width:62pt;border:1pt solid black;" rowspan="4">
+                        <p class="s4" style="padding-top:2pt;padding-left:4pt;line-height:12pt;text-align:left;">
+                            PRO.INV:
                         </p>
-                      </td>
+                        <p class="s4" style="padding-top:6pt;padding-left:4pt;line-height:12pt;text-align:left;">
+                            PO.NO:
+                        </p>
+                        </td>
+
+
+                                            <td style="width:100pt;border:1pt solid black;" rowspan="4">
+                        <p class="s4" style="padding-top:2pt;padding-left:2pt;line-height:12pt;text-align:left;">
+                            ${data.pro_invrefno}
+                        </p>
+                        <p class="s4" style="padding-top:6pt;padding-left:2pt;line-height:12pt;text-align:left;">
+                            ${data.ponum}
+                        </p>
+                        </td>
+                        <td style="width:100pt;border:1pt solid black;" rowspan="4">
+                        <p class="s4"
+                            style="padding-top:2pt;
+                                    padding-left:2pt;
+                                    line-height:12pt;
+                                    text-align:left;">
+                            DATE:${formattedDate}
+                        </p>
+                        <p class="s4"
+                        style="padding-top:6pt;
+                                padding-left:2pt;
+                                line-height:12pt;
+                                text-align:left;">
+                        PO DATE:${formattedDate1 || ''}
+                        </p>                        
+                        </td>
+
                   </tr>
                   <tr style="height:50pt">
                      <td style="width:238pt;border-left-style:solid;border-left-width:1pt;border-right-style:solid;border-right-width:1pt">
                         <p class="s4" style="padding-top: 2pt;padding-left: 2pt;text-indent: 0pt;line-height: 12pt;text-align: left;font-size: 10pt;">${data.custname}</p>
                         <p class="s4" style="padding-left: 2pt; text-indent: 0pt; line-height: 12pt; text-align: left;font-size: 10pt;">
-                            ${data?.address ? data.address.split(',').join(',<br>') : ""}
+                            ${data?.address ? data.address.split('\n').join('<br/>') : ""}
                         </p>
                     </td>
                   </tr>
                   <tr style="height:14pt">
                       <td style="width:238pt;border-left-style:solid;border-left-width:1pt;border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-                          <p class="s4" style="padding-top: 2pt;padding-left: 2pt;text-indent: 0pt;line-height: 10pt;text-align: left;">GST NO:-${data.gstno}</p>
+                          <p class="s4" style="padding-top: 2pt;padding-left: 2pt;text-indent: 0pt;line-height: 10pt;text-align: left;"><b>GST NO:-&nbsp;&nbsp;${data.gstno}</b></p>
                       </td>
                   </tr>
              
                   <tr style="height:70pt">
                      <td style="width:238pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">   
-                        <p class="s4" style="padding-top: 1pt;padding-left: 2pt;text-indent: 0pt;line-height: 12pt;text-align: left;font-size: 10pt;">Consumer: ${data.consumer}</p>
+                        <p class="s4"
+                        style="padding-top:1pt;padding-left:2pt;
+                                text-align:left;font-size:10pt;">
+                        <span style="display:block;line-height:12pt;text-decoration:underline;">
+                            Consumer:-
+                        </span>
+                        <span style="display:block;line-height:12pt;">
+                            ${data.consumer}
+                        </span>
+                        </p>
                         <p class="s4" style="padding-left: 2pt;text-indent: 0pt;line-height: 10pt;text-align: left;"></p>
                         <p class="s4" style="padding-left: 2pt; text-indent: 0pt; line-height: 12pt; text-align: left;font-size: 10pt;">
-                            ${data?.consumer_address ? data.consumer_address.split(',').join(',<br>') : ""}
+                            ${data?.consumer_address ? data.consumer_address.split('\n').join('<br/>') : ""}
                         </p>
                     </td>
                   </tr>
@@ -372,8 +400,8 @@ const Printprofoma = () => {
                           <p class="s5" style="padding-top: 3pt;padding-left: 2pt;padding-right: 90pt;text-indent: 0pt;line-height: 87%;text-align: left;">RANGE:THERGAON DIVISION:PUNE IV</p>
                           <p class="s5" style="padding-top: 7pt;padding-left: 2pt;text-indent: 0pt;line-height: 10pt;text-align: left;font-weight: bold;">Bank Details:-</p>
                           <p class="s5" style="padding-top: 2pt;padding-left: 2pt;text-indent: 0pt;line-height: 9pt;text-align: left;font-weight: bold;">Name:&nbsp;&nbsp; Static Electricals Pune</p>
-                          <p class="s5" style="padding-top: 2pt;padding-left: 2pt;padding-right: 47pt;text-indent: 0pt;line-height: 87%;text-align: left;font-weight: bold;">ICIC Bank – A/c No:&nbsp;&nbsp; 003905501942</p>
-                                              <p class="s5" style="padding-top: 1pt;padding-left: 2pt;text-indent: 0pt;line-height: 9pt;text-align: left;font-weight: bold;">Branch:&nbsp;&nbsp;Shivaji Nager, Pune 411005</p>
+                          <p class="s5" style="padding-top: 2pt;padding-left: 2pt;padding-right: 47pt;text-indent: 0pt;line-height: 87%;text-align: left;font-weight: bold;">ICICI Bank – A/c No:&nbsp;&nbsp; 003905501942</p>
+                                              <p class="s5" style="padding-top: 1pt;padding-left: 2pt;text-indent: 0pt;line-height: 9pt;text-align: left;font-weight: bold;">Branch:&nbsp;&nbsp;ShivajiNagar, Pune 411005</p>
                     <p class="s5" style="padding-top: 3pt;padding-left: 2pt;text-indent: 0pt;line-height: 9pt;text-align: left;font-weight: bold;">RTGS / NEFT / IFSC Code:&nbsp;&nbsp; ICIC0000039</p>
                     
                           
@@ -400,16 +428,20 @@ const Printprofoma = () => {
                           <p class="s3" style="padding-top: 2pt;padding-right: 1pt;text-indent: 0pt;line-height: 10pt;text-align: right;">${Number(SGST || 0).toLocaleString("en-IN")}</p>
                       </td>
                   </tr>
-                  <tr style="height:14pt">
-                      <td style="width:162pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="2">
-                          <p class="s4" style="padding-top: 2pt;padding-left: 55pt;padding-right: 55pt;text-indent: 0pt;line-height: 10pt;text-align: center;">I.GST ${Igst}%</p>
-                      </td>
-                      <td style="width:100pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-                          <p class="s3" style="padding-top: 2pt;padding-right: 1pt;text-indent: 0pt;line-height: 10pt;text-align: right;">${Number(IGST || 0).toLocaleString("en-IN")}</p>
-                              <br/>
-                          </p>
-                      </td>
-                  </tr>
+                 <tr style="height:14pt">
+                        <td style="width:162pt;border:1pt solid black;" colspan="2">
+                            <p class="s4" style="padding-top: 2pt;padding-left: 55pt;padding-right: 55pt;text-indent: 0pt;line-height: 10pt;text-align: center;">
+                            I.GST ${Igst || ""}%
+                            </p>
+                        </td>
+
+                        <td style="width:100pt;border:1pt solid black;">
+                            <p class="s3" style="padding-top: 2pt;padding-right: 1pt;text-indent: 0pt;line-height: 10pt;text-align: right;">
+                            ${Number(IGST || 0).toLocaleString("en-IN")}
+                            </p>
+                        </td>
+                        </tr>
+
                   <tr style="height:14pt">
                       <td style="width:162pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="2">
                           <p class="s4" style="padding-top: 2pt;padding-left: 51pt;text-indent: 0pt;line-height: 10pt;text-align: left;">Grand Total.</p>

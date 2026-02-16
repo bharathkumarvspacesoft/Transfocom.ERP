@@ -261,6 +261,17 @@ const PrintQuotation = () => {
     return words.trim();
   }
 
+  function formatTappingText(text) {
+    if (!text) {
+      return "<b>No Tapping</b>";
+    }
+
+    return text
+      .replace(/Off circuit tap changer/gi, "<b>Off circuit tap changer</b>")
+      .replace(/On load tap changer/gi, "<b>On load tap changer</b>");
+  }
+
+
 
   function NumberToWords(num) {
     if (num === 0) {
@@ -344,6 +355,9 @@ const PrintQuotation = () => {
         #print-content {
           padding-bottom: 50px; 
         }
+        #print-content1 {
+          padding-bottom: -10px; 
+        }
      
         @page {
           size: A4;
@@ -383,10 +397,9 @@ const PrintQuotation = () => {
         .no-border th,
         .no-border td {
           border: none;
-          padding: 0px;
-          text-align: left;
-          padding-right:50px; 
-          
+          padding: 2px 50px 2px 0; /* top:8px, right:50px, bottom:8px, left:0 */
+          text-align: left;     
+          vertical-align: top;               
         }
       
       </style>
@@ -416,7 +429,14 @@ const PrintQuotation = () => {
         </div>
       <p>We thank you for your valued inquiry and have pleasure in submitting our offer for supply of Distribution Transformer. Our offer is subject to the terms and conditions of Sale as per enclosed schedules. <br/><b>The Transformer shall be manufactured and tested as per IS: 1180 (Part-I) 2014 & as per MSEDCL Specifications<b/></p>
       <div  class="center-text ">
-        <h4><b>SCHEDULE: A<b/> <h4/>
+        <h4 style="
+            display: inline-block;
+            padding-bottom: 4px;   /* ← controls gap */
+            border-bottom: 1px solid #000;
+            margin: 0;
+        ">
+          <b>SCHEDULE: A</b>
+        </h4>
          <h4><b>PRICE AND TECHNICAL DETAILS OF TRANSFORMERS<b/> <h4/>
         </div>
         <table  class="no-border ">
@@ -437,9 +457,9 @@ const PrintQuotation = () => {
           <td style="font-weight: normal;">${getTypeLabel(data.type)}</td>
         </tr>
        <tr>
-  <th>Quantity (Nos.):</th>
-  <td style="font-weight: normal;">${String(data.qty).padStart(2, '0')}</td>
-</tr>
+    <th>Quantity (Nos.):</th>
+    <td style="font-weight: normal;">${String(data.qty).padStart(2, '0')}</td>
+  </tr>
 
         <tr>
           <th>No. of Phases:</th>
@@ -473,100 +493,154 @@ const PrintQuotation = () => {
           <th>L.V.:</th>
           <td style="font-weight: normal;">${data.lvvoltage}</td>
         </tr>
-        <tr>
-          <th>Tapping:</th>
-          <td style="font-weight: normal;">${data.typetaping ? data.typetaping : "No Tapping"}</td>
-        </tr>
-        <tr>
-<th style="padding-top: 10px;">Rate In Rs For Each Transformer:</th>
-<td style="font-weight: normal;">${data.capacity}KVA&nbsp;,${data.priratio}/${data.secratio}V:-&nbsp;&nbsp;Rs-&nbsp;${Number(data.cost).toLocaleString('en-IN')}/-</td>
+       <tr>
+      <th>Tapping:</th>
+      <td style="font-weight: normal;">
+        ${formatTappingText(data.typetaping)}
+      </td>
+    </tr>
 
-
+  <tr>
+  <th style="padding: 10px 10px 10px 0; width: 250px; text-align: left; vertical-align: top;">
+    Rate In Rs For Each Transformer:
+  </th>
+  <td style="padding: 10px 0 10px 0; font-weight: bold; text-align: left; vertical-align: top;">
+    ${data.capacity}KVA, ${data.priratio}/${data.secratio} :- Rs- ${Number(data.cost).toLocaleString('en-IN')}/-
+  </td>
 </tr>
+
 
         <tr>
           <th></th>
-          <td style="font-weight: normal;">(${NumberToWords(Number(data.cost))} Only)</td>
+          <td style="font-weight: normal;"><b>(${NumberToWords(Number(data.cost))} Only)</b></td>
         </tr>
       </table>
       
       <div class="page-break"></div>
-      <div id="print-content">
-      ${printContent}
-    </div>
-         <div class="center-text ">
-
-         <h4><b>SCHEDULE: B<b/> <h4/>
-         </div>
-         <div  class="center-text " style={{marginLeft:"10%"}}>
-         <h4>COMMERCIAL TERMS & CONDITIONS</h4>
-       </div>
+        <div id="print-content1">
+          ${printContent}
+        </div>
+        <div class="center-text " style="margin-top: 5px;">
+        <h4 style="
+            display: inline-block;
+            padding-bottom: 4px;   /* ← controls gap */
+            border-bottom: 1px solid #000;
+            margin: 0;
+        ">
+          <b>SCHEDULE: B</b>
+        </h4>
+        </div>
+        <div  class="center-text " style={{marginLeft:"10%"}}>
+          <h4>COMMERCIAL TERMS & CONDITIONS</h4>
+        </div>
        <table>
-       <tr>
-        <td style="font-weight: bold;">Price</td>
-         <td>
-         <ul style="font-weight: normal;">
-           <li>C.GST  ${data.cgst}%:- ${data.cgsttype}</li>
-           <li>S.GST  ${data.sgst}%:- ${data.sgsttype}</li>
-           <li>Transportation: - ${data.transport}</li>
-           <li>Unloading at Site:-Done By Purchaser</li>
-           <li>Prices are subject to IEEMA price variation clause.</li>
-         </ul>
-       </td>
-       </tr>
-       <tr>
-       <td style="font-weight: bold;">Delivery Period</td>
-       <td style="font-weight: normal;">
-  <ul>
-    <li>${data.deliverydesc?.replace(/\*/g, data.deliveryperiod || "*") || ""}</li>
-  </ul>
-</td>
+            <tr>
+            <td style="font-weight: bold; font-size: 18px;">Price</td>
+             <td style="padding: 4px 6px;">
+              <ul style="
+                  font-weight: normal;
+                  font-size: 18px;
+                  margin: 0;
+                  padding: 8px 0 8px 50px;
+                  line-height: 1.2;
+                ">
+                <li> <b>C.GST  ${data.cgst}%:- </b> ${data.cgsttype}</li>
+                <li> <b>S.GST  ${data.sgst}%:- </b> ${data.sgsttype}</li>
+                <li>Transportation: - ${data.transport}</li>
+                <li>Unloading at Site:-Done By Purchaser</li>
+                <li>Prices are subject to IEEMA price variation clause.</li>
+              </ul>
+            </td>
 
-     </tr>
-     <tr>
-     <td style="font-weight: bold;">Payment</td>
-    <td style="font-weight: normal;">
-  <ul>
-    <li>${data.paymentdesc}</li>
-  </ul>
-</td>
-
-   </tr>
-   <tr>
-   <td style="font-weight: bold;">Inspection</td>
-  <td style="font-weight: normal;">
-  <ul>
-    <li>${data.inspectiondesc}</li>
-  </ul>
-</td>
-
- </tr>
- <tr>
- <td style="font-weight: bold;">Guarantee</td>
-<td style="font-weight: normal;">
-  <ul>
-    <li>${data.guranteetext?.replace(/\*/g, data.guranteeperiod || "*") || ""}</li>
-  </ul>
-</td>
-
-</tr>
-<tr>
- <td style="font-weight: bold;">Validity</td>
-<td style="font-weight: normal;">
-  <ul>
-    <li>${validityterms?.replace(/\*/g, data.validityofquote || "*") || ""}</li>
-  </ul>
-</td>
-
-</tr>
+            </tr>
+             <tr>
+                <td style="font-weight: bold; white-space: nowrap; font-size: 18px;">Delivery Period</td>
+                <td style="padding: 4px 6px;">
+              <ul  style="
+                  font-weight: normal;
+                  font-size: 18px;
+                  margin: 0;
+                  padding: 8px 0 8px 50px;
+                  line-height: 1.2;
+                ">
+                <li>${data.deliverydesc?.replace(/\*/g, data.deliveryperiod || "*") || ""}</li>
+              </ul>
+            </td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold; font-size: 18px;">Payment</td>
+              <td style="padding: 4px 6px;">
+              <ul  style="
+                  font-weight: normal;
+                  font-size: 18px;
+                  margin: 0;
+                  padding: 8px 0 8px 50px;
+                  line-height: 1.2;
+                ">
+              <li>${data.paymentdesc}</li>
+            </ul>
+            </td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold; font-size: 18px;">Inspection</td>
+            <td style="padding: 4px 6px;">
+              <ul  style="
+                  font-weight: normal;
+                  font-size: 18px;
+                  margin: 0;
+                  padding: 8px 0 8px 50px;
+                  line-height: 1.2;
+                ">
+              <li>${data.inspectiondesc}</li>
+            </ul>
+          </td>
+          </tr>
+          <tr>
+          <td style="font-weight: bold; font-size: 18px;">Guarantee</td>
+          <td style="padding: 4px 6px;">
+              <ul  style="
+                  font-weight: normal;
+                  font-size: 18px;
+                  margin: 0;
+                  padding: 8px 0 8px 50px;
+                  line-height: 1.2;">
+              <li>
+                ${data.guranteetext
+        ?.replace(
+          /\*\s*Months/gi,
+          `<b>${data.guranteeperiod || "*"} Months</b>`
+        ) || ""}
+              </li>
+            </ul>
+          </td>
+          </tr>
+          <tr>
+          <td style="font-weight: bold; font-size: 18px;  ">Validity</td>
+          <td style="padding: 4px 6px;">
+              <ul  style="
+                  font-weight: normal;
+                  font-size: 18px;
+                  margin: 0;
+                  padding: 8px 0 8px 50px;
+                  line-height: 1.2;">
+              <li>
+                ${validityterms
+        ?.replace(
+          /\*\s*Days/gi,
+          `<b>${data.validityofquote || "*"} Days</b>`
+        ) || ""}
+              </li>
+            </ul>
+          </td>
+          </tr>
      </table>
-     <div>
-     <h3 style={{marginRight:"70%"  }}>
+     <div style="text-align: right;">
+     <h3 style="margin: 0 0 10px 0;">
        For Static Electricals Pune
      </h3>
    </div>
-   <div>
-     <h3  style={{ marginTop: 0, marginBottom: 10 }}>
+   <div style="text-align: right; margin-top: 30px;">
+     <h3 style="margin: 0;">
        ${fromData.username} (${fromData.contactno})
      </h3>
    </div>

@@ -265,7 +265,7 @@ export default function View() {
       <p class="s2" style="padding-top: 2pt;padding-right: 1pt;text-indent: 0pt;line-height: 8pt;text-align: right;">${item?.amount}</p>
     </td>
   </tr>
-`))}
+`)).join('')}
 
             <tr style="height:12pt">
                 <td style="width:44pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
